@@ -320,6 +320,58 @@
             </div>
         </div>
     </section>
+
+    {{-- Team Section --}}
+    <section class="team-section" style="background: #311545 0% 0% no-repeat padding-box;">
+        <div class="row">
+            <div class="col-12">
+                <div class="py-9">
+                    <div class="container">
+                        <div class="text-center">
+                            <div class="col-12 my-4">
+                                <div class="">
+                                    <h3 class=" text-8xl text-secondary work-sans-regular text-white fw-bolder ">Nuestro equipo</h3>
+                                </div>
+                            </div>
+                            <div class="team-members">
+                                <div class="team-member">
+                                    <img src="{{ asset('images/home/team/angel_ceo.jpeg')}}" alt="Ángel Garaban">
+                                    <h3 class="text-2xl">Ángel Garaban</h3>
+                                    <p class="text-xl">Programador</p>
+                                    <p class="role text-2xl">CEO</p>
+                                    <div class="social-media">
+                                        <a href="#"><i class="fab fa-instagram"></i></a>
+                                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-member">
+                                    <img src="{{ asset('images/home/team/josue_coo.jpg')}}" alt="Josue Avila">
+                                    <h3 class="text-2xl">Josue Avila</h3>
+                                    <p class="text-xl">ING Petroquímico</p>
+                                    <p class="role text-2xl">COO</p>
+                                    <div class="social-media">
+                                        <a href="#"><i class="fab fa-instagram"></i></a>
+                                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-member">
+                                    <img src="{{ asset('images/home/team/carlos_cto.png')}}" alt="Carlos Oblander">
+                                    <h3 class="text-2xl">Carlos Oblander</h3>
+                                    <p class="text-xl">Programador</p>
+                                    <p class="role text-2xl">CTO</p>
+                                    <div class="social-media">
+                                        <a href="#"><i class="fab fa-instagram"></i></a>
+                                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{-- Team Section --}}
 @endsection
 @section('js')
     <script>

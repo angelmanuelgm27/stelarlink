@@ -342,6 +342,9 @@ a{
     .text-3xl{
         font-size: 1.3rem;
     }
+    .text-8xl{
+        font-size: 3rem;
+    }
     .text-10xl{
         font-size: 3rem;
     }
@@ -543,3 +546,98 @@ a{
 @media only screen and (max-width: 1279px) and (min-width: 1201px){}
 @media only screen and (max-width: 1919px) and (min-width: 1280px){}
 @media only screen and (min-width: 1920px){}
+
+.team-section {
+    text-align: center;
+    padding: 50px 0;
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+
+    .team-members {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 100px;
+
+        .team-member {
+            background-color: $secondary;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            text-align: center;
+
+            img {
+                border-radius: 50%;
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                margin-bottom: 10px;
+                color: #fff;
+            }
+
+            p {
+                margin: 5px 0;
+                color:#fff;
+            }
+
+            .role {
+                color: $primary;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+            .social-media {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+
+                a {
+                    color: $white;
+                    font-size: 1.5rem;
+
+                    &:hover {
+                        color: $primary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .team-section .team-members {
+        flex-direction: column;
+        align-items: center;
+
+        .team-member {
+            max-width: 90%;
+    
+            img {
+    
+                width: 300px;
+                height: 300px;
+
+            }
+        }
+    }
+
+
+
+}
+@media (max-width: 480px) {
+    .team-section .team-members .team-member {
+        max-width: 100%;
+        img {
+
+            width: 250px;
+            height: 250px;
+
+        }
+    }
+}
