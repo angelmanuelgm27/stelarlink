@@ -111,6 +111,19 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row mb-7">
+                        @foreach ($installation_services as $service)
+                            <div class="col-12 col-md-6">
+                                <x-installation-plans class="px-4 py-4 bg-secondary rounded-5 m-4 inst-plan"
+                                         image="{{ $service->image ? asset('images/services/' . $service->image) : asset('images/noticon.png') }}"
+                                         planName="{{ $service->name }}" planPrice="{{ $service->price }}$"
+                                         planDescription="{{ $service->description }}">
+                                </x-installation-plans>
+                            </div>
+                        @endforeach
+                    </div>
+
                     <div class="row mb-7">
                         @foreach ($services as $service)
                             <div class="col-12 col-md-6">

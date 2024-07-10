@@ -13,6 +13,9 @@ body{
 }
 
 // Custom
+.w-60{
+    width: 60% !important;
+}
 .w-30{
     width: 30% !important;
 }
@@ -116,6 +119,12 @@ body{
     font-weight: 400;
     font-style: normal;
 }
+
+.inst-plan{
+    display: flex;
+    justify-content: center;
+    min-height: 350px;
+}
 .menu .nav-item a:hover{
     position: relative;
 }
@@ -156,6 +165,11 @@ body{
 
 .btn-primary {
     color: $white !important;
+}
+
+.btn-white {
+    color: $secondary !important;
+    background-color: $white !important;
 }
 
 .btn-secondary:hover {
@@ -372,9 +386,7 @@ a{
     .p-7{
         padding: 3rem !important;
     }
-    .pt-8{
-        padding-top: 6rem !important;
-    }
+
 
     .mx-7{
         margin-right: 3rem !important;
