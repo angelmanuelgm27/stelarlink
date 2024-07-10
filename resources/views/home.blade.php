@@ -3,15 +3,21 @@
 @section('content')
     <section>
         <div class="position-relative">
-            <video class="w-100" autoplay muted loop>
-                <source src="{{ asset('/mp4/stelarlink-home.mp4') }}">
-            </video>
-            <div class="main-content pt-8">
+            <!-- Slider main container -->
+            <div class="swiper ">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide w-100"><img class="w-100" src="{{ asset('images/home/banner1.png')}}" alt="banner1"></div>
+                    <div class="swiper-slide w-100"><img class="w-100" src="{{ asset('images/home/banner2.png')}}" alt="banner2"></div>
+                </div>
+            </div>
+            <div class="main-content pt-8 z-2">
                 <h3 class="text-white text-7xl anta-regular">Conectando</h3>
                 <h3 class="text-primary text-5xl anta-regular ">comunidades rurales</h3>
                 <p class="text-white text-2xl work-sans-regular ">Transformando vidas a través de la conectividad digital
                     confiable.</p>
-                <x-button text="Planes y Precios" :url="route('login')"
+                <x-button text="Planes y Precios" :url="('login')"
                     class="btn btn-primary text-3xl px-4 py-2 fw-semibold work-sans-regular rounded-pill w-100"></x-button>
             </div>
         </div>

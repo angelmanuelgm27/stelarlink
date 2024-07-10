@@ -1,4 +1,4 @@
-<header class="position-absolute z-3">
+<header class="z-3">
     <div class="container">
         <nav class="navbar navbar-expand-lg ">
             <div class="container-fluid align-items-end">

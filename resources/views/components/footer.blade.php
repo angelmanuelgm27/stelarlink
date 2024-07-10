@@ -1,4 +1,4 @@
-<footer class="text-center text-lg-start text-muted pt-4 image-background-fix" style="background-image: url('{{ asset('images/footer.jpg') }} ');">
+<footer class="text-center text-lg-start text-muted pt-4 image-background-fix" style="background-image: url('{{ asset('images/footer.png') }} ');">
     <div class="container">
         <section>
             <div class="row justify-content-center mt-5">
