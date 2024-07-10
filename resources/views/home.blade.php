@@ -322,7 +322,7 @@
     </section>
 
     {{-- Team Section --}}
-    <section class="team-section" style="background: #311545 0% 0% no-repeat padding-box;">
+    <section class="team-section" style="background: #311545 no-repeat padding-box;">
         <div class="row">
             <div class="col-12">
                 <div class="py-9">
@@ -340,8 +340,12 @@
                                     <p class="text-xl">Programador</p>
                                     <p class="role text-2xl">CEO</p>
                                     <div class="social-media">
-                                        <a href="#"><i class="fab fa-instagram"></i></a>
-                                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                                        <a href="https://www.instagram.com/angelmanuelgm/" target="_blank">
+                                            <x-icons icon="fab fa-instagram"></x-icons>
+                                        </a>
+                                        <a href="https://www.tiktok.com/@angelgaraban" target="_blank">
+                                            <x-icons icon="fab fa-tiktok"></x-icons>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="team-member">
@@ -350,8 +354,12 @@
                                     <p class="text-xl">ING Petroquímico</p>
                                     <p class="role text-2xl">COO</p>
                                     <div class="social-media">
-                                        <a href="#"><i class="fab fa-instagram"></i></a>
-                                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                                        <a href="https://www.instagram.com/AVILA21J/" target="_blank">
+                                            <x-icons icon="fab fa-instagram"></x-icons>
+                                        </a>
+                                        <a href="https://www.tiktok.com/@AVILA21J" target="_blank">
+                                            <x-icons icon="fab fa-tiktok"></x-icons>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="team-member">
@@ -360,8 +368,12 @@
                                     <p class="text-xl">Programador</p>
                                     <p class="role text-2xl">CTO</p>
                                     <div class="social-media">
-                                        <a href="#"><i class="fab fa-instagram"></i></a>
-                                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                                        <a href="www.instagram.com/gabrielzinisa/" target="_blank">
+                                            <x-icons icon="fab fa-instagram"></x-icons>
+                                        </a>
+                                        <a href="https://www.tiktok.com/@GABRIELZIN0710" target="_blank">
+                                            <x-icons icon="fab fa-tiktok"></x-icons>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
