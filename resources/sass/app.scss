@@ -125,6 +125,14 @@ body{
     justify-content: center;
     min-height: 350px;
 }
+
+.work-sans-semibold {
+    font-family: "Work Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
 .menu .nav-item a:hover{
     position: relative;
 }
@@ -657,3 +665,5 @@ a{
         }
     }
 }
+
+

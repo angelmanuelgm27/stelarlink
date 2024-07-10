@@ -143,12 +143,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="py-9 image-background-fix"
-                    style="background-image: url({{ asset('images/home/imagen_2.png') }})">
+                    style="background-image: url({{ asset('images/home/banner-contacto.png') }})">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6 col-xl-4 offset-xl-1">
                                 <div>
-                                    <p class="work-sans-regular mb-3 text-base text-white text-lg">¿Tienes alguna pregunta o
+                                    <p class="work-sans-light mb-3 text-base text-white text-lg">¿Tienes alguna pregunta o
                                         consulta? Completa nuestro formulario de contacto y nos pondremos en contacto
                                         contigo lo
                                         antes posible".
@@ -157,7 +157,7 @@
                                 <form name="form_contact" id="form_contact" class="form-contact">
                                     <div class="mb-3">
                                         <label class="form-label text-white text-2xl">Nombre y apellido</label>
-                                        <input required type="text" class="form-control rounded-5 px-3 py-2 text-lg"
+                                        <input required type="text" class="form-control rounded-5 px-5  py-2 text-lg"
                                             id="client_full_name" />
                                     </div>
                                     <div class="mb-3">
@@ -172,13 +172,13 @@
                                     <button type="submit" form="form_contact"
                                         class="btn btn-primary w-100 text-3xl py-3 rounded-5">Enviar</button>
                                 </form>
-                                <p class="text-white mt-5 works-sans-regular text-lg">El siguiente mapa muestra la
+                                <p class="text-white mt-5 work-sans-light text-lg">El siguiente mapa muestra la
                                     cobertura de
-                                    nuestro servicio, revisa si tu ubicación se encuentra en nuestro radio.</p>
+                                    nuestro servicio, <span class="work-sans-semibold"> revisa si tu ubicación se encuentra en nuestro radio. </span> </p>
                             </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-5 my-auto offset-xl-1">
+                            <div class="col-12 col-md-6 col-lg-6 col-xl-6 mt-auto offset-xl-1 mb-3">
                                 <div>
-                                    <p class="anta-regular text-5xl text-white">Conecta con nosotros</p>
+                                    <p class="work-sans-semibold text-5xl text-white">¡Conecta con nosotros!</p>
                                 </div>
                                 <div class="d-flex align-items-center my-4 contact-networks">
                                     <div>
@@ -188,7 +188,7 @@
                                         </a>
                                     </div>
                                     <div>
-                                        <p class="m-0 mx-3 text-white work-sans-regular text-3xl">+584245734146</p>
+                                        <p class="m-0 mx-3 text-white work-sans-semibold text-3xl">(0215) 0000000</p>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-4 contact-networks">
@@ -199,32 +199,59 @@
                                         </a>
                                     </div>
                                     <div>
-                                        <p class="m-0 mx-3 text-white work-sans-regular text-3xl">+584245734146</p>
+                                        <p class="m-0 mx-3 text-white work-sans-semibold text-3xl">(0412) 0000000</p>
+                                        <p class="m-0 mx-3 text-white work-sans-regular text-2xl">https://www.whatsapp.com/?lang=es_LA</p>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center my-4 contact-networks">
-                                    <div>
-                                        <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
-                                            class="d-block">
-                                            <x-icon icon="fab fa-instagram"></x-icon>
-                                        </a>
+
+                                <div class="d-flex flex-row mt-3 justify-content-end me-6">
+
+                                    <div class="d-flex align-items-center mx-1 my-4 contact-networks">
+                                        <div>
+                                            <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
+                                                class="d-block">
+                                                <x-icon icon="fab fa-instagram"></x-icon>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="m-0 mx-3 text-white work-sans-regular text-3xl">stelarlink</p>
+
+                                    <div class="d-flex align-items-center mx-1 my-4 contact-networks">
+                                        <div>
+                                            <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
+                                                class="d-block">
+                                                <x-icon icon="fab fa-facebook-f"></x-icon>
+                                            </a>
+                                        </div>
                                     </div>
+
+                                    <div class="d-flex align-items-center mx-1 my-4 contact-networks">
+                                        <div>
+                                            <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
+                                                class="d-block">
+                                                <x-icon icon="fab fa-tiktok"></x-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex align-items-center mx-1 my-4 contact-networks">
+                                        <div>
+                                            <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
+                                                class="d-block">
+                                               <x-icon icon="fab fa-twitter">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                                                            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                                                        </svg>
+                                               </x-icon>
+                                                
+                                            </a>
+                                        </div>
                                 </div>
-                                <div class="d-flex align-items-center my-4 contact-networks">
-                                    <div>
-                                        <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
-                                            class="d-block">
-                                            <x-icon icon="fab fa-facebook-f"></x-icon>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <p class="m-0 mx-3 text-white work-sans-regular text-3xl">stelarlink</p>
-                                    </div>
-                                </div>
+
+
+
                             </div>
+
+                            
                         </div>
                     </div>
                 </div>
