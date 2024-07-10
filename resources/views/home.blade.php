@@ -6,7 +6,7 @@
             <video class="w-100" autoplay muted loop>
                 <source src="{{ asset('/mp4/stelarlink-home.mp4') }}">
             </video>
-            <div class="main-content">
+            <div class="main-content pt-8">
                 <h3 class="text-white text-7xl anta-regular">Conectando</h3>
                 <h3 class="text-primary text-5xl anta-regular ">comunidades rurales</h3>
                 <p class="text-white text-2xl work-sans-regular ">Transformando vidas a través de la conectividad digital
