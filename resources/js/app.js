@@ -1,7 +1,4 @@
 import './bootstrap';
-import Swiper from 'swiper/bundle';
-// import Swiper styles
-import 'swiper/css';
 import {getElement} from "bootstrap/js/src/util/index.js";
 
 // init Swiper:

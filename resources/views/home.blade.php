@@ -325,14 +325,13 @@
     <section class="gallery">
         <div class="row">
             <div class="col-12">
-                <div class="py-9">
+                <div class="py-8">
                     <div class="container">
                         <div class="row">
-                            <div class="col-12 col-md-4 offset-md-1 my-4">
+                            <div class="col-12 col-md-6 my-2 mx-auto">
                                 <div>
-                                    <h3 class="text-primary work-sans-regular m-0 text-8xl">¡vive</h3>
-                                    <h3 class="work-sans-regular m-0 text-5xl text-secondary">la experiencia</h3>
-                                    <h3 class="work-sans-regular m-0 text-5xl text-secondary">stelarlink!</h3>
+                                    <h3 class="text-primary work-sans-extrabold m-0 text-12xl text-center">¡Vive!</h3>
+                                    <h3 class="work-sans-semibold text-5xl text-secondary py-4 text-center ">la experiencia</h3>
                                 </div>
                             </div>
                         </div>
@@ -340,9 +339,9 @@
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-8">
                                 <div class="row">
-                                    <div class="col-12 col-lg-6 col-md-6 mb-4 mt-auto mb-lg-0">
+                                    <div class="col-12 col-lg-6 col-md-6 mb-lg-0">
                                         <img src="{{ asset('images/home/gallery/image_1.jpg') }}"
-                                            class="w-100 shadow-1-strong rounded-5 mb-4" alt="Boat on Calm Water" />
+                                            class="w-100 shadow-1-strong rounded-5 " alt="Boat on Calm Water" />
                                     </div>
 
                                     <div class="col-12 col-lg-6 col-md-6 mb-4 mb-lg-0">
@@ -351,10 +350,6 @@
 
                                         <img src="{{ asset('images/home/gallery/image_3.jpg') }}"
                                             class="w-100 shadow-1-strong rounded-5 mb-4" alt="Mountains in the Clouds" />
-                                    </div>
-                                    <div class="col-lg-12 mb-4 mb-lg-0">
-                                        <img src="{{ asset('images/home/gallery/image_5.jpg') }}"
-                                            class="w-100 shadow-1-strong rounded-5 mb-4" alt="Waves at Sea" />
                                     </div>
                                 </div>
                             </div>
@@ -365,13 +360,8 @@
                                             class="w-100 shadow-1-strong rounded-5 mb-4" alt="Waves at Sea" />
                                     </div>
                                     <div class="col-lg-12 col-12 col-md-6 mb-4 mb-lg-0">
-                                        <div class="position-relative">
-                                            <img src="{{ asset('images/home/gallery/image_6.jpg') }}"
-                                                class="w-100 shadow-1-strong rounded-5 mb-4" alt="Waves at Sea" />
-                                            <p
-                                                class="text-4xl text-white work-sans-regular h-100 fw-semibold px-4 d-flex align-items-center justify-content-center position-absolute top-0 start-0">
-                                                CONSEJOS PARA DISFRUTAR MEJOR</p>
-                                        </div>
+                                        <img src="{{ asset('images/home/gallery/image_3.jpg') }}"
+                                            class="w-100  shadow-1-strong rounded-5 mb-4 " alt="Waves at Sea" />
                                     </div>
                                 </div>
                             </div>

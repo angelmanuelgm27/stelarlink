@@ -93,6 +93,11 @@ body{
     line-height: 1;
 }
 
+.text-12xl	{
+    font-size: 12rem; /* 192px */
+    line-height: 1;
+}
+
 .anta-regular {
     font-family: "Anta", sans-serif;
     font-weight: 400;
@@ -130,6 +135,13 @@ body{
     font-family: "Work Sans", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
+    font-style: normal;
+}
+
+.work-sans-extrabold {
+    font-family: "Work Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
     font-style: normal;
 }
 
