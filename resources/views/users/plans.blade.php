@@ -26,28 +26,68 @@
             </div>
         </div>
     @endif
+
     <x-paneltitle titleName="Mis planes"></x-paneltitle>
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+    @if($services->isNotEmpty())
+
             <div class="container-fluid table-responsive">
                 <table id="users_table" class="table text-center">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Plan / Servicio</th>
+                            <th>Estado</th>
                             <th>Velocidad de carga</th>
                             <th>Velocidad de bajada</th>
                             <th>Fecha de compra</th>
                             <th>Fecha de Activacion</th>
                             <th>Fecha de Vencimiento</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody id="users_plans_table_content">
+
+                        @php
+                        $index = 1;
+                        @endphp
+
+                        @foreach ($services as $service)
+
+                            <tr>
+                                <td class="align-middle">{{ $index }}</td>
+                                <td class="align-middle">{{ $service->name }}</td>
+                                <td class="align-middle">{{ $service->status }}</td>
+                                <td class="align-middle">{{ $service->velocity_load }}</td>
+                                <td class="align-middle">{{ $service->velocity_download }}</td>
+                                <td class="align-middle">{{ $service->formatted_created_at }}</td>
+                                <td class="align-middle">{{ $service->date_active }}</td>
+                                <td class="align-middle">{{ $service->date_finish }}</td>
+                                <td class="align-middle">
+                                    @if($service->action == 'Cancelar')
+                                        <button class="btn btn-primary">{{ $service->action }}</button>
+                                    @endif
+                                </td>
+
+                            </tr>
+
+                        @php
+                        $index++;
+                        @endphp
+
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>
+
+
+  @else
+
+    <div class="my-5 text-center">No hay informacion para mostrar</div>
+
+  @endif
+
     <x-paneltitle titleName="Comprar nuevos planes"></x-paneltitle>
     <div class="row mt-4" id="services_list">
     </div>

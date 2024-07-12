@@ -41,7 +41,8 @@
                         <div class="mb-3">
                             <label class="form-label">Rol</label>
                             <select name="rol" id="rol" class="form-control">
-                                <option value="soporte-tecnico">Soporte Tecnico - Instalador</option>
+                                <option value="soporte-tecnico-administrador">Soporte técnico - Administrador</option>
+                                <option value="soporte-tecnico-instalador">Soporte técnico - Instalador</option>
                                 <option value="cobranzas">Cobranzas</option>
                             </select>
                         </div>

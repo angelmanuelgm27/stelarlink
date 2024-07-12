@@ -299,7 +299,7 @@ return [
             'text' => 'Inicio',
             'icon' => 'fa fa-home',
             'url' => '/dashboard',
-            'can' => ['default', 'administrador', 'soporte-tecnico', 'cobranzas'],
+            'can' => ['default', 'administrador', 'soporte-tecnico-administrador', 'soporte-tecnico-instalador', 'cobranzas'],
         ],
         [
             'text' => 'Usuarios',
@@ -323,7 +323,13 @@ return [
             'text' => 'Solicitudes de instalacion',
             'icon' => 'fas fa-route',
             'url' => '/soporte-tecnico/solicitudes-instlacion',
-            'can' => ['soporte-tecnico'],
+            'can' => ['soporte-tecnico-instalador'],
+        ],
+        [
+            'text' => 'Grupos de instaladores',
+            'icon' => 'fas fa-route',
+            'url' => '/soporte-tecnico/grupos-instaladores',
+            'can' => ['soporte-tecnico-administrador'],
         ],
         [
             'text' => 'Mis planes',
@@ -371,7 +377,7 @@ return [
             'text' => 'Volver a principal',
             'icon' => "fas fa-external-link-alt",
             'url' => '/',
-            'can' => ['administrador', 'default', 'soporte-tecnico', 'cobranzas'],
+            'can' => ['default', 'administrador', 'soporte-tecnico-administrador', 'soporte-tecnico-instalador', 'cobranzas'],
         ]
     ],
 

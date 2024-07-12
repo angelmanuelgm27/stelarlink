@@ -1,15 +1,15 @@
 <?php
 
 use App\Http\Controllers\Admin\MapController;
-use App\Http\Controllers\Admin\StaffController as AdminStaffController;
-use App\Http\Controllers\Admin\UsersController as AdminUsersController;
+use App\Http\Controllers\Admin\MethodsPaymentsController as AdminMethodsPaymentsController;
 use App\Http\Controllers\Admin\ServiciosController as AdminServiciosController;
 use App\Http\Controllers\Admin\SolicitudesController as AdminSolicitudesController;
-use App\Http\Controllers\Admin\MethodsPaymentsController as AdminMethodsPaymentsController;
-
-use App\Http\Controllers\TechnicalSupport\SolicitudesController as TechnicalSolicitudesController;
+use App\Http\Controllers\Admin\StaffController as AdminStaffController;
+use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profiles;
+use App\Http\Controllers\TechnicalSupportGroupController;
+use App\Http\Controllers\TechnicalSupport\SolicitudesController as TechnicalSolicitudesController;
 use App\Http\Controllers\Users\PlansController;
 use App\Mail\Contact;
 use Illuminate\Support\Facades\Route;
@@ -67,13 +67,11 @@ Route::get('/administrador/mapa/delete/${id}', [MapController::class, 'delete'])
 //SOLCITUD INSTALACION
 Route::get('/administrador/solicitudes-instlacion', [AdminSolicitudesController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.staff');
 
-
 //METODOS DE PAGO
 Route::get('/administrador/metodos-pagos', [AdminMethodsPaymentsController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.staff');
 
 //'admin.map.delete
 #Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 //CLIENTE
 Route::get('/cliente/planes', [PlansController::class, 'index'])->middleware(['auth', 'verified'])->name('client.plans');
@@ -83,6 +81,9 @@ Route::get('/cliente/planes/list', [PlansController::class, 'findAll'])->middlew
 
 //SOPORTE TECNICO
 Route::get('/soporte-tecnico/solicitudes-instlacion', [TechnicalSolicitudesController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.staff');
+Route::get('/soporte-tecnico/grupos-instaladores', [TechnicalSupportGroupController::class, 'index'])
+->middleware(['auth', 'verified'])
+->name('technical-support-group.index');
 
 
 //COBRANZAS

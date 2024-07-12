@@ -11,6 +11,7 @@ use App\Models\Payments;
 use App\Models\Solicitudes;
 use App\Models\ClientServices;
 use App\Models\Invoices;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PlansController extends Controller
@@ -18,7 +19,33 @@ class PlansController extends Controller
     //
     public function index()
     {
-        return view('users.plans');
+
+        $user_id = Auth::user()->id;
+
+        $services = Solicitudes::where('id_cliente', $user_id)
+            ->join('services', 'id_service', '=', 'services.id')
+            ->select('solicitudes.*', 'services.name', 'services.price', 'services.velocity_load', 'services.velocity_download')
+            ->get();
+
+        $services->each(function ($service) {
+
+            $date = Carbon::createFromFormat('Y-m-d H:i:s', $service->created_at);
+            Carbon::setLocale('es');
+            $formatted_created_at = $date->isoFormat('D \d\e MMMM, YYYY');
+
+            $service->formatted_created_at = $formatted_created_at;
+
+            $time_now = Carbon::now();
+            $total_duration_in_hours = $time_now->diffInHours($service->updated_at);
+            if($total_duration_in_hours < 12 && $service->status == 'Pendiente' ){
+                $service->action = 'Cancelar';
+            }
+
+        });
+
+// dd($services);
+
+        return view('users.plans', ['services' => $services]);
     }
 
     public function store(Request $request)
