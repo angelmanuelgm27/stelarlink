@@ -18,7 +18,7 @@ class StaffController extends Controller
 
     public function list()
     {
-        $staffs = User::whereIn('rol', ['soporte-tecnico', 'cobranzas'])->get();
+        $staffs = User::whereIn('rol', ['soporte-tecnico-administrador', 'soporte-tecnico-instalador', 'cobranzas'])->get();
         return response()->json($staffs, 200);
     }
 

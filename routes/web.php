@@ -81,10 +81,17 @@ Route::get('/cliente/planes/list', [PlansController::class, 'findAll'])->middlew
 
 //SOPORTE TECNICO
 Route::get('/soporte-tecnico/solicitudes-instlacion', [TechnicalSolicitudesController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.staff');
-Route::get('/soporte-tecnico/grupos-instaladores', [TechnicalSupportGroupController::class, 'index'])
-->middleware(['auth', 'verified'])
-->name('technical-support-group.index');
 
+//SOPORTE TECNICO - GRUPOS
+Route::get('/soporte-tecnico/grupos-instaladores', [TechnicalSupportGroupController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('technical-support-group.index');
+Route::post('/soporte-tecnico/grupos-instaladores', [TechnicalSupportGroupController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('technical-support-group.store');
+Route::delete('/soporte-tecnico/grupos-instaladores/{technicalSupportGroup}', [TechnicalSupportGroupController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('technical-support-group.destroy');
 
 //COBRANZAS
 //Route::get('/cobranzas/historial-pagos', [AdminStaffController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.staff');

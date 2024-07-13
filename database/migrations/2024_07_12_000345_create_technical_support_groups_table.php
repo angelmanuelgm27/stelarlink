@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('technical_support_groups', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('zone');
             $table->timestamps();
         });
     }
