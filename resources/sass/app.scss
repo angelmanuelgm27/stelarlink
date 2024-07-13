@@ -352,7 +352,15 @@ a{
     color: $light-medium;
 }
 
+.main-banner{
+    display: block;
+}
+.main-banner-responsive{
+    display: none;
+}
+
 @media only screen and (max-width: 660px) and (min-width: 300px){
+
     .text-7xl{
         font-size: 2.5rem;
     }
@@ -369,7 +377,7 @@ a{
         font-size: 3rem;
     }
     .text-10xl{
-        font-size: 3rem;
+        font-size: 4.5rem;
     }
     .main-content{
         width: 98%;
@@ -469,6 +477,12 @@ a{
     }
     .mission-vision, .title-content-3{
         display: none;
+    }
+    .main-banner{
+        display: none;
+    }
+    .main-banner-responsive{
+        display: block;
     }
 }
 @media only screen and (max-width: 992px) and (min-width: 661px) {

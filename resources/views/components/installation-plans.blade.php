@@ -3,6 +3,7 @@
         <div class="row justify-content-between">
             <div class="col-12 col-md-6 my-auto">
                 <p class="m-0 text-5xl text-primary text-center text-xl-start anta-regular">{{ $planName }}</p>
+                <p class="m-2 text-white work-sans-semibold text-lg text-center text-xl-start">{{ $planCategory }}</p>
             </div>
             <div class="col-12 col-md-4 py-1">
                 <img src="{{ $image }}" class="w-60 d-block mx-auto" alt="{{ $planName }}">

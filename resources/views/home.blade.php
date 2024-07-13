@@ -3,15 +3,23 @@
 @section('content')
     <section>
         <div class="position-relative">
-            <!-- Slider main container -->
-            <div class="swiper ">
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-                    <!-- Slides -->
-                    <div class="swiper-slide w-100"><img class="w-100" src="{{ asset('images/home/banner1.png')}}" alt="banner1"></div>
-                    <div class="swiper-slide w-100"><img class="w-100" src="{{ asset('images/home/banner2.png')}}" alt="banner2"></div>
+            <div class="main-banner">
+
+                <!-- Slider main container -->
+                <div class="swiper">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide w-100"><img class="w-100" src="{{ asset('images/home/banner1.png')}}" alt="banner1"></div>
+                        <div class="swiper-slide w-100"><img class="w-100" src="{{ asset('images/home/banner2.png')}}" alt="banner2"></div>
+                    </div>
                 </div>
             </div>
+
+            <div class="main-banner-responsive">
+                <img src="{{ asset('images/home/responsive/banner-resposive.png') }}" alt="main">
+            </div>
+
             <div class="main-content pt-8 z-2">
                 <h3 class="text-white text-7xl anta-regular">Conectando</h3>
                 <h3 class="text-primary text-5xl anta-regular ">comunidades rurales</h3>
@@ -98,14 +106,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <div class="py-8">
-                                <h3 class="text-center works-sans-regular text-7xl fw-semibold text-secundary-light">
-                                    Nuestros planes</h3>
-                                <p class="text-2xl mt-7 mx-7 text-secundary-light fw-semibold">Ofrecemos precios
+                            <div class="py-5">
+                                <h3 class="text-10xl text-secondary text-center work-sans-regular fw-bold">Planes</h3>
+                                <h3 class="text-center works-sans-regular text-5xl fw-semibold text-secundary-light">
+                                    de instalación</h3>
+                                <p class="text-2xl mt-7 mx-7 text-md-center text-start text-secundary-light fw-semibold">Ofrecemos precios
                                     competitivos y
                                     transparentes sin costos
                                     ocultos
-                                    ni tarifas adicionales". Opciones de pago: "Aceptamos diferentes métodos de pago para
+                                    ni tarifas adicionales". <br> <br> Opciones de pago: "Aceptamos diferentes métodos de pago para
                                     mayor
                                     comodidad, incluidas transferencias bancarias y pagos en línea</p>
                             </div>
@@ -113,17 +122,27 @@
                     </div>
 
                     <div class="row mb-7">
-                        @foreach ($installation_services as $service)
+                        @foreach ($installation_services as $iservice)
                             <div class="col-12 col-md-6">
                                 <x-installation-plans class="px-4 py-4 bg-secondary rounded-5 m-4 inst-plan"
-                                         image="{{ $service->image ? asset('images/services/' . $service->image) : asset('images/noticon.png') }}"
-                                         planName="{{ $service->name }}" planPrice="{{ $service->price }}$"
-                                         planDescription="{{ $service->description }}">
+                                    image="{{ $iservice->image ? asset('images/services/' . $iservice->image) : asset('images/noticon.png') }}"
+                                    planName="{{ $iservice->name }}" planPrice="{{ $iservice->price }}$"
+                                    planCategory="{{ $iservice->category }}"
+                                    planDescription="{{ $iservice->description }}">
                                 </x-installation-plans>
                             </div>
                         @endforeach
                     </div>
 
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="py-8">
+                                <h3 class="text-10xl text-secondary text-center work-sans-regular fw-bold">Planes</h3>
+                                <h3 class="text-center works-sans-regular text-5xl fw-semibold text-secundary-light">
+                                    de suscripción</h3>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mb-7">
                         @foreach ($services as $service)
                             <div class="col-12 col-md-6">
@@ -188,7 +207,7 @@
                                         </a>
                                     </div>
                                     <div>
-                                        <p class="m-0 mx-3 text-white work-sans-semibold text-3xl">(0215) 0000000</p>
+                                        <p class="m-0 mx-3 text-white work-sans-semibold text-3xl">+584245734146</p>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-4 contact-networks">
@@ -199,8 +218,8 @@
                                         </a>
                                     </div>
                                     <div>
-                                        <p class="m-0 mx-3 text-white work-sans-semibold text-3xl">(0412) 0000000</p>
-                                        <p class="m-0 mx-3 text-white work-sans-regular text-2xl">https://www.whatsapp.com/?lang=es_LA</p>
+                                        <p class="m-0 mx-3 text-white work-sans-semibold text-3xl">+584245734146</p>
+
                                     </div>
                                 </div>
 
@@ -242,21 +261,18 @@
                                                             <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
                                                         </svg>
                                                </x-icon>
-                                                
+
                                             </a>
                                         </div>
+                                    </div>
                                 </div>
-
-
-
                             </div>
-
-                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </section>
     <section id="coveragemap">
         <div class="row">
