@@ -19,9 +19,7 @@
                             <th>#</th>
                             <th>Nombre</th>
                             <th>Zona</th>
-                            <th>Estado</th>
                             <th>Instaladores</th>
-                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -37,18 +35,18 @@
                                 <td class="align-middle">{{ $index }}</td>
                                 <td class="align-middle">{{ $group->name }}</td>
                                 <td class="align-middle">{{ $group->zone }}</td>
-                                <td class="align-middle">ESTADO</td>
                                 <td class="align-middle">{{ $group->user_names }}</td>
                                 <td class="align-middle">
-                                    <form method="POST" action="{{ route('technical-support-group.destroy', ['technicalSupportGroup' => $group]) }}" >
+
+                                    <form
+                                    method="POST"
+                                    action="{{ route('technical-support-group.destroy', ['technicalSupportGroup' => $group]) }}"
+                                    >
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-primary">Eliminar</button>
                                     </form>
 
-                                </td>
-                                <td class="align-middle">
-                                    <button class="btn btn-primary">Suspender</button>
                                 </td>
                             </tr>
 

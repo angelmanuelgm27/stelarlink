@@ -105,4 +105,5 @@ class TechnicalSupportGroupController extends Controller
         return redirect()->route('technical-support-group.index');
 
     }
+
 }

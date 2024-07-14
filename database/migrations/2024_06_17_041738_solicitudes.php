@@ -17,7 +17,10 @@ return new class extends Migration {
             $table->integer('id_service');
             $table->string('status');
             $table->string('ip')->nullable();
-            $table->string('id_employee')->nullable();
+            $table->integer('group_id')->nullable();
+            $table->string('adrress')->nullable();
+            $table->string('zone')->nullable();
+            $table->integer('invoice_id');
             $table->timestamps();
         });
     }

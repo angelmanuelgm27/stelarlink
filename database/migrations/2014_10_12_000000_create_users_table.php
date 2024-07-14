@@ -49,7 +49,7 @@ return new class extends Migration {
                 'password' => Hash::make('1'),
             ],
             [
-                'name' => 'servivio tecnico admin',
+                'name' => 'servicio tecnico admin',
                 'email' => 'sta@1',
                 'address' => 'default',
                 'phone' => '4122548458',
@@ -59,7 +59,7 @@ return new class extends Migration {
                 'password' => Hash::make('1'),
             ],
             [
-                'name' => 'servivio tecnico instalador',
+                'name' => 'servicio tecnico instalador',
                 'email' => 'sti@1',
                 'address' => 'default',
                 'phone' => '4122548458',
