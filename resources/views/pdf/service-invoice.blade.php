@@ -14,7 +14,9 @@
     <main>
 
         <h1>Factura</h1>
-        <p>Precio: {{ $price }}</p>
+        <p>Hola {{ $user_name }}</p>
+        <p>Precio: {{ $plan_price }}</p>
+        <p>Plan: {{ $plan_name }}</p>
         <p>Gracias por su compra</p>
 
     </main>

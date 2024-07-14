@@ -33,7 +33,7 @@ return new class extends Migration {
                 'email' => 'admin@1',
                 'address' => 'default',
                 'phone' => '4122548458',
-                'dni' => '1',
+                'dni' => '11',
                 'rol' => 'administrador',
                 'avatar' => '',
                 'password' => Hash::make('1'),
@@ -43,7 +43,7 @@ return new class extends Migration {
                 'email' => 'c@1',
                 'address' => 'default',
                 'phone' => '4122548458',
-                'dni' => '2',
+                'dni' => '22',
                 'rol' => 'default',
                 'avatar' => '',
                 'password' => Hash::make('1'),
@@ -53,32 +53,38 @@ return new class extends Migration {
                 'email' => 'sta@1',
                 'address' => 'default',
                 'phone' => '4122548458',
-                'dni' => '3',
+                'dni' => '33',
                 'rol' => 'soporte-tecnico-administrador',
                 'avatar' => '',
                 'password' => Hash::make('1'),
             ],
-            [
-                'name' => 'servicio tecnico instalador',
-                'email' => 'sti@1',
-                'address' => 'default',
-                'phone' => '4122548458',
-                'dni' => '4',
-                'rol' => 'soporte-tecnico-instalador',
-                'avatar' => '',
-                'password' => Hash::make('1'),
-            ],
+
             [
                 'name' => 'cobranza',
                 'email' => 'c@1',
                 'address' => 'default',
                 'phone' => '4122548458',
-                'dni' => '5',
+                'dni' => '44',
                 'rol' => 'cobranza',
                 'avatar' => '',
                 'password' => Hash::make('1'),
             ],
         ]);
+
+        for ($i=0; $i < 10; $i++) {
+            DB::table('users')->insert([
+                [
+                    'name' => 'servicio tecnico instalador' . $i,
+                    'email' => 'sti' . $i . '@1',
+                    'address' => 'default',
+                    'phone' => $i,
+                    'dni' => $i,
+                    'rol' => 'soporte-tecnico-instalador',
+                    'avatar' => '',
+                    'password' => Hash::make('1'),
+                ],
+            ]);
+        }
     }
 
     /**

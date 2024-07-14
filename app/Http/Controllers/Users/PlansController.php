@@ -23,9 +23,17 @@ class PlansController extends Controller
 
         $user_id = Auth::user()->id;
 
-        $services = Solicitudes::where('id_cliente', $user_id)
+        $services = Solicitudes::where('solicitudes.id_cliente', $user_id)
             ->join('services', 'id_service', '=', 'services.id')
-            ->select('solicitudes.*', 'services.name', 'services.price', 'services.velocity_load', 'services.velocity_download')
+            ->join('invoices', 'invoice_id', '=', 'invoices.id')
+            ->select(
+                'solicitudes.*',
+                'services.name',
+                'services.price',
+                'services.velocity_load',
+                'services.velocity_download',
+                'invoices.invoice_url'
+            )
             ->get();
 
         $services->each(function ($service) {
@@ -51,7 +59,12 @@ class PlansController extends Controller
 
     public function store(Request $request)
     {
+
         try {
+
+            $user = Auth::user();
+            $user_id = $user->id;
+
             if ($request->file('image')) {
                 $file = $request->file('image');
                 $outputImage = 'images/payments/';
@@ -71,7 +84,7 @@ class PlansController extends Controller
 
                     $payment = new Payments;
                     $payment->id = $newIdPayment;
-                    $payment->id_cliente = Auth::user()->id;
+                    $payment->id_cliente = $user_id;
                     $payment->id_service = $plan[0]->id;
                     $payment->status = "Pendiente";
                     $payment->reference = $request->input('payment_ref');
@@ -79,29 +92,33 @@ class PlansController extends Controller
                     $payment->save();
 
                     $pdf_data = [
-                        'price' => $plan[0]->price,
+                        'plan_price' => $plan[0]->price,
+                        'plan_name' => $plan[0]->name,
+                        'user_name' => $user->name,
                     ];
 
-                    $pdf_path = storage_path('app/public/invoices/') . 'Factura-' . $newIdPayment . '.pdf';
+                    $pdf_file_name = 'Factura-' . $newIdPayment . '.pdf';
+
+                    $pdf_path = storage_path('app/public/invoices/') . $pdf_file_name;
 
                     $pdf = Pdf::loadView('pdf.service-invoice', $pdf_data)
                         ->save($pdf_path);
 
                     $invoices = new Invoices;
-                    $invoices->id_cliente = Auth::user()->id;
+                    $invoices->id_cliente = $user_id;
                     $invoices->id_service = $plan[0]->id;
                     $invoices->amount = $plan[0]->price;
                     $invoices->id_payment = $newIdPayment;
-                    $invoices->imagen = $pdf_path;
+                    $invoices->invoice_url = '/storage/invoices/' . $pdf_file_name;
                     $invoices->save();
 
                     $clientServices = new ClientServices;
-                    $clientServices->id_cliente = Auth::user()->id;
+                    $clientServices->id_cliente = $user_id;
                     $clientServices->id_service = $plan[0]->id;
                     $clientServices->save();
 
                     $solicitude = new Solicitudes;
-                    $solicitude->id_cliente = Auth::user()->id;
+                    $solicitude->id_cliente = $user_id;
                     $solicitude->id_service = $plan[0]->id;
                     $solicitude->invoice_id = $invoices->id;
                     $solicitude->status = "Pendiente";
@@ -114,9 +131,11 @@ class PlansController extends Controller
                     return response()->json(['success' => false, 'message' => 'No existe este plan']);
                 }
             }
+
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
+
     }
 
     public function findAll()

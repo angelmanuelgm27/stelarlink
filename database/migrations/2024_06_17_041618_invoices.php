@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->integer('id_service');
             $table->integer('amount');
             $table->string('id_payment');
-            $table->string('imagen');
+            $table->string('invoice_url');
             $table->timestamps();
         });
     }

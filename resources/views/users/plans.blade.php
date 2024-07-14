@@ -43,6 +43,7 @@
                             <th>Fecha de compra</th>
                             <th>Fecha de Activacion</th>
                             <th>Fecha de Vencimiento</th>
+                            <th>Factura</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -63,6 +64,9 @@
                                 <td class="align-middle">{{ $service->formatted_created_at }}</td>
                                 <td class="align-middle">{{ $service->date_active }}</td>
                                 <td class="align-middle">{{ $service->date_finish }}</td>
+                                <td class="align-middle">
+                                    <a href="{{ $service->invoice_url }}" target="_blank">Ver</a>
+                                </td>
                                 <td class="align-middle">
                                     @if($service->action == 'Cancelar')
                                         <button class="btn btn-primary">{{ $service->action }}</button>
