@@ -13,6 +13,7 @@ use App\Models\ClientServices;
 use App\Models\Invoices;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PlansController extends Controller
 {
@@ -77,18 +78,21 @@ class PlansController extends Controller
                     $payment->imagen = $paymentUrl;
                     $payment->save();
 
-                    $solicitude = new Solicitudes;
-                    $solicitude->id_cliente = Auth::user()->id;
-                    $solicitude->id_service = $plan[0]->id;
-                    $solicitude->status = "Pendiente";
-                    $solicitude->save();
+                    $pdf_data = [
+                        'price' => $plan[0]->price,
+                    ];
+
+                    $pdf_path = storage_path('app/public/invoices/') . 'Factura-' . $newIdPayment . '.pdf';
+
+                    $pdf = Pdf::loadView('pdf.service-invoice', $pdf_data)
+                        ->save($pdf_path);
 
                     $invoices = new Invoices;
                     $invoices->id_cliente = Auth::user()->id;
                     $invoices->id_service = $plan[0]->id;
                     $invoices->amount = $plan[0]->price;
                     $invoices->id_payment = $newIdPayment;
-                    $invoices->imagen = $paymentUrl;
+                    $invoices->imagen = $pdf_path;
                     $invoices->save();
 
                     $clientServices = new ClientServices;
@@ -96,6 +100,12 @@ class PlansController extends Controller
                     $clientServices->id_service = $plan[0]->id;
                     $clientServices->save();
 
+                    $solicitude = new Solicitudes;
+                    $solicitude->id_cliente = Auth::user()->id;
+                    $solicitude->id_service = $plan[0]->id;
+                    $solicitude->invoice_id = $invoices->id;
+                    $solicitude->status = "Pendiente";
+                    $solicitude->save();
 
                     $file->storeAs($outputImage, $fileName . '.' . $file->getClientOriginalExtension(), 'public');
                     return response()->json(['success' => true, 'message' => 'Pago realizado exitosamente']);
