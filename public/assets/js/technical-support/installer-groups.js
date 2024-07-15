@@ -14,7 +14,7 @@ function addNewUser(event){
   event.preventDefault();
 
   const technicalUsersContainer = document.getElementById('technical-users-container');
-  const clonedUserElement = document.querySelector('.user-element').cloneNode(true);
+  const clonedUserElement = document.querySelector('.user-element').cloneNode(true); // use create element ***
   technicalUsersContainer.appendChild(clonedUserElement);
 
   setRemoveUserListener();

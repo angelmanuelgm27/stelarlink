@@ -164,7 +164,7 @@
 
                         const shopMessage = Swal.mixin({
                             customClass: {
-                                confirmButton: "btn btn-adminlte-secondary mx-2 px-4 py-3 anta-regular rounded-pill",
+                                confirmButton: "btn btn-primary mx-2 px-4 py-3 rounded-pill",
                                 cancelButton: "btn btn-danger mx-2 px-4 py-3 anta-regular rounded-pill",
                             },
                             buttonsStyling: false
@@ -232,10 +232,8 @@
                                 }).then((result) => {
                                     let formData = new FormData()
                                     formData.append('plan_id', planId)
-                                    formData.append('payment_ref', $(
-                                        '#shop_payment_ref').val())
-                                    formData.append('image', $(
-                                        '#shop_image_payment')[0].files[0])
+                                    formData.append('payment_ref', $('#shop_payment_ref').val())
+                                    formData.append('image', $('#shop_image_payment')[0].files[0])
                                     formData.append('_token', '{{ csrf_token() }}')
                                     if (result.value == true) {
                                         $.ajax({
@@ -246,14 +244,11 @@
                                             processData: false,
                                             contentType: false,
                                             headers: {
-                                                'X-CSRF-TOKEN': $(
-                                                    'meta[name="csrf-token"]'
-                                                ).attr('content')
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                             },
                                             success: function(response) {
                                                 console.log(response)
-                                                if (response.success ==
-                                                    true) {
+                                                if (response.success == true) {
                                                     Swal.fire({
                                                         type: "success",
                                                         title: "Compra exitosa !",

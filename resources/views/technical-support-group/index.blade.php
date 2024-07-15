@@ -122,5 +122,5 @@
 
 
 @section('js')
-    <script type="text/javascript" src="{{ asset('assets/js/soporte-tecnico/grupos-instaladores.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/technical-support/installer-groups.js') }}"></script>
 @endsection
