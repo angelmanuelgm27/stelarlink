@@ -88,7 +88,7 @@
         <!-- Section: Links  -->
 
         <!-- Copyright -->
-        <div class="text-center mb-5">
+        <div class="text-center mb-5  ">
             <a class="work-sans-light text-2xl text-white " >Stelarlink Derechos reservados 2024</a>
         </div>
         <!-- Copyright -->

@@ -336,15 +336,15 @@
                             </div>
                         </div>
                         <!-- Gallery -->
-                        <div class="row">
+                        <div class="row d-none d-lg-flex">
                             <div class="col-12 col-md-12 col-lg-8">
                                 <div class="row">
-                                    <div class="col-12 col-lg-6 col-md-6 mb-lg-0">
+                                    <div class="col-6 col-lg-6 col-md-6 mb-lg-0">
                                         <img src="{{ asset('images/home/gallery/image_1.jpg') }}"
                                             class="w-100 shadow-1-strong rounded-5 " alt="Boat on Calm Water" />
                                     </div>
 
-                                    <div class="col-12 col-lg-6 col-md-6 mb-4 mb-lg-0">
+                                    <div class="col-6 col-lg-6 col-md-6 mb-4 mb-lg-0">
                                         <img src="{{ asset('images/home/gallery/image_2.jpg') }}"
                                             class="w-100 shadow-1-strong rounded-5 mb-4" alt="Mountains in the Clouds" />
 
@@ -360,42 +360,42 @@
                                             class="w-100 shadow-1-strong rounded-5 mb-4" alt="Waves at Sea" />
                                     </div>
                                     <div class="col-lg-12 col-12 col-md-6 mb-4 mb-lg-0">
-                                        <img src="{{ asset('images/home/gallery/image_3.jpg') }}" 
+                                        <img src="{{ asset('images/home/gallery/image_3.jpg') }}"
                                             class="w-100  shadow-1-strong rounded-5 mb-4 " alt="Waves at Sea" />
-                                    </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Gallery RESPONSIVE-->
-                          <div class="row">
-                            <div class="col-12 col-md-12 col-lg-8">
+                          <div class="row d-lg-none d-block">
+                            <div class="col-12  col-lg-8">
                                 <div class="row">
-                                    <div class="col-4 col-lg-6 col-md-6 mb-lg-0">
+                                    <div class="col-4 col-lg-6 mb-lg-0">
                                         <img src="{{ asset('images/home/gallery/image_1.jpg') }}"
                                             class="w-100 shadow-1-strong rounded-5 " alt="Boat on Calm Water" />
                                     </div>
 
-                                    <div class="col-8 col-lg-6 col-md-6 mb-4 mb-lg-0">
+                                    <div class="col-8 col-lg-6 mb-4 mb-lg-0">
                                         <img src="{{ asset('images/home/gallery/image_2.jpg') }}"
                                             class="w-100 shadow-1-strong rounded-5 mb-4" alt="Mountains in the Clouds" />
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-12 col-lg-4 ">
+                            <div class="col-12  col-lg-4 ">
                                 <div class="row">
                                        
 
-                                    <div class="col-lg-12 col-8 col-md-6 mb-4 mb-lg-0">
+                                    <div class="col-lg-12 col-8 mb-4 mb-lg-0">
                                         <img src="{{ asset('images/home/gallery/image_5.jpg') }}"
                                             class="w-100 h-100  shadow-1-strong rounded-5 mb-4 " alt="Waves at Sea" />
                                     </div>
-                                    <div class="col-lg-12 col-4 col-md-6 mb-4 mb-lg-0">
+                                    <div class="col-lg-12 col-4 mb-4 mb-lg-0">
                                         <img src="{{ asset('images/home/gallery/image_4.jpg') }}"
                                             class="w-100 h-100 shadow-1-strong rounded-5 mb-4" alt="Waves at Sea" />
                                     </div>
 
-                                    <div class="col-12 col-lg-6 col-md-6 mb-4 mb-lg-0">
+                                    <div class="col-12 col-lg-6 mb-4 mb-lg-0">
 
                                         <img src="{{ asset('images/home/gallery/image_3.jpg') }}" 
                                             class="w-100 h-60  shadow-1-strong rounded-5 mb-4 col-12" alt="Mountains in the Clouds" />
