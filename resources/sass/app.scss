@@ -148,6 +148,7 @@ body{
 
 .main-content {
     position: absolute;
+
     top: 0;
     left: 10%;
     height: 100%;
@@ -179,6 +180,7 @@ body{
     color: $secondary !important;
     background-color: $white !important;
 }
+
 
 .btn-secondary:hover {
     color: $white !important;
@@ -380,15 +382,17 @@ a{
         font-size: 4.5rem;
     }
     .main-content{
-        width: 98%;
+        text-align: center;
         left: 0;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
         top: 0px;
         padding: 15px;
-        align-items: inherit;
         margin-left: 0;
     }
     .main-content p{
-        display: none;
+
     }
     .main-content-section-1{
         top: 15px;
@@ -483,6 +487,9 @@ a{
     }
     .main-banner-responsive{
         display: block;
+    }
+    .row{
+        --bs-gutter-x: 0;
     }
 }
 @media only screen and (max-width: 992px) and (min-width: 661px) {

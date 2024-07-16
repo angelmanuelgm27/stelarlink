@@ -17,7 +17,7 @@
             </div>
 
             <div class="main-banner-responsive">
-                <img src="{{ asset('images/home/responsive/banner-resposive.png') }}" alt="main">
+                <img src="{{ asset('images/home/responsive/banner-resposive.png') }}" style="width: 100%" alt="main">
             </div>
 
             <div class="main-content pt-8 z-2">
@@ -26,7 +26,7 @@
                 <p class="text-white text-2xl work-sans-regular ">Transformando vidas a través de la conectividad digital
                     confiable.</p>
                 <x-button text="Planes y Precios" :url="('login')"
-                    class="btn btn-primary text-3xl px-4 py-2 fw-semibold work-sans-regular rounded-pill w-100"></x-button>
+                    class="btn btn-primary-light text-3xl px-4 py-2 fw-semibold work-sans-regular rounded-pill w-100"></x-button>
             </div>
         </div>
     </section>
@@ -48,8 +48,8 @@
                 <div class="col-12">
                     <div class="bg-secondary rounded-7 p-7 my-5">
                         <div class="row">
-                            <div class="col-12 col-md-12 col-lg-12 col-xl-6 my-auto">
-                                <p class="text-5xl text-white work-sans-regular">Estas son las razones para activar hoy tu
+                            <div class="col-12 col-md-12 col-lg-12 col-xl-6 my-auto text-xl-start text-center">
+                                <p class="text-5xl text-white  work-sans-regular">Estas son las razones para activar hoy tu
                                     conexión
                                     Stelarlink</p>
                                 <p class="text-white text-2xl work-sans-regular my-4">"StelarLink se compromete a
@@ -124,7 +124,7 @@
                     <div class="row mb-7">
                         @foreach ($installation_services as $iservice)
                             <div class="col-12 col-md-6">
-                                <x-installation-plans class="px-4 py-4 bg-secondary rounded-5 m-4 inst-plan"
+                                <x-installation-plans class="px-4 py-4 bg-secondary rounded-5 m-2 inst-plan"
                                     image="{{ $iservice->image ? asset('images/services/' . $iservice->image) : asset('images/noticon.png') }}"
                                     planName="{{ $iservice->name }}" planPrice="{{ $iservice->price }}$"
                                     planCategory="{{ $iservice->category }}"
@@ -395,6 +395,7 @@
                                     <h3 class=" text-8xl text-secondary work-sans-regular text-white fw-bolder ">Nuestro equipo</h3>
                                 </div>
                             </div>
+
                             <div class="team-members">
                                 <div class="team-member">
                                     <img src="{{ asset('images/home/team/angel_ceo.jpeg')}}" alt="Ángel Garaban">
