@@ -13,6 +13,8 @@ body{
 }
 
 // Custom
+
+
 .w-60{
     width: 60% !important;
 }
@@ -27,6 +29,10 @@ body{
 }
 .w-8{
     width: 8% !important;
+}
+
+.w-2X{
+    width: 100% !important;
 }
 
 .text-xs	{
@@ -239,6 +245,12 @@ a{
     background-size: cover;
 }
 
+.image-background-fix-footer {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 1000px;
+}
+
 .image-background-fix--format-2{
     background-repeat: no-repeat;
     background-size: contain;
@@ -330,10 +342,17 @@ a{
     margin-bottom: 5rem !important;
 }
 
+
 .my-8{
     margin-top: 7rem !important;
     margin-bottom: 7rem !important;
 }
+
+.my-10{
+    padding-top: 15vw !important;
+    padding-bottom: 15vw !important;
+}
+
 
 .py-8{
     padding-top: 7rem !important;
@@ -395,6 +414,15 @@ a{
     }
     .text-10xl{
         font-size: 4.5rem;
+    }
+    .text-12xl{
+        font-size: 8rem;
+    }
+
+    .image-background-fix-footer {
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 850px;
     }
     .main-content{
         text-align: center;
