@@ -13,11 +13,11 @@ return new class extends Migration {
         //
         Schema::create('client_services', function (Blueprint $table) {
             $table->id();
-            $table->string('id_cliente');
-            $table->string('id_service');
-            $table->string('id_employee')->nullable();
-            $table->string('date_active')->nullable();
-            $table->string('date_finish')->nullable();
+            $table->unsignedInteger('user_id')->references('id')->on('users');
+            $table->unsignedInteger('service_id')->references('id')->on('services');
+            // $table->unsignedInteger('id_employee')->references('id')->on('users')->nullable();
+            $table->timestamp('date_active')->nullable();
+            $table->timestamp('date_finish')->nullable();
             $table->timestamps();
         });
     }

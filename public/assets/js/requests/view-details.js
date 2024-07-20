@@ -21,12 +21,6 @@ function viewDetails(event){
       buttonsStyling: false
   });
 
-
-
-
-
-
-
   $.ajax({
     type: "GET",
     url: '/administrador/solicitudes-instlacion/' + requestId,
@@ -39,27 +33,43 @@ function viewDetails(event){
     },
     success: function(response) {
 
-        detailsPopUp.fire({
-      title: "Detalles",
-      confirmButtonText: "Actualizar",
-      cancelButtonText: "Cancelar",
-      allowOutsideClick: true,
-      showCancelButton: true,
-      width: 800,
-      template: "#request-data-popup"
-  });
+      detailsPopUp.fire({
+        title: "Detalles de la solicitud",
+        confirmButtonText: "Actualizar",
+        cancelButtonText: "Cancelar",
+        allowOutsideClick: true,
+        showCancelButton: true,
+        width: 800,
+        template: "#request-data-popup"
+      });
 
+      document.getElementById('form-update-request').setAttribute('action', '/administrador/solicitudes-instlacion/' + requestId);
 
-        console.log(response)
+      document.getElementById('user_name').textContent = response.user_name;
+      document.getElementById('service_name').textContent = response.service_name;
+      document.getElementById('formatted_created_at').textContent = response.formatted_created_at;
+      document.getElementById('adrress').textContent = response.adrress;
+      document.getElementById('group_name').textContent = (response.group_name) ? response.group_name : 'No asignado';
+      document.getElementById('status').textContent = response.status;
+      document.getElementById('invoice').href = '/invoice/' + response.invoice_id;
 
-        document.getElementById('user_name').textContent = response.solicitud[0].user_name;
-        document.getElementById('service_name').textContent = response.solicitud[0].service_name;
-        document.getElementById('created_at').textContent = response.solicitud[0].created_at;
-        document.getElementById('adrress').textContent = response.solicitud[0].adrress;
-        document.getElementById('status').textContent = response.solicitud[0].status;
-        document.getElementById('ip').textContent = response.solicitud[0].ip;
-        document.getElementById('zone').textContent = response.solicitud[0].zone;
-        document.getElementById('group_name').textContent = response.solicitud[0].group_name;
+      document.getElementById('ip').value = response.ip;
+      document.getElementById('zone_id').value = response.zone_id;
+
+      const formAcceptRequest = document.getElementById('form-accept-request');
+      const formRejectRequest = document.getElementById('form-reject-request');
+      formAcceptRequest.classList.add('d-none');
+      formRejectRequest.classList.add('d-none');
+
+      if(response.status == 'Pendiente'){
+
+        formAcceptRequest.setAttribute('action', '/administrador/aceptar-solicitud/' + requestId);
+        formAcceptRequest.classList.remove('d-none');
+
+        formRejectRequest.setAttribute('action', '/administrador/rechazar-solicitud/' + requestId);
+        formRejectRequest.classList.remove('d-none');
+
+      }
 
     },
     failure: function(e) {

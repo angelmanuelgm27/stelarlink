@@ -11,10 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('technical_support_group_user', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
+
             $table->id();
-            $table->unsignedInteger('technical_support_group_id')->references('id')->on('technical_support_groups');
-            $table->unsignedInteger('user_id')->references('id')->on('users');
+
+            $table->unsignedInteger('taskable_id');
+            $table->string('taskable_type');
+
+            $table->unsignedInteger('technical_support_group_id')
+                ->references('id')
+                ->on('technical_support_groups');
+
+            $table->timestamps();
         });
     }
 
@@ -23,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('technical_support_group_user');
+        Schema::dropIfExists('tasks');
     }
 };

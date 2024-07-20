@@ -11,7 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('files', function (Blueprint $table) {
+
+            $table->id();
+
+            $table->string('path');
+            $table->string('name');
+
+            $table->unsignedInteger('fileable_id');
+            $table->string('fileable_type');
+
+            $table->timestamps();
+
+        });
     }
 
     /**
@@ -19,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('files');
     }
 };

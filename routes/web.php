@@ -7,10 +7,13 @@ use App\Http\Controllers\Admin\SolicitudesController as AdminSolicitudesControll
 use App\Http\Controllers\Admin\StaffController as AdminStaffController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Profiles;
 use App\Http\Controllers\TechnicalSupportGroupController;
+use App\Http\Controllers\TechnicalSupportTaskController;
 use App\Http\Controllers\TechnicalSupport\SolicitudesController as TechnicalSolicitudesController;
 use App\Http\Controllers\Users\PlansController;
+use App\Http\Controllers\ZoneController;
 use App\Mail\Contact;
 use Illuminate\Support\Facades\Route;
 
@@ -27,20 +30,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])
     ->name('home');
+
 Route::get('/nosotros', [HomeController::class, 'about'])
     ->name('about');
+
 Route::post('/form-contacto', [HomeController::class, 'contact'])
     ->name('form.contact');
+
 Auth::routes();
 
 Route::get('/dashboard', [HomeController::class, 'panel'])
     ->middleware(['auth', 'verified']);
+
 Route::get('/perfil', [HomeController::class, 'profile'])
     ->middleware(['auth', 'verified'])
     ->name('profile');
+
 Route::put('/perfil/imagen-actualizar/{id}', [Profiles::class, 'updateAvatar'])
     ->middleware(['auth', 'verified'])
     ->name('profile.update.image');
+
 Route::put('/perfil/actualizar/{id}', [Profiles::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('profile.update');
@@ -49,12 +58,15 @@ Route::put('/perfil/actualizar/{id}', [Profiles::class, 'update'])
 Route::get('/administrador/usuarios', [AdminUsersController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('admin.users');
+
 Route::get('/administrador/usuarios/all', [AdminUsersController::class, 'list'])
     ->middleware(['auth', 'verified'])
     ->name('admin.users.all');
+
 Route::patch('/administrador/usuarios/{id}', [AdminUsersController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('admin.users.update');
+
 Route::delete('/administrador/usuarios/{id}', [AdminUsersController::class, 'delete'])
     ->middleware(['auth', 'verified'])
     ->name('admin.users.delete');
@@ -63,12 +75,15 @@ Route::delete('/administrador/usuarios/{id}', [AdminUsersController::class, 'del
 Route::get('/administrador/personal', [AdminStaffController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('admin.staff');
+
 Route::post('/administrador/personal/crear', [AdminStaffController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('admin.staff.create');
+
 Route::get('/administrador/personal/all', [AdminStaffController::class, 'list'])
     ->middleware(['auth', 'verified'])
     ->name('admin.staff.list');
+
 Route::delete('/administrador/personal/{id}', [AdminStaffController::class, 'delete'])
     ->middleware(['auth', 'verified'])
     ->name('admin.staff.delete');
@@ -84,18 +99,23 @@ Route::delete('/administrador/personal/{id}', [AdminStaffController::class, 'del
 Route::get('/administrador/servicios/all', [AdminServiciosController::class, 'list'])
     ->middleware(['auth', 'verified'])
     ->name('admin.services.all');
+
 Route::get('/administrador/servicios', [AdminServiciosController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('admin.services');
+
 Route::patch('/administrador/servicios/estado/{id}', [AdminServiciosController::class, 'updateStatus'])
     ->middleware(['auth', 'verified'])
     ->name('admin.services.update.status');
+
 Route::patch('/administrador/servicios/editar/{id}', [AdminServiciosController::class, 'edit'])
     ->middleware(['auth', 'verified'])
     ->name('admin.services.update');
+
 Route::delete('/administrador/servicios/eliminar/{id}', [AdminServiciosController::class, 'delete'])
     ->middleware(['auth', 'verified'])
     ->name('admin.services.delete');
+
 Route::post('/administrador/servicios/crear', [AdminServiciosController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('admin.services.create');
@@ -104,9 +124,11 @@ Route::post('/administrador/servicios/crear', [AdminServiciosController::class, 
 Route::get('/administrador/mapa', [MapController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('admin.map');
+
 Route::post('/administrador/mapa/crear-punto', [MapController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('admin.map.create');
+
 Route::get('/administrador/mapa/delete/${id}', [MapController::class, 'delete'])
     ->middleware(['auth', 'verified'])
     ->name('admin.map.delete');
@@ -115,14 +137,30 @@ Route::get('/administrador/mapa/delete/${id}', [MapController::class, 'delete'])
 Route::get('/administrador/solicitudes-instlacion', [AdminSolicitudesController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.index');
+
 Route::get('/administrador/solicitudes-instlacion/{id}', [AdminSolicitudesController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.show');
+
+Route::post('/administrador/solicitudes-instlacion/{solicitudes}', [AdminSolicitudesController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.requests.update');
 
 //METODOS DE PAGO
 Route::get('/administrador/metodos-pagos', [AdminMethodsPaymentsController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('admin.staff');
+
+Route::put('/administrador/aceptar-solicitud/{solicitudes}', [AdminSolicitudesController::class, 'accept'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.requests.accept');
+
+Route::put('/administrador/rechazar-solicitud/{solicitudes}', [AdminSolicitudesController::class, 'reject'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.requests.reject');
+
+
+
 
 //'admin.map.delete
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
@@ -132,13 +170,23 @@ Route::get('/administrador/metodos-pagos', [AdminMethodsPaymentsController::clas
 Route::get('/cliente/planes', [PlansController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('client.plans');
+
 Route::post('/cliente/planes/compra', [PlansController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('client.plans.shop');
+
 Route::get('/cliente/planes/list', [PlansController::class, 'findAll'])
     ->middleware(['auth', 'verified'])
     ->name('client.plans.user');
-//route('client.plans.user')
+
+Route::put('/cliente/planes/{solicitudes}', [PlansController::class, 'cancel'])
+    ->middleware(['auth', 'verified'])
+    ->name('request.cancel');
+
+//INVOICE
+Route::get('/invoice/{invoice}', [InvoiceController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('invoice.show');
 
 //SOPORTE TECNICO
 Route::get('/soporte-tecnico/solicitudes-instlacion', [TechnicalSolicitudesController::class, 'index'])
@@ -148,13 +196,41 @@ Route::get('/soporte-tecnico/solicitudes-instlacion', [TechnicalSolicitudesContr
 //SOPORTE TECNICO - GRUPOS
 Route::get('/soporte-tecnico/grupos-instaladores', [TechnicalSupportGroupController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('technical-support-group.index');
+    ->name('technical.support.group.index');
+
 Route::post('/soporte-tecnico/grupos-instaladores', [TechnicalSupportGroupController::class, 'store'])
     ->middleware(['auth', 'verified'])
-    ->name('technical-support-group.store');
+    ->name('technical.support.group.store');
+
 Route::delete('/soporte-tecnico/grupos-instaladores/{technicalSupportGroup}', [TechnicalSupportGroupController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
-    ->name('technical-support-group.destroy');
+    ->name('technical.support.group.destroy');
+
+Route::PUT('/soporte-tecnico/update.availability/{technicalSupportGroup}', [TechnicalSupportGroupController::class, 'updateAvailability'])
+    ->middleware(['auth', 'verified'])
+    ->name('technical.support.group.update.availability');
+
+//SOPORTE TECNICO - TASKS
+Route::get('/soporte-tecnico/actividades', [TechnicalSupportTaskController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('technical.support.task.index');
+
+Route::put('/soporte-tecnico/actividades/{task}', [TechnicalSupportTaskController::class, 'markAsCompleted'])
+    ->middleware(['auth', 'verified'])
+    ->name('technical.support.task.completed');
+
+//GESTION DE ZONAS
+Route::get('/administrador/zona', [ZoneController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('zone.index');
+
+Route::post('/administrador/zona', [ZoneController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('zone.store');
+
+Route::delete('/administrador/zona/{zone}', [ZoneController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('zone.destroy');
 
 //COBRANZAS
 // Route::get('/cobranzas/historial-pagos', [AdminStaffController::class, 'index'])

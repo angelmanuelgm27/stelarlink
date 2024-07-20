@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Solicitudes;
+use App\Models\Task;
 use App\Models\TechnicalSupportGroup;
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Zone;
+use Illuminate\Http\Request;
 
 class TechnicalSupportGroupController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $groups = TechnicalSupportGroup::all();
+
+        $groups = TechnicalSupportGroup::leftJoin('zones', 'zone_id', '=', 'zones.id')
+            ->select(
+                'technical_support_groups.*',
+                'zones.name as zone_name',
+            )->get();
 
         $groups->each(function ($group) {
 
@@ -27,16 +36,21 @@ class TechnicalSupportGroupController extends Controller
 
         });
 
+        $zones = Zone::all();
+
         $users = User::where('rol', 'soporte-tecnico-instalador')
+            ->whereDoesntHave('group')
             ->select('id', 'name')
             ->get();
 
         $data = [
             'groups' => $groups,
             'users' => $users,
+            'zones' => $zones,
         ];
 
         return view('technical-support-group.index', $data);
+
     }
 
     /**
@@ -55,19 +69,19 @@ class TechnicalSupportGroupController extends Controller
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'zone' => ['required', 'string', 'max:255'],
+            'zone_id' => ['required', 'integer', 'max:255'],
             'technical_support_user' => ['required', 'array', 'min:1'],
             'technical_support_user.*' => ['integer', 'exists:users,id'],
         ]);
 
         $technical_support_group = new TechnicalSupportGroup();
         $technical_support_group->name = $validated['name'];
-        $technical_support_group->zone = $validated['zone'];
+        $technical_support_group->zone_id = $validated['zone_id'];
         $technical_support_group->save();
 
         $technical_support_group->users()->attach($request->technical_support_user); // validate ***
 
-        return redirect()->route('technical-support-group.index');
+        return redirect()->route('technical.support.group.index');
     }
 
     /**
@@ -102,7 +116,44 @@ class TechnicalSupportGroupController extends Controller
 
         $technicalSupportGroup->delete();
 
-        return redirect()->route('technical-support-group.index');
+        return redirect()->route('technical.support.group.index');
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function updateAvailability(TechnicalSupportGroup $technicalSupportGroup)
+    {
+
+        $old_availability = $technicalSupportGroup->availability;
+        $new_availability = 'No disponible';
+
+        if($old_availability == 'No disponible'){
+
+            $solicitud = Solicitudes::where('status', 'Aprobada')->oldest()->first();
+
+            if(!empty($solicitud)){
+
+                $task = new Task();
+
+                $task->technical_support_group_id = $technicalSupportGroup->id;
+
+                $solicitud->task()->save($task);
+
+                $solicitud->update(['status' => 'Asignada']);
+
+            }else{
+
+                $new_availability = 'Disponible';
+
+            }
+
+        }
+
+        $technicalSupportGroup->update(['availability' => $new_availability]);
+
+        return redirect()->route('technical.support.task.index');
 
     }
 

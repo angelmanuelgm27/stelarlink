@@ -20,6 +20,7 @@
                             <th>Nombre</th>
                             <th>Zona</th>
                             <th>Instaladores</th>
+                            <th>Actividad</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -34,13 +35,14 @@
                             <tr>
                                 <td class="align-middle">{{ $index }}</td>
                                 <td class="align-middle">{{ $group->name }}</td>
-                                <td class="align-middle">{{ $group->zone }}</td>
+                                <td class="align-middle">{{ $group->zone_name }}</td>
                                 <td class="align-middle">{{ $group->user_names }}</td>
+                                <td class="align-middle">-</td>
                                 <td class="align-middle">
 
                                     <form
                                     method="POST"
-                                    action="{{ route('technical-support-group.destroy', ['technicalSupportGroup' => $group]) }}"
+                                    action="{{ route('technical.support.group.destroy', ['technicalSupportGroup' => $group]) }}"
                                     >
                                         @csrf
                                         @method('DELETE')
@@ -69,22 +71,34 @@
 
     <x-paneltitle titleName="Crear nuevo grupo"></x-paneltitle>
 
-    <form method="POST" action="{{ route('technical-support-group.store') }}" >
+    <form method="POST" action="{{ route('technical.support.group.store') }}" >
 
         @csrf
 
         <div class="row">
             <div class="col-12 col-md-6">
                 <label for="name" class="form-label">Nombre del grupo</label>
-                <input type="text" id="name" name="name" class="form-control">
+                <input type="text" id="name" name="name" class="form-control" required>
             </div>
             <div class="col-12 col-md-6">
-                <label for="zone" class="form-label">Zona</label>
-                <input type="text" id="zone" name="zone" class="form-control">
+                <label for="zone_id" class="form-label">Zona</label>
+                <select id="zone_id" name="zone_id" class="form-control" required>
+                    @foreach($zones as $zone)
+                        <option value="{{ $zone->id }}">{{ $zone->name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
 
-        <label class="form-label">Usuarios</label>
+        <div class="d-flex justify-content-between align-items-center my-3">
+
+            <label class="form-label">Instaladores</label>
+
+            <div class="text-right">
+                <button class="btn btn-primary" id="add-new-user-btn">Agregar</button>
+            </div>
+
+        </div>
 
         <div id="technical-users-container">
 
@@ -94,7 +108,7 @@
                 <span class="input-group-text" >Instalador</span>
               </div>
 
-              <select class="custom-select" name="technical_support_user[]">
+              <select class="custom-select" name="technical_support_user[]" required>
                 <option value="">Seleccionar...</option>
                 @foreach ($users as $user)
                     <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -107,10 +121,6 @@
 
             </div>
 
-        </div>
-
-        <div class="text-right">
-            <button class="btn btn-primary" id="add-new-user-btn">Agregar</button>
         </div>
 
         <div class="text-center">

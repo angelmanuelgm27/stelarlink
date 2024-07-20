@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Str;
-use App\Models\Services;
-use App\Models\Payments;
-use App\Models\Solicitudes;
 use App\Models\ClientServices;
-use App\Models\Invoices;
+use App\Models\File;
+use App\Models\Invoice;
+use App\Models\Payments;
+use App\Models\Services;
+use App\Models\Solicitudes;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Str;
 
 class PlansController extends Controller
 {
@@ -23,16 +24,14 @@ class PlansController extends Controller
 
         $user_id = Auth::user()->id;
 
-        $services = Solicitudes::where('solicitudes.id_cliente', $user_id)
-            ->join('services', 'id_service', '=', 'services.id')
-            ->join('invoices', 'invoice_id', '=', 'invoices.id')
+        $services = Solicitudes::where('solicitudes.user_id', $user_id)
+            ->join('services', 'service_id', '=', 'services.id')
             ->select(
                 'solicitudes.*',
                 'services.name',
                 'services.price',
                 'services.velocity_load',
                 'services.velocity_download',
-                'invoices.invoice_url'
             )
             ->get();
 
@@ -46,13 +45,12 @@ class PlansController extends Controller
 
             $time_now = Carbon::now();
             $total_duration_in_hours = $time_now->diffInHours($service->updated_at);
-            if($total_duration_in_hours < 12 && $service->status == 'Pendiente' ){
-                $service->action = 'Cancelar';
+            if($total_duration_in_hours > 12 && $service->status == 'Pendiente' ){
+                $service->action = 'Cancelar'; // ***
             }
 
-        });
 
-// dd($services);
+        });
 
         return view('users.plans', ['services' => $services]);
     }
@@ -60,20 +58,20 @@ class PlansController extends Controller
     public function store(Request $request)
     {
 
+        $user = Auth::user();
+        $user_id = $user->id;
+
         try {
 
-            $user = Auth::user();
-            $user_id = $user->id;
-
             if ($request->file('image')) {
-                $file = $request->file('image');
+                $payment_file = $request->file('image');
                 $outputImage = 'images/payments/';
                 $fileName = 'payment_' . time() . '_' . Str::uuid()->toString();
 
                 $plan = Services::where('id', $request->input('plan_id'))->get();
                 if (count($plan) > 0) {
 
-                    $paymentUrl = '/storage/' . $outputImage . $fileName . '.' . $file->getClientOriginalExtension();
+                    $paymentUrl = '/storage/' . $outputImage . $fileName . '.' . $payment_file->getClientOriginalExtension();
 
                     $lastIdPayment = Payments::latest()->first();
                     if ($lastIdPayment == null) {
@@ -84,8 +82,8 @@ class PlansController extends Controller
 
                     $payment = new Payments;
                     $payment->id = $newIdPayment;
-                    $payment->id_cliente = $user_id;
-                    $payment->id_service = $plan[0]->id;
+                    $payment->user_id = $user_id;
+                    $payment->service_id = $plan[0]->id;
                     $payment->status = "Pendiente";
                     $payment->reference = $request->input('payment_ref');
                     $payment->imagen = $paymentUrl;
@@ -96,35 +94,35 @@ class PlansController extends Controller
                         'plan_name' => $plan[0]->name,
                         'user_name' => $user->name,
                     ];
+                    $file_name = '/invoices/Factura-' . $newIdPayment . '.pdf';
+                    $file_path = storage_path('app') . $file_name;
+                    $invoice_file = Pdf::loadView('pdf.service-invoice', $pdf_data)->save($file_path);
 
-                    $pdf_file_name = 'Factura-' . $newIdPayment . '.pdf';
-
-                    $pdf_path = storage_path('app/public/invoices/') . $pdf_file_name;
-
-                    $pdf = Pdf::loadView('pdf.service-invoice', $pdf_data)
-                        ->save($pdf_path);
-
-                    $invoices = new Invoices;
-                    $invoices->id_cliente = $user_id;
-                    $invoices->id_service = $plan[0]->id;
+                    $invoices = new Invoice;
+                    $invoices->user_id = $user_id;
+                    $invoices->service_id = $plan[0]->id;
                     $invoices->amount = $plan[0]->price;
                     $invoices->id_payment = $newIdPayment;
-                    $invoices->invoice_url = '/storage/invoices/' . $pdf_file_name;
                     $invoices->save();
 
+                    $file = new File();
+                    $file->path = $file_path;
+                    $file->name = $file_name;
+                    $invoices->file()->save($file);
+
                     $clientServices = new ClientServices;
-                    $clientServices->id_cliente = $user_id;
-                    $clientServices->id_service = $plan[0]->id;
+                    $clientServices->user_id = $user_id;
+                    $clientServices->service_id = $plan[0]->id;
                     $clientServices->save();
 
                     $solicitude = new Solicitudes;
-                    $solicitude->id_cliente = $user_id;
-                    $solicitude->id_service = $plan[0]->id;
+                    $solicitude->user_id = $user_id;
+                    $solicitude->service_id = $plan[0]->id;
                     $solicitude->invoice_id = $invoices->id;
                     $solicitude->status = "Pendiente";
                     $solicitude->save();
 
-                    $file->storeAs($outputImage, $fileName . '.' . $file->getClientOriginalExtension(), 'public');
+                    $payment_file->storeAs($outputImage, $fileName . '.' . $payment_file->getClientOriginalExtension(), 'public');
                     return response()->json(['success' => true, 'message' => 'Pago realizado exitosamente']);
 
                 } else {
@@ -141,11 +139,22 @@ class PlansController extends Controller
     public function findAll()
     {
         $data = [];
-        $clientServices = ClientServices::where('id_cliente', Auth::user()->id)->get();
+        $clientServices = ClientServices::where('user_id', Auth::user()->id)->get();
         foreach ($clientServices as $clientService) {
-            $service = Services::find($clientService->id_service);
+            $service = Services::find($clientService->service_id);
             array_push($data, $service);
         }
         return response()->json(['success' => true, 'data' => $data]);
     }
+
+    public function cancel(Solicitudes $solicitudes){
+
+        // ***
+
+        $solicitudes->update(['status' => 'Cancelada']);
+
+        return redirect()->route('client.plans');
+
+    }
+
 }

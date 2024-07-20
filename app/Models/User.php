@@ -3,8 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\TechnicalSupportGroup;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as AuthenticatableUser;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -66,5 +68,13 @@ class User extends AuthenticatableUser implements Authenticatable
     public function setAuthColumns()
     {
         return ['email', 'dni', 'name', 'address'];
+    }
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function group(): BelongsToMany
+    {
+        return $this->BelongsToMany(TechnicalSupportGroup::class);
     }
 }

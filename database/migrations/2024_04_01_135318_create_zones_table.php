@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Zone;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('technical_support_groups', function (Blueprint $table) {
+        Schema::create('zones', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedInteger('zone_id')->references('id')->on('zones');
-            $table->string('availability')->default('No disponible');
+            $table->string('description');
             $table->timestamps();
         });
+
+        for ($i=1; $i < 4; $i++) {
+            DB::table('zones')->insert([
+                [
+                    'name' => 'Zona ' . $i,
+                    'description' => 'Descripcion de la zona ' . $i,
+                ],
+            ]);
+        }
     }
 
     /**
@@ -26,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('technical_support_groups');
+        Schema::dropIfExists('zones');
     }
 };

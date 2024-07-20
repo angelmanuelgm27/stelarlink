@@ -16,8 +16,8 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->float('price');
-            $table->integer('velocity_load');
-            $table->integer('velocity_download');
+            $table->unsignedInteger('velocity_load');
+            $table->unsignedInteger('velocity_download');
             $table->string('image');
             $table->boolean('status');
             $table->timestamps();

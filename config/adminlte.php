@@ -326,6 +326,12 @@ return [
             'can' => ['soporte-tecnico-administrador'],
         ],
         [
+            'text' => 'Actividades',
+            'icon' => 'fas fa-users-cog',
+            'url' => '/soporte-tecnico/actividades',
+            'can' => ['soporte-tecnico-instalador'],
+        ],
+        [
             'text' => 'Mis planes',
             'icon' => 'fa fa-cubes',
             'url' => '/cliente/planes',
@@ -366,6 +372,12 @@ return [
             'icon' => "fas fa-share-alt",
             'url' => '/administrador/servicios',
             'can' => ['administrador'],
+        ],
+        [
+            'text' => 'Gestión de zonas',
+            'icon' => "fas fa-route",
+            'url' => '/administrador/zona',
+            'can' => ['administrador', 'soporte-tecnico-administrador'],
         ],
         [
             'text' => 'Volver a principal',

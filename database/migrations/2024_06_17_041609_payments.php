@@ -13,12 +13,12 @@ return new class extends Migration {
         //
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_cliente');
-            $table->integer('id_service');
+            $table->unsignedInteger('user_id')->references('id')->on('users');
+            $table->unsignedInteger('service_id')->references('id')->on('services');
             $table->string('status');
             $table->string('reference');
             $table->string('imagen');
-            $table->integer('id_user_approve')->nullable();
+            $table->unsignedInteger('id_user_approve')->nullable();
             $table->timestamps();
         });
     }

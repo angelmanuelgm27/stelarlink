@@ -19,6 +19,7 @@
                             <th>Cliente</th>
                             <th>Plan</th>
                             <th>status</th>
+                            <th>Zona</th>
                             <th>ip</th>
                             <th>Grupo instalador</th>
                             <th></th>
@@ -38,6 +39,13 @@
                                 <td class="align-middle">{{ $request->service_name }}</td>
                                 <td class="align-middle">{{ $request->status }}</td>
                                 <td class="align-middle">
+                                    @if(empty($request->zone_name))
+                                        No asignado
+                                    @else
+                                        {{ $request->zone_name }}
+                                    @endif
+                                </td>
+                                <td class="align-middle">
                                     @if(empty($request->ip))
                                         No asignado
                                     @else
@@ -48,7 +56,7 @@
                                     @if(empty($request->group_id))
                                         No asignado
                                     @else
-                                        {{ $request->group_id }}
+                                        {{ $request->group_name }}
                                     @endif
                                 </td>
                                 <td class="align-middle">
@@ -73,22 +81,7 @@
 
   @endif
 
-<template id="request-data-popup">
-    <swal-html>
-        <h3>Detalles de la solicitud</h3>
-        <div class="text-left">
-            <div class="mb-1"><span class="font-weight-bold">Cliente:</span> <span id="user_name"></span></div>
-            <div class="mb-1"><span class="font-weight-bold">Plan:</span> <span id="service_name"></span></div>
-            <div class="mb-1"><span class="font-weight-bold">Creacion:</span> <span id="created_at"></span></div>
-            <div class="mb-1"><span class="font-weight-bold">Direccion:</span> <span id="adrress"></span></div>
-            <div class="mb-1"><span class="font-weight-bold">Estado:</span> <span id="status"></span></div>
-            <div class="mb-1"><span class="font-weight-bold">IP:</span> <span id="ip"></span></div>
-            <div class="mb-1"><span class="font-weight-bold">Zona:</span> <span id="zone"></span></div>
-            <div class="mb-1"><span class="font-weight-bold">Grupo:</span> <span id="group_name"></span></div>
-        </div>
-
-    </swal-html>
-</template>
+  @include('admin.edit-request', ['statuses' => $statuses, 'zones' => $zones])
 
 @stop
 

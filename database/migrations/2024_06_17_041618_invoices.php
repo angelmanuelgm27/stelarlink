@@ -13,11 +13,10 @@ return new class extends Migration {
         //
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_cliente');
-            $table->integer('id_service');
-            $table->integer('amount');
+            $table->unsignedInteger('user_id')->references('id')->on('users');
+            $table->unsignedInteger('service_id')->references('id')->on('services');
+            $table->float('amount');
             $table->string('id_payment');
-            $table->string('invoice_url');
             $table->timestamps();
         });
     }

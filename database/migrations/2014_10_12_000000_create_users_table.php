@@ -71,7 +71,7 @@ return new class extends Migration {
             ],
         ]);
 
-        for ($i=0; $i < 10; $i++) {
+        for ($i=1; $i < 10; $i++) {
             DB::table('users')->insert([
                 [
                     'name' => 'servicio tecnico instalador' . $i,

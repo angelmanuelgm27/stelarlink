@@ -13,14 +13,14 @@ return new class extends Migration {
         //
         Schema::create('solicitudes', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_cliente');
-            $table->integer('id_service');
+            $table->unsignedInteger('user_id')->references('id')->on('users');
+            $table->unsignedInteger('service_id')->references('id')->on('services');
             $table->string('status');
             $table->string('ip')->nullable();
-            $table->integer('group_id')->nullable();
+            $table->unsignedInteger('group_id')->references('id')->on('technical_support_groups')->nullable();
             $table->string('adrress')->nullable();
-            $table->string('zone')->nullable();
-            $table->integer('invoice_id');
+            $table->unsignedInteger('zone_id')->references('id')->on('zones')->nullable();
+            $table->unsignedInteger('invoice_id')->references('id')->on('invoices');
             $table->timestamps();
         });
     }

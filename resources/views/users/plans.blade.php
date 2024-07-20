@@ -65,11 +65,17 @@
                                 <td class="align-middle">{{ $service->date_active }}</td>
                                 <td class="align-middle">{{ $service->date_finish }}</td>
                                 <td class="align-middle">
-                                    <a href="{{ $service->invoice_url }}" target="_blank">Ver</a>
+                                    <a href="{{ route('invoice.show', ['invoice' => $service->invoice_id ]) }}">Descargar</a>
                                 </td>
                                 <td class="align-middle">
                                     @if($service->action == 'Cancelar')
-                                        <button class="btn btn-primary">{{ $service->action }}</button>
+
+                                        <form method="POST" action="{{ route('request.cancel', ['solicitudes' => $service->id]) }}" >
+                                            @csrf
+                                            @method('PUT')
+                                            <button class="btn btn-primary">Cancelar</button>
+                                        </form>
+
                                     @endif
                                 </td>
 
