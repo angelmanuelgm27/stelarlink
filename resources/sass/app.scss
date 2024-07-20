@@ -31,6 +31,22 @@ body{
     width: 8% !important;
 }
 
+.h-60{
+    height: 60%;
+}
+
+.h-80{
+    height: 80%;
+}
+
+.h-90{
+    height: 90%;
+}
+
+.h-gallery{
+    height: 250px;
+}
+
 .w-2X{
     width: 100% !important;
 }
@@ -637,9 +653,28 @@ a{
         font-size: 0.65rem;
     }
 }
-@media only screen and (max-width: 1200px) and (min-width: 1025px){}
-@media only screen and (max-width: 1279px) and (min-width: 1201px){}
-@media only screen and (max-width: 1919px) and (min-width: 1280px){}
+@media only screen and (max-width: 1200px) and (min-width: 1025px){
+    .h-gallery{
+        height: 350px;
+    }
+}
+@media only screen and (max-width: 1679px) and (min-width: 1201px){
+    .h-gallery{
+        height: 350px;
+    }
+}
+@media only screen and (max-width: 2560px) and (min-width: 1680px){
+
+    .h-gallery{
+        height: 350px;
+    }
+
+    .image-background-fix-footer {
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 1300px;
+    }
+}
 @media only screen and (min-width: 1920px){}
 
 .team-section {
