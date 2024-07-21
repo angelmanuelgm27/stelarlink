@@ -10,7 +10,7 @@
                 <div class="mb-1"><span class="font-weight-bold">Plan:</span> <span id="service_name"></span></div>
                 <div class="mb-1"><span class="font-weight-bold">Creacion:</span> <span id="formatted_created_at"></span></div>
                 <div class="mb-1"><span class="font-weight-bold">Direccion:</span> <span id="adrress"></span></div>
-                <div class="mb-1"><span class="font-weight-bold">Grupo:</span> <span id="group_name"></span></div>
+                <!-- <div class="mb-1"><span class="font-weight-bold">Grupo:</span> <span id="group_name"></span></div> -->
                 <div class="mb-1"><span class="font-weight-bold">Estado:</span> <span id="status"></span></div>
                 <div class="mb-1"><span class="font-weight-bold"><a href="" id="invoice">Factura</a></span></div>
 
@@ -37,6 +37,9 @@
                     </div>
 
                 </div>
+
+                <div class="mb-1" id="instalation-files-label"><span class="font-weight-bold">Imágenes de la instalación:</span></div>
+                <div id="instalation-files" class="d-none"></div>
 
             </div>
 

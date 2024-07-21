@@ -49,7 +49,7 @@ function viewDetails(event){
       document.getElementById('service_name').textContent = response.service_name;
       document.getElementById('formatted_created_at').textContent = response.formatted_created_at;
       document.getElementById('adrress').textContent = response.adrress;
-      document.getElementById('group_name').textContent = (response.group_name) ? response.group_name : 'No asignado';
+      // document.getElementById('group_name').textContent = (response.group_name) ? response.group_name : 'No asignado';
       document.getElementById('status').textContent = response.status;
       document.getElementById('invoice').href = '/invoice/' + response.invoice_id;
 
@@ -70,6 +70,26 @@ function viewDetails(event){
         formRejectRequest.classList.remove('d-none');
 
       }
+
+      const instalationFiles = document.getElementById('instalation-files');
+      const instalationFilesLabel = document.getElementById('instalation-files-label');
+
+      if(response.instalation_files.length > 0){
+        instalationFiles.classList.remove('d-none');
+        instalationFilesLabel.classList.remove('d-none');
+        for (var i = 0; i < response.instalation_files.length; i++) {
+          instalationFiles.innerHTML += '<a class="d-block" href="/file/' + response.instalation_files[i].id + '">' + response.instalation_files[i].name + '</a>'
+        }
+
+      }else{
+        instalationFiles.classList.add('d-none');
+        instalationFilesLabel.classList.add('d-none');
+        while (instalationFiles.lastElementChild) {
+          instalationFiles.removeChild(instalationFiles.lastElementChild);
+        }
+      }
+
+
 
     },
     failure: function(e) {

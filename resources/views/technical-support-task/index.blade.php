@@ -50,7 +50,6 @@
 
                 <h4>{{ $taskable_name }}</h4>
                 <h5>Direccion: {{ $taskable->adrress }}</h5>
-                <h5>Zona: {{ $taskable->zone_id }}</h5>
 
                 <form
                     method="POST"

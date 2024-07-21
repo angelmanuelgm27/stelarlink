@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ServiciosController as AdminServiciosController;
 use App\Http\Controllers\Admin\SolicitudesController as AdminSolicitudesController;
 use App\Http\Controllers\Admin\StaffController as AdminStaffController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Profiles;
@@ -146,7 +147,6 @@ Route::post('/administrador/solicitudes-instlacion/{solicitudes}', [AdminSolicit
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.update');
 
-//METODOS DE PAGO
 Route::get('/administrador/metodos-pagos', [AdminMethodsPaymentsController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('admin.staff');
@@ -206,7 +206,7 @@ Route::delete('/soporte-tecnico/grupos-instaladores/{technicalSupportGroup}', [T
     ->middleware(['auth', 'verified'])
     ->name('technical.support.group.destroy');
 
-Route::PUT('/soporte-tecnico/update.availability/{technicalSupportGroup}', [TechnicalSupportGroupController::class, 'updateAvailability'])
+Route::PUT('/soporte-tecnico/update-availability/{technicalSupportGroup}', [TechnicalSupportGroupController::class, 'updateAvailability'])
     ->middleware(['auth', 'verified'])
     ->name('technical.support.group.update.availability');
 
@@ -236,3 +236,9 @@ Route::delete('/administrador/zona/{zone}', [ZoneController::class, 'destroy'])
 // Route::get('/cobranzas/historial-pagos', [AdminStaffController::class, 'index'])
 //     ->middleware(['auth', 'verified'])
 //     ->name('admin.staff');
+
+
+// ARCHIVOS
+Route::get('/file/{file}', [FileController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('file.show');

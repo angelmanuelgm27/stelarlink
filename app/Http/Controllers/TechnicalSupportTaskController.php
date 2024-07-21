@@ -49,7 +49,7 @@ class TechnicalSupportTaskController extends Controller
 
             $service = ($task) ? Services::find($taskable->service_id) : null;
 
-            $class_name = ($task) ? get_class($taskable) : null; //class_basename()?
+            $class_name = ($task) ? get_class($taskable) : null;
 
             $taskable_name = ($task) ? Task::$task_names[$class_name] : null;
 
