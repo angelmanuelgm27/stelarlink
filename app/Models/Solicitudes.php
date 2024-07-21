@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\File;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Solicitudes extends Model
 {
@@ -42,6 +44,14 @@ class Solicitudes extends Model
     public function task(): MorphOne
     {
         return $this->morphOne(Task::class, 'taskable');
+    }
+
+    /**
+     * Get all of the post's comments.
+     */
+    public function files(): MorphMany
+    {
+        return $this->morphMany(File::class, 'fileable');
     }
 
 }

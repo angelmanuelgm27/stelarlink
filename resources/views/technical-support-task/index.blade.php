@@ -13,8 +13,9 @@
     @if(!empty($group))
 
         <div class="mb-5">
+
             <h5>Grupo: {{ $group->name }}</h5>
-            <h5>Zona: {{ $group->zone }}</h5>
+            <h5>Zona: {{ $group->zone_name }}</h5>
             <h5>Disponibilidad: {{ $group->availability }}</h5>
 
             @if(empty($taskable))
@@ -39,8 +40,6 @@
 
     @endif
 
-
-
     <x-paneltitle titleName="Actividad asignada"></x-paneltitle>
 
     @if (!empty($taskable))
@@ -53,10 +52,22 @@
                 <h5>Direccion: {{ $taskable->adrress }}</h5>
                 <h5>Zona: {{ $taskable->zone_id }}</h5>
 
-                <form method="POST" action="{{ route('technical.support.task.completed', ['task' => $task_id]) }}">
+                <form
+                    method="POST"
+                    action="{{ route('technical.support.task.completed', ['task' => $task_id]) }}"
+                    enctype="multipart/form-data"
+                >
+
                     @method('PUT')
                     @csrf
+
+                    <div class="position-relative my-2">
+                        <input type="file" name="files[]" id="files" class="custom-file-input" lang="es" multiple required>
+                        <label class="custom-file-label" for="files">Archivos</label>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Marcar como completada</button>
+
                 </form>
 
             </div>
@@ -83,4 +94,3 @@
     @endif
 
 @endsection
-

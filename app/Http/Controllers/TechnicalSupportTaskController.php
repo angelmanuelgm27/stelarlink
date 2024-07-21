@@ -8,9 +8,12 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use App\Traits\FileTrait;
 
 class TechnicalSupportTaskController extends Controller
 {
+
+    use FileTrait;
 
     /**
      * Display a listing of the resource.
@@ -20,7 +23,13 @@ class TechnicalSupportTaskController extends Controller
 
         $user = Auth::user();
 
-        $group = $user->group()->first();
+        $group = $user->group()
+            ->leftJoin('zones', 'zone_id', '=', 'zones.id')
+            ->select(
+                'technical_support_groups.*',
+                'zones.name as zone_name',
+            )
+            ->first();
 
         if($group){
 
@@ -60,14 +69,23 @@ class TechnicalSupportTaskController extends Controller
 
     }
 
-    public function markAsCompleted(Task $task)
+    public function markAsCompleted(Request $request, Task $task)
     {
 
-        $user = Auth::user();
+        // $user = Auth::user();
+
+        $validated = $request->validate([
+            'files' => ['nullable', 'max:20'],
+            'files.*' => ['nullable', 'file', 'mimes:bmp,gif,jpeg,jpg,pdf,png,zip', 'max:12800'],
+        ]);
+
+        // $group = $user->group()->first();
 
         $taskable = $task->taskable;
 
         $taskable->update(['status' => 'Completada']);
+
+        $this->instalationFiles($request->file('files'), $taskable);
 
         return redirect()->route('technical.support.task.index');
 
