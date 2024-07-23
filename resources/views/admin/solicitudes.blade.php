@@ -12,23 +12,63 @@
     <form action="{{ route('admin.requests.index') }}" method="GET">
 
         <div class="input-group">
+
+            <div class="input-group-prepend">
+                 <span class="input-group-text">Status</span>
+            </div>
             <select name="status" class="custom-select" >
-                <option value="">Filtrar por status</option>
+                <option value="">Seleccionar...</option>
                 @if (isset($statuses))
                     @foreach ($statuses as $status)
                         <option value="{{ $status }}" {{ (isset($request->status) && $request->status == $status) ? 'selected' : '' }}>{{ $status }}</option>
                     @endforeach
                 @endif
             </select>
+
+            <div class="input-group-prepend">
+                 <span class="input-group-text">Plan</span>
+            </div>
+            <select name="service" class="custom-select" >
+                <option value="">Seleccionar...</option>
+                @if (isset($statuses))
+                    @foreach ($statuses as $status)
+                        <option value="{{ $status }}" {{ (isset($request->status) && $request->status == $status) ? 'selected' : '' }}>{{ $status }}</option>
+                    @endforeach
+                @endif
+            </select>
+
+            <div class="input-group-prepend">
+                 <span class="input-group-text">Zona</span>
+            </div>
+            <select name="zone" class="custom-select" >
+                <option value="">Seleccionar...</option>
+                @if (isset($statuses))
+                    @foreach ($statuses as $status)
+                        <option value="{{ $status }}" {{ (isset($request->status) && $request->status == $status) ? 'selected' : '' }}>{{ $status }}</option>
+                    @endforeach
+                @endif
+            </select>
+
+            <div class="input-group-prepend">
+                 <span class="input-group-text">Fecha inicio</span>
+            </div>
+            <input type="date" class="form-control" name="">
+            <div class="input-group-prepend">
+                 <span class="input-group-text">Fecha final</span>
+            </div>
+            <input type="date" class="form-control" name="">
             <div class="input-group-append">
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+
             </div>
         </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+
     </form>
 
     @if($service_requests->isNotEmpty())
-
-
 
         <div class="container-fluid table-responsive">
             <table id="users_table" class="table text-center">
@@ -56,20 +96,8 @@
                             <td class="align-middle">{{ $request->user_name }}</td>
                             <td class="align-middle">{{ $request->service_name }}</td>
                             <td class="align-middle">{{ $request->status }}</td>
-                            <td class="align-middle">
-                                @if(empty($request->zone_name))
-                                    No asignado
-                                @else
-                                    {{ $request->zone_name }}
-                                @endif
-                            </td>
-                            <td class="align-middle">
-                                @if(empty($request->ip))
-                                    No asignado
-                                @else
-                                    {{ $request->ip }}
-                                @endif
-                            </td>
+                            <td class="align-middle">{{ $request->zone_name }}</td>
+                            <td class="align-middle">{{ $request->ip }}</td>
                             <td class="align-middle">
                                 <button class="btn btn-primary view-details" data-id="{{ $request->id }}">Detalles</button>
                             </td>
@@ -85,7 +113,6 @@
             </table>
 
         </div>
-
 
     @else
 

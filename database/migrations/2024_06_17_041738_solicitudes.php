@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->unsignedInteger('service_id')->references('id')->on('services');
             $table->string('status');
             $table->string('ip')->nullable();
-            $table->unsignedInteger('group_id')->references('id')->on('technical_support_groups')->nullable();
+            // $table->unsignedInteger('group_id')->references('id')->on('technical_support_groups')->nullable();
             $table->string('adrress')->nullable();
             $table->unsignedInteger('zone_id')->references('id')->on('zones')->nullable();
             $table->unsignedInteger('invoice_id')->references('id')->on('invoices');

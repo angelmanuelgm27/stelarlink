@@ -332,6 +332,12 @@ return [
             'can' => ['soporte-tecnico-instalador'],
         ],
         [
+            'text' => 'Actividades completadas',
+            'icon' => 'fas fa-tasks',
+            'url' => '/soporte-tecnico/actividades-completadas',
+            'can' => ['soporte-tecnico-instalador'],
+        ],
+        [
             'text' => 'Mis planes',
             'icon' => 'fa fa-cubes',
             'url' => '/cliente/planes',

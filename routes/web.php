@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ServiciosController as AdminServiciosController;
 use App\Http\Controllers\Admin\SolicitudesController as AdminSolicitudesController;
 use App\Http\Controllers\Admin\StaffController as AdminStaffController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
+use App\Http\Controllers\FinishedController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
@@ -189,9 +190,9 @@ Route::get('/invoice/{invoice}', [InvoiceController::class, 'show'])
     ->name('invoice.show');
 
 //SOPORTE TECNICO
-Route::get('/soporte-tecnico/solicitudes-instlacion', [TechnicalSolicitudesController::class, 'index'])
+Route::get('/soporte-tecnico/actividades-completadas', [FinishedController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('admin.staff');
+    ->name('completedActivities.index');
 
 //SOPORTE TECNICO - GRUPOS
 Route::get('/soporte-tecnico/grupos-instaladores', [TechnicalSupportGroupController::class, 'index'])

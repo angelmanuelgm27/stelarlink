@@ -7,6 +7,7 @@ use App\Models\TechnicalSupportGroup;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as AuthenticatableUser;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -75,6 +76,15 @@ class User extends AuthenticatableUser implements Authenticatable
      */
     public function group(): BelongsToMany
     {
-        return $this->BelongsToMany(TechnicalSupportGroup::class);
+        return $this->belongsToMany(TechnicalSupportGroup::class);
     }
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function finisheds(): HasMany
+    {
+        return $this->hasMany(Finished::class);
+    }
+
 }

@@ -37,6 +37,18 @@ class SolicitudesController extends Controller
 
         $service_requests = $service_requests->get();
 
+        $service_requests->each(function ($service_request) {
+
+            if(!$service_request->zone_name){
+                $service_request->zone_name = 'No asignado';
+            }
+
+            if(!$service_request->ip){
+                $service_request->ip = 'No asignado';
+            }
+
+        });
+
         $zones = Zone::all();
 
         $data = [

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Finished;
 use App\Models\Services;
 use App\Models\Solicitudes;
 use App\Models\Task;
+use App\Traits\FileTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
-use App\Traits\FileTrait;
 
 class TechnicalSupportTaskController extends Controller
 {
@@ -49,9 +50,13 @@ class TechnicalSupportTaskController extends Controller
 
             $service = ($task) ? Services::find($taskable->service_id) : null;
 
-            $class_name = ($task) ? get_class($taskable) : null;
+            $class_name = ($task) ? $task->taskable_type : null;
 
             $taskable_name = ($task) ? Task::$task_names[$class_name] : null;
+
+            $group_users = $group->users()
+                ->select('name')
+                ->get();
 
             $data = [
                 'task_id' => $task_id,
@@ -59,6 +64,7 @@ class TechnicalSupportTaskController extends Controller
                 'taskable' => $taskable,
                 'service' => $service,
                 'taskable_name' => $taskable_name,
+                'group_users' => $group_users,
             ];
 
         }else{
@@ -72,20 +78,31 @@ class TechnicalSupportTaskController extends Controller
     public function markAsCompleted(Request $request, Task $task)
     {
 
-        // $user = Auth::user();
-
         $validated = $request->validate([
             'files' => ['nullable', 'max:20'],
             'files.*' => ['nullable', 'file', 'mimes:bmp,gif,jpeg,jpg,pdf,png,zip', 'max:12800'],
         ]);
-
-        // $group = $user->group()->first();
 
         $taskable = $task->taskable;
 
         $taskable->update(['status' => 'Completada']);
 
         $this->instalationFiles($request->file('files'), $taskable);
+
+        $user = Auth::user();
+
+        $group = $user->group()->first();
+
+        $users = $group->users;
+
+        // $users->each(function ($user) {
+        foreach ($users as $user) {
+
+            $finished = new Finished();
+            $finished->user_id = $user->id;
+            $taskable->finisheds()->save($finished);
+
+        };
 
         return redirect()->route('technical.support.task.index');
 

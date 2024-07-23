@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\File;
+use App\Models\Finished;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Solicitudes extends Model
 {
@@ -52,6 +53,14 @@ class Solicitudes extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'fileable');
+    }
+
+    /**
+     * Get all of the post's comments.
+     */
+    public function finisheds(): MorphMany
+    {
+        return $this->morphMany(Finished::class, 'finishedable');
     }
 
 }
