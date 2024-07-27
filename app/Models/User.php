@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Payment;
 use App\Models\TechnicalSupportGroup;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,6 +30,8 @@ class User extends AuthenticatableUser implements Authenticatable
         'phone',
         'rol',
         'password',
+        'wallet_balance',
+        'wallet_balance_to_be_approved',
     ];
 
     /**
@@ -85,6 +88,14 @@ class User extends AuthenticatableUser implements Authenticatable
     public function finisheds(): HasMany
     {
         return $this->hasMany(Finished::class);
+    }
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 
 }

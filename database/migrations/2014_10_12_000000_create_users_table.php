@@ -21,6 +21,8 @@ return new class extends Migration {
             $table->string('dni')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('rol');
+            $table->float('wallet_balance')->nullable();
+            $table->float('wallet_balance_to_be_approved')->nullable();
             $table->string('avatar')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -61,7 +63,7 @@ return new class extends Migration {
 
             [
                 'name' => 'cobranza',
-                'email' => 'c@1',
+                'email' => 'cobranza@1',
                 'address' => 'default',
                 'phone' => '4122548458',
                 'dni' => '44',

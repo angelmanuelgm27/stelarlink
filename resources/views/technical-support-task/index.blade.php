@@ -78,6 +78,7 @@
                     @method('PUT')
                     @csrf
 
+                    <label class="form-label">Imágenes de la instalación</label>
                     <div class="position-relative my-2">
                         <input type="file" name="files[]" id="files" class="custom-file-input" lang="es" multiple required>
                         <label class="custom-file-label" for="files">Archivos</label>

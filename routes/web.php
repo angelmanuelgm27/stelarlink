@@ -1,20 +1,23 @@
 <?php
 
 use App\Http\Controllers\Admin\MapController;
-use App\Http\Controllers\Admin\MethodsPaymentsController as AdminMethodsPaymentsController;
+use App\Http\Controllers\Admin\PaymentMethodsController;
 use App\Http\Controllers\Admin\ServiciosController as AdminServiciosController;
 use App\Http\Controllers\Admin\SolicitudesController as AdminSolicitudesController;
 use App\Http\Controllers\Admin\StaffController as AdminStaffController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
-use App\Http\Controllers\FinishedController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\FinishedController;
+use App\Http\Controllers\FundController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Profiles;
 use App\Http\Controllers\TechnicalSupportGroupController;
 use App\Http\Controllers\TechnicalSupportTaskController;
 use App\Http\Controllers\TechnicalSupport\SolicitudesController as TechnicalSolicitudesController;
 use App\Http\Controllers\Users\PlansController;
+use App\Http\Controllers\WalletController;
 use App\Http\Controllers\ZoneController;
 use App\Mail\Contact;
 use Illuminate\Support\Facades\Route;
@@ -148,9 +151,25 @@ Route::post('/administrador/solicitudes-instlacion/{solicitudes}', [AdminSolicit
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.update');
 
-Route::get('/administrador/metodos-pagos', [AdminMethodsPaymentsController::class, 'index'])
+
+// metodos de pago
+Route::get('/administrador/metodos-pagos', [PaymentMethodsController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('admin.staff');
+    ->name('admin.payment.methods.index');
+
+Route::post('/administrador/metodos-pagos', [PaymentMethodsController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.payment.methods.store');
+
+Route::delete('/administrador/metodos-pagos/{payment_method}', [PaymentMethodsController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.payment.methods.store');
+
+Route::delete('/administrador/metodos-pagos/{payment_method}', [PaymentMethodsController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.payment.methods.destroy');
+
+
 
 Route::put('/administrador/aceptar-solicitud/{solicitudes}', [AdminSolicitudesController::class, 'accept'])
     ->middleware(['auth', 'verified'])
@@ -183,6 +202,23 @@ Route::get('/cliente/planes/list', [PlansController::class, 'findAll'])
 Route::put('/cliente/planes/{solicitudes}', [PlansController::class, 'cancel'])
     ->middleware(['auth', 'verified'])
     ->name('request.cancel');
+
+//BILETERA
+Route::get('/cliente/billetera', [WalletController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('wallet.index');
+
+Route::get('/cliente/agregar-fondos', [FundController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('funds.index');
+
+Route::get('/cliente/metodo-de-pago/{payment_method}', [FundController::class, 'getPaymenMethod'])
+    ->middleware(['auth', 'verified'])
+    ->name('payment.method.show');
+
+Route::post('/cliente/pago', [PaymentController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('payment.store');
 
 //INVOICE
 Route::get('/invoice/{invoice}', [InvoiceController::class, 'show'])

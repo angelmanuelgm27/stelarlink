@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\ClientServices;
 use App\Models\File;
 use App\Models\Invoice;
-use App\Models\Payments;
 use App\Models\Services;
 use App\Models\Solicitudes;
 use App\Models\User;
@@ -72,22 +71,6 @@ class PlansController extends Controller
                 if (count($plan) > 0) {
 
                     $paymentUrl = '/storage/' . $outputImage . $fileName . '.' . $payment_file->getClientOriginalExtension();
-
-                    $lastIdPayment = Payments::latest()->first();
-                    if ($lastIdPayment == null) {
-                        $newIdPayment = 1;
-                    } else {
-                        $newIdPayment = $lastIdPayment->id + 1;
-                    }
-
-                    $payment = new Payments;
-                    $payment->id = $newIdPayment;
-                    $payment->user_id = $user_id;
-                    $payment->service_id = $plan[0]->id;
-                    $payment->status = "Pendiente";
-                    $payment->reference = $request->input('payment_ref');
-                    $payment->imagen = $paymentUrl;
-                    $payment->save();
 
                     $pdf_data = [
                         'plan_price' => $plan[0]->price,
