@@ -50,6 +50,7 @@ function showPaymentMethodDetail(event){
       document.getElementById('payment-method-img').src = '/storage/' + response.image;
       document.getElementById('payment-method-details').innerHTML = response.details.replace(/\r\n/g , "<br>");;
 
+      dollarConversionListener();
 
     },
     failure: function(e) {

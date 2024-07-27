@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
+use App\Traits\DollarPriceTrait;
 
 class FundController extends Controller
 {
+
+    use DollarPriceTrait;
 
     public function index()
     {
@@ -14,8 +17,11 @@ class FundController extends Controller
         $payment_methods = PaymentMethod::where('enabled', true)
             ->get();
 
+        $dollar_price = $this->getDollarPrice();
+
         $data = [
             'payment_methods' => $payment_methods,
+            'dollar_price' => $dollar_price,
         ];
 
         return view('users.payment-methods', $data);

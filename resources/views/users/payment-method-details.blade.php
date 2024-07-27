@@ -26,16 +26,16 @@
 
                 <div class="col-12 col-md-6">
 
-                    <label class="form-label" for="amount_bs">Monto Bs</label>
-                    <input type="number" class="form-control" id="amount_bs" name="amount_bs" step="0.01">
+                    <label class="form-label" for="amount-bs">Monto Bs</label>
+                    <input type="number" class="form-control" id="amount-bs" name="amount_bs" step="0.01">
 
                 </div>
 
                 <div class="col-12 col-md-6">
 
-                    <label class="form-label" for="amount_dollar">Monto $</label>
-                    <input type="number" class="form-control" id="amount_dollar" name="amount_dollar" step="0.01">
-                    <p id="dollar_price" style="font-size: 12px;">Tasa BCV: 40.41 bs/$</p>
+                    <label class="form-label" for="amount-dollar">Monto $</label>
+                    <input type="number" class="form-control" id="amount-dollar" name="amount_dollar" step="0.01">
+                    <p style="font-size: 12px;">Tasa BCV: <span id="dollar-price" >{{ $dollar_price }}</span> bs/$</p>
 
                 </div>
 

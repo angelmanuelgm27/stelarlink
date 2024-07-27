@@ -492,7 +492,6 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
-                    // 'location' => asset('assets/js/sweetalert_2_11.js'),
                 ],
             ],
         ],

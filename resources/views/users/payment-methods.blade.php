@@ -30,11 +30,12 @@
 
     @endif
 
-    @include('users.payment-method-details')
+    @include('users.payment-method-details', ['dollar_price', $dollar_price])
 
 @stop
 
 
 @section('js')
     <script type="text/javascript" src="{{ asset('assets/js/funds/show-payment-methods.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/funds/dollar-calculation.js') }}"></script>
 @endsection
