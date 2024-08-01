@@ -16,7 +16,7 @@ use App\Http\Controllers\Profiles;
 use App\Http\Controllers\TechnicalSupportGroupController;
 use App\Http\Controllers\TechnicalSupportTaskController;
 use App\Http\Controllers\TechnicalSupport\SolicitudesController as TechnicalSolicitudesController;
-use App\Http\Controllers\Users\PlansController;
+use App\Http\Controllers\Users\UserServiceController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\ZoneController;
 use App\Mail\Contact;
@@ -169,8 +169,6 @@ Route::delete('/administrador/metodos-pagos/{payment_method}', [PaymentMethodsCo
     ->middleware(['auth', 'verified'])
     ->name('admin.payment.methods.destroy');
 
-
-
 Route::put('/administrador/aceptar-solicitud/{solicitudes}', [AdminSolicitudesController::class, 'accept'])
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.accept');
@@ -179,29 +177,31 @@ Route::put('/administrador/rechazar-solicitud/{solicitudes}', [AdminSolicitudesC
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.reject');
 
+// PAGOS
+Route::get('/administrador/pago', [PaymentController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.payment.index');
 
+Route::put('/administrador/aprobar-pago/{payment}', [PaymentController::class, 'approve'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.payment.approve');
 
+Route::put('/administrador/rechazar-pago/{payment}', [PaymentController::class, 'reject'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.payment.reject');
 
 //'admin.map.delete
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 //     ->name('home');
 
 //CLIENTE
-Route::get('/cliente/planes', [PlansController::class, 'index'])
+Route::get('/cliente/solicitud', [UserServiceController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('client.plans');
 
-Route::post('/cliente/planes/compra', [PlansController::class, 'store'])
+Route::post('/cliente/solicitud/compra', [UserServiceController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('client.plans.shop');
-
-Route::get('/cliente/planes/list', [PlansController::class, 'findAll'])
-    ->middleware(['auth', 'verified'])
-    ->name('client.plans.user');
-
-Route::put('/cliente/planes/{solicitudes}', [PlansController::class, 'cancel'])
-    ->middleware(['auth', 'verified'])
-    ->name('request.cancel');
 
 //BILETERA
 Route::get('/cliente/billetera', [WalletController::class, 'index'])

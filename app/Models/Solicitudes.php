@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Solicitudes extends Model
 {
@@ -28,6 +29,7 @@ class Solicitudes extends Model
         'adrress',
         'zone_id',
         'invoice_id',
+        'instalation_date',
     ];
 
     public static array $statuses = [
@@ -36,7 +38,6 @@ class Solicitudes extends Model
         'Asignada',
         'Completada',
         'Rechazada',
-        'Cancelada',
     ];
 
     /**
@@ -61,6 +62,14 @@ class Solicitudes extends Model
     public function finisheds(): MorphMany
     {
         return $this->morphMany(Finished::class, 'finishedable');
+    }
+
+    /**
+     * Get the post's task.
+     */
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
     }
 
 }

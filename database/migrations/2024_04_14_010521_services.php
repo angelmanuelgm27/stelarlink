@@ -16,10 +16,10 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->float('price');
-            $table->unsignedInteger('velocity_load');
-            $table->unsignedInteger('velocity_download');
+            $table->unsignedSmallInteger('velocity_load');
+            $table->unsignedSmallInteger('velocity_download');
             $table->string('image');
-            $table->boolean('status');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
 

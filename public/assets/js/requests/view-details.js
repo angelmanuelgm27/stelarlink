@@ -38,7 +38,8 @@ function viewDetails(event){
         confirmButtonText: "Actualizar",
         cancelButtonText: "Cancelar",
         allowOutsideClick: true,
-        showCancelButton: true,
+        showCancelButton: false,
+        showConfirmButton: false,
         width: 800,
         template: "#request-data-popup"
       });
@@ -93,8 +94,7 @@ function viewDetails(event){
 
     },
     failure: function(e) {
-        console.log('Error: ' + e)
-        console.log('Error: ' + e.getMessage())
+
     }
 
   });

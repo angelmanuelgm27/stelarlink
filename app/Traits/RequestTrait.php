@@ -9,12 +9,13 @@ use App\Models\TechnicalSupportGroup;
 trait RequestTrait
 {
 
-    public function asign(Solicitudes $solicitudes)
+    public function asign(Solicitudes $solicitud)
     {
 
         $group = TechnicalSupportGroup::where('availability', 'Disponible')
-        ->inRandomOrder()
-        ->first();
+            ->where('zone_id', $solicitud->zone_id)
+            ->orderBy('last_instalation', 'asc')
+            ->first();
 
         if($group){
 
@@ -22,9 +23,9 @@ trait RequestTrait
 
             $task->technical_support_group_id = $group->id;
 
-            $solicitudes->task()->save($task);
+            $solicitud->task()->save($task);
 
-            $solicitudes->update(['status' => 'Asignada']);
+            $solicitud->update(['status' => 'Asignada']);
 
             $group->update(['availability' => 'No disponible']);
 

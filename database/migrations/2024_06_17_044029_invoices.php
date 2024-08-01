@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->unsignedInteger('user_id')->references('id')->on('users');
             $table->unsignedInteger('service_id')->references('id')->on('services');
             $table->float('amount');
-            $table->string('id_payment');
             $table->timestamps();
         });
     }

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Finished;
-use App\Models\Services;
+use App\Models\Service;
 use App\Models\Solicitudes;
 use App\Models\Task;
 use App\Traits\FileTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class TechnicalSupportTaskController extends Controller
 {
@@ -48,7 +49,7 @@ class TechnicalSupportTaskController extends Controller
 
             $taskable = ($task) ? $task->taskable : null;
 
-            $service = ($task) ? Services::find($taskable->service_id) : null;
+            $service = ($task) ? Service::find($taskable->service_id) : null;
 
             $class_name = ($task) ? $task->taskable_type : null;
 
@@ -85,7 +86,10 @@ class TechnicalSupportTaskController extends Controller
 
         $taskable = $task->taskable;
 
-        $taskable->update(['status' => 'Completada']);
+        $taskable->update([
+            'status' => 'Completada',
+            'instalation_date' => Carbon::now(),
+        ]);
 
         $this->instalationFiles($request->file('files'), $taskable);
 
@@ -93,9 +97,12 @@ class TechnicalSupportTaskController extends Controller
 
         $group = $user->group()->first();
 
+        $group->update([
+            'last_instalation' => Carbon::now(),
+        ]);
+
         $users = $group->users;
 
-        // $users->each(function ($user) {
         foreach ($users as $user) {
 
             $finished = new Finished();

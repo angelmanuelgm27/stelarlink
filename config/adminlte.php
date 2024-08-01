@@ -338,9 +338,9 @@ return [
             'can' => ['soporte-tecnico-instalador'],
         ],
         [
-            'text' => 'Mis planes',
+            'text' => 'Mis Solicitudes',
             'icon' => 'fa fa-cubes',
-            'url' => '/cliente/planes',
+            'url' => '/cliente/solicitud',
             'can' => ['default'],
         ],
         [
@@ -358,7 +358,7 @@ return [
         [
             'text' => 'Pagos',
             'icon' => 'fas fa-hand-holding-usd',
-            'url' => '/administrador/pagos',
+            'url' => '/administrador/pago',
             'can' => ['administrador', 'cobranzas'],
         ],
         [

@@ -13,13 +13,13 @@
             <div class="card shadow">
                 <div class="row">
                     <div class="col-12 col-md-4 profile-image m-auto text-center">
-                        <div class="position-relative">
-                            <img class="card-img-profile rounded-circle shadow cursor-pointer" id="profile_user_profile"
+                        <div class="p-5 ">
+                            <img class="w-100 card-img-profile rounded-circle shadow cursor-pointer" id="profile_user_profile"
                                 src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('images/avatar_default.png') }}"
                                 alt="{{ Auth::user()->name }}">
                             <div class="icon-cambiar-image"><i class="fas fa-sync text-5xl text-adminlte-primary"></i></div>
                             <input type="file" accept="image/png, image/jpeg, image/jpg, image/webp"
-                                class="position-absolute rounded-circle top-0 left-0 mx-auto opacity-0 cursor-pointer right-0 input-cambiar-image"
+                                class=" top-0 left-0 mx-auto opacity-0 cursor-pointer right-0 input-cambiar-image"
                                 id="update_profile_avatar" name="update_profile_avatar">
                         </div>
                     </div>
@@ -27,17 +27,17 @@
                         <div class="card-body bg-adminlte-primary">
                             <form name="update_profile" id="update_profile">
                                 <div class="mb-3">
-                                    <label class="form-label text-white">Correo electronico</label>
+                                    <label class="form-label">Correo electronico</label>
                                     <input type="email" class="form-control rounded-pill px-4"
                                         value="{{ Auth::user()->email }}" name="user_email" id="user_email">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label text-white">Teléfono</label>
+                                    <label class="form-label">Teléfono</label>
                                     <input type="text" class="form-control rounded-pill px-4"
                                         value="{{ Auth::user()->phone }}" name="user_phone" id="user_phone">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label text-white">Dirección</label>
+                                    <label class="form-label">Dirección</label>
                                     <input type="text" class="form-control rounded-pill px-4"
                                         value="{{ Auth::user()->address }}" name="user_address" id="user_address">
                                 </div>

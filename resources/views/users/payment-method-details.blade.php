@@ -58,6 +58,8 @@
 
             </div>
 
+            <input type="hidden" name="payment_method_id" id="payment-method-id">
+
             <button type="submit" class="btn btn-primary">Notificar pago</button>
 
         </form>

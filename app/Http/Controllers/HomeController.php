@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Contact;
 use App\Models\Coordinates;
-use App\Models\Services;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -19,9 +19,10 @@ class HomeController extends Controller
             'description' => 'Home',
             'copyright' => 'StelarLink'
         ];
-        $services = Services::where('status', true)->get();
+        $services = Service::where('status', true)->get();
         $coordinates = Coordinates::all();
         return view('home', compact('data', 'services', 'coordinates'));
+
     }
 
     public function about()

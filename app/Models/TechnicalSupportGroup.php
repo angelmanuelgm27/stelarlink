@@ -19,6 +19,9 @@ class TechnicalSupportGroup extends Model
      */
     protected $fillable = [
         'availability',
+        'last_instalation',
+        'name',
+        'zone_id',
     ];
 
     /**

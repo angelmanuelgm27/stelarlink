@@ -15,7 +15,19 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payments = Payment::leftJoin('users', 'user_id', '=', 'users.id')
+            ->leftJoin('payment_methods', 'payment_method_id', '=', 'payment_methods.id')
+            ->select(
+                'payments.*',
+                'users.name as user_name',
+                'payment_methods.name as payment_method_name',
+            )->get();
+
+        $data = [
+            'payments' => $payments,
+        ];
+
+        return view('admin.payment-index', $data);
     }
 
     /**
@@ -36,6 +48,7 @@ class PaymentController extends Controller
             'amount_bs' => ['required', 'decimal:0,2', 'min:1'],
             'amount_dollar' => ['required', 'decimal:0,2', 'min:1'],
             'reference' => ['required', 'string', 'max:255'],
+            'payment_method_id' => ['required', 'integer', 'exists:payment_methods,id'],
             'image' => ['required', 'file', 'mimes:bmp,gif,jpeg,jpg,png', 'max:12800'],
         ]);
 
@@ -45,6 +58,7 @@ class PaymentController extends Controller
             'amount_bs' => $validated['amount_bs'],
             'amount_dollar' => $validated['amount_dollar'],
             'reference' => $validated['reference'],
+            'payment_method_id' => $validated['payment_method_id'],
         ]);
 
         $file_request = $request->file('image');
@@ -96,5 +110,45 @@ class PaymentController extends Controller
     public function destroy(Payment $payment)
     {
         //
+    }
+
+    public function approve(Payment $payment)
+    {
+
+        $user = $payment->client;
+
+        $amount_dollar = floatval($payment->amount_dollar);
+
+        $user_wallet_balance_to_be_approved = floatval($user->wallet_balance_to_be_approved) - $amount_dollar; // minimun 0 ***
+        $user_wallet_balance = floatval($user->wallet_balance) + $amount_dollar;
+
+        $user->update([
+            'wallet_balance_to_be_approved' => $user_wallet_balance_to_be_approved,
+            'wallet_balance' => $user_wallet_balance,
+        ]);
+
+        $payment->update(['status' => 'Completado']);
+
+        return redirect()->route('admin.payment.index');
+
+    }
+
+    public function reject(Payment $payment)
+    {
+
+        $user = $payment->client;
+
+        $amount_dollar = floatval($payment->amount_dollar);
+
+        $user_wallet_balance_to_be_approved = floatval($user->wallet_balance_to_be_approved) - $amount_dollar; // minimun 0 ***
+
+        $user->update([
+            'wallet_balance_to_be_approved' => $user_wallet_balance_to_be_approved,
+        ]);
+
+        $payment->update(['status' => 'Rechazado']);
+
+        return redirect()->route('admin.payment.index');
+
     }
 }

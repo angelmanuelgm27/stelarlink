@@ -131,7 +131,10 @@ class TechnicalSupportGroupController extends Controller
 
         if($old_availability == 'No disponible'){
 
-            $solicitud = Solicitudes::where('status', 'Aprobada')->oldest()->first();
+            $solicitud = Solicitudes::where('status', 'Aprobada')
+                ->where('zone_id', $technicalSupportGroup->zone_id)
+                ->oldest()
+                ->first();
 
             if(!empty($solicitud)){
 

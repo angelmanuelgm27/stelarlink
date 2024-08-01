@@ -19,16 +19,14 @@ class SolicitudesController extends Controller
     public function index(Request $request)
     {
 
-        $service_requests = Solicitudes::join('services', 'service_id', '=', 'services.id')
+        $service_requests = Solicitudes::leftJoin('services', 'service_id', '=', 'services.id')
             ->leftJoin('users', 'user_id', '=', 'users.id')
             ->leftJoin('zones', 'zone_id', '=', 'zones.id')
-            // ->leftJoin('technical_support_groups', 'group_id', '=', 'technical_support_groups.id')
             ->select(
                 'solicitudes.*',
                 'services.name as service_name',
                 'users.name as user_name',
                 'zones.name as zone_name',
-                // 'technical_support_groups.name as group_name'
             );
 
         if ($request->has('status') && !empty($request->status)) {
@@ -68,12 +66,10 @@ class SolicitudesController extends Controller
         $service_request = Solicitudes::where('solicitudes.id', $id)
             ->leftJoin('services', 'service_id', '=', 'services.id')
             ->leftJoin('users', 'user_id', '=', 'users.id')
-            // ->leftJoin('technical_support_groups', 'group_id', '=', 'technical_support_groups.id')
             ->select(
                 'solicitudes.*',
                 'services.name as service_name',
                 'users.name as user_name',
-                // 'technical_support_groups.name as group_name'
             )
             ->first();
 
@@ -121,14 +117,18 @@ class SolicitudesController extends Controller
     {
 
         // if(!(Gate::allows('isEditor') || Gate::allows('isAdmin'))){
-        //     abort(403); // use policies ***
+        //     abort(403);
         // }
+
+        if(empty($solicitudes->zone_id)){
+            return redirect()->back(); // with error ***
+        }
 
         $solicitudes->update(['status' => 'Aprobada']);
 
         $this->asign($solicitudes);
 
-        return redirect()->route('admin.requests.index');
+        return redirect()->back(); // with success ***
 
     }
 

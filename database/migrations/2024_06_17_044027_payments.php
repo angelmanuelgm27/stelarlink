@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->id();
 
             $table->unsignedInteger('user_id')->references('id')->on('users');
+            $table->unsignedInteger('payment_method_id')->references('id')->on('payment_methods');
             $table->string('status')->default('Pendiente');
             $table->string('reference');
             $table->float('amount_bs');

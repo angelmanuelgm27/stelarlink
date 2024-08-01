@@ -12,11 +12,6 @@ function showPaymentMethodDetail(event){
   const obj = event.currentTarget;
   const paymentMethodId = obj.dataset.id;
 
-
-
-
-
-
   const detailsPopUp = Swal.mixin({
       customClass: {
           confirmButton: "btn btn-primary mx-2 px-4 py-3 rounded-pill",
@@ -42,11 +37,13 @@ function showPaymentMethodDetail(event){
         confirmButtonText: "Enviar",
         cancelButtonText: "Cancelar",
         allowOutsideClick: true,
-        showCancelButton: true,
+        showCancelButton: false,
+        showConfirmButton: false,
         width: 800,
         template: "#payment-method-data-popup"
       });
 
+      document.getElementById('payment-method-id').value = response.id;
       document.getElementById('payment-method-img').src = '/storage/' + response.image;
       document.getElementById('payment-method-details').innerHTML = response.details.replace(/\r\n/g , "<br>");;
 
