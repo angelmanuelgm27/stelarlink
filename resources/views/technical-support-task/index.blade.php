@@ -24,7 +24,7 @@
 
                 @if(empty($taskable))
 
-                    <form method="POST" action="{{ route('technical.support.group.update.availability', ['technicalSupportGroup' => $group]) }}">
+                    <form method="POST" action="{{ route('technical.support.group.update.availability', ['technical_support_group' => $group]) }}">
 
                         @method('PUT')
 

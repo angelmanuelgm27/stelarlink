@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Finished;
 use App\Models\Service;
-use App\Models\Solicitudes;
+use App\Models\Plan;
 use App\Models\Task;
 use App\Traits\FileTrait;
 use Illuminate\Database\Eloquent\Builder;
@@ -38,9 +38,9 @@ class TechnicalSupportTaskController extends Controller
             $task = $group->task()
             ->whereHasMorph(
                 'taskable',
-                [Solicitudes::class],
+                [Plan::class],
                 function (Builder $query) {
-                    $query->where('status', 'Asignada');
+                    $query->where('status', 'Asignado');
                 }
             )
             ->first();
@@ -87,7 +87,7 @@ class TechnicalSupportTaskController extends Controller
         $taskable = $task->taskable;
 
         $taskable->update([
-            'status' => 'Completada',
+            'status' => 'Activo',
             'instalation_date' => Carbon::now(),
         ]);
 

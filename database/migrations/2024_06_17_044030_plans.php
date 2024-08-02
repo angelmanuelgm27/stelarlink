@@ -11,13 +11,14 @@ return new class extends Migration {
     public function up(): void
     {
         //
-        Schema::create('solicitudes', function (Blueprint $table) {
+        Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id')->references('id')->on('users');
             $table->unsignedInteger('service_id')->references('id')->on('services');
             $table->string('status');
             $table->string('ip')->nullable();
             $table->string('adrress');
+            $table->unsignedInteger('technical_support_group_id')->references('id')->on('technical_support_groups')->nullable();
             $table->unsignedInteger('zone_id')->references('id')->on('zones')->nullable();
             $table->unsignedInteger('invoice_id')->references('id')->on('invoices');
             $table->timestamp('instalation_date')->nullable();
@@ -31,6 +32,6 @@ return new class extends Migration {
     public function down(): void
     {
         //
-        Schema::dropIfExists('solicitudes');
+        Schema::dropIfExists('plans');
     }
 };

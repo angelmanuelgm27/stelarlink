@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <x-paneltitle titleName="Solicitudes de instalacion"></x-paneltitle>
+    <x-paneltitle titleName="Mis planes"></x-paneltitle>
 
     @if($user_requests->isNotEmpty())
 
@@ -62,7 +62,7 @@
 
     @endif
 
-    <x-paneltitle titleName="Solicitar una nueva instalacion"></x-paneltitle>
+    <x-paneltitle titleName="Solicitar un nuevo plan"></x-paneltitle>
 
     <div class="row mt-4">
 

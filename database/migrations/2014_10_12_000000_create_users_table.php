@@ -67,7 +67,7 @@ return new class extends Migration {
                 'address' => 'default',
                 'phone' => '4122548458',
                 'dni' => '44',
-                'rol' => 'cobranza',
+                'rol' => 'cobranzas',
                 'avatar' => '',
                 'password' => Hash::make('1'),
             ],

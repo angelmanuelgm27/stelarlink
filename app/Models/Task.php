@@ -12,7 +12,7 @@ class Task extends Model
     use HasFactory;
 
     public static $task_names = [
-        'App\Models\Solicitudes' => 'Solicitud de instalación',
+        'App\Models\Plan' => 'Solicitud de instalación',
     ];
 
     /**

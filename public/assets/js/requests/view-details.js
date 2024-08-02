@@ -23,7 +23,7 @@ function viewDetails(event){
 
   $.ajax({
     type: "GET",
-    url: '/administrador/solicitudes-instlacion/' + requestId,
+    url: '/administrador/plan/' + requestId,
     dataType: "json",
     processData: false,
     contentType: false,
@@ -34,7 +34,7 @@ function viewDetails(event){
     success: function(response) {
 
       detailsPopUp.fire({
-        title: "Detalles de la solicitud",
+        title: "Detalles del plan",
         confirmButtonText: "Actualizar",
         cancelButtonText: "Cancelar",
         allowOutsideClick: true,
@@ -44,31 +44,36 @@ function viewDetails(event){
         template: "#request-data-popup"
       });
 
-      document.getElementById('form-update-request').setAttribute('action', '/administrador/solicitudes-instlacion/' + requestId);
+      document.getElementById('form-update-request').setAttribute('action', '/administrador/plan/' + requestId);
 
       document.getElementById('user_name').textContent = response.user_name;
       document.getElementById('service_name').textContent = response.service_name;
       document.getElementById('formatted_created_at').textContent = response.formatted_created_at;
       document.getElementById('adrress').textContent = response.adrress;
-      // document.getElementById('group_name').textContent = (response.group_name) ? response.group_name : 'No asignado';
-      document.getElementById('status').textContent = response.status;
+      document.getElementById('group_name').textContent = (response.group_name) ? response.group_name : 'No asignado';
+      document.getElementById('plan-data-status').textContent = response.status;
       document.getElementById('invoice').href = '/invoice/' + response.invoice_id;
 
       document.getElementById('ip').value = response.ip;
       document.getElementById('zone_id').value = response.zone_id;
 
-      const formAcceptRequest = document.getElementById('form-accept-request');
       const formRejectRequest = document.getElementById('form-reject-request');
-      formAcceptRequest.classList.add('d-none');
       formRejectRequest.classList.add('d-none');
+
+      const formSubmitBtn = document.getElementById('form-submit-btn');
 
       if(response.status == 'Pendiente'){
 
-        formAcceptRequest.setAttribute('action', '/administrador/aceptar-solicitud/' + requestId);
-        formAcceptRequest.classList.remove('d-none');
+        formSubmitBtn.textContent = 'Enviar y aceptar solicitud';
 
-        formRejectRequest.setAttribute('action', '/administrador/rechazar-solicitud/' + requestId);
+        formRejectRequest.setAttribute('action', '/administrador/rechazar-plan/' + requestId);
         formRejectRequest.classList.remove('d-none');
+
+      }else if(response.status == 'Rechazado'){
+        document.getElementById('form-update-request').classList.add('d-none');
+      }else{
+
+        formSubmitBtn.textContent = 'Enviar';
 
       }
 

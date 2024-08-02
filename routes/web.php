@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\Admin\PaymentMethodsController;
 use App\Http\Controllers\Admin\ServiciosController as AdminServiciosController;
-use App\Http\Controllers\Admin\SolicitudesController as AdminSolicitudesController;
+use App\Http\Controllers\Admin\PlanController as AdminPlanController;
 use App\Http\Controllers\Admin\StaffController as AdminStaffController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\FileController;
@@ -15,7 +15,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Profiles;
 use App\Http\Controllers\TechnicalSupportGroupController;
 use App\Http\Controllers\TechnicalSupportTaskController;
-use App\Http\Controllers\TechnicalSupport\SolicitudesController as TechnicalSolicitudesController;
+use App\Http\Controllers\TechnicalSupport\PlanController as TechnicalPlanController;
 use App\Http\Controllers\Users\UserServiceController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\ZoneController;
@@ -93,13 +93,6 @@ Route::delete('/administrador/personal/{id}', [AdminStaffController::class, 'del
     ->middleware(['auth', 'verified'])
     ->name('admin.staff.delete');
 
-//ADMINISTRADOR
-
-// me parece que es incorrecto ***
-// Route::get('/administrador/solicitudes-instlacion', [AdminStaffController::class, 'index'])
-//     ->middleware(['auth', 'verified'])
-//     ->name('admin.staff');
-
 //ADMINISTRADOR - SERVICIOS
 Route::get('/administrador/servicios/all', [AdminServiciosController::class, 'list'])
     ->middleware(['auth', 'verified'])
@@ -139,15 +132,15 @@ Route::get('/administrador/mapa/delete/${id}', [MapController::class, 'delete'])
     ->name('admin.map.delete');
 
 //SOLCITUD INSTALACION
-Route::get('/administrador/solicitudes-instlacion', [AdminSolicitudesController::class, 'index'])
+Route::get('/administrador/plan', [AdminPlanController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.index');
 
-Route::get('/administrador/solicitudes-instlacion/{id}', [AdminSolicitudesController::class, 'show'])
+Route::get('/administrador/plan/{id}', [AdminPlanController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.show');
 
-Route::post('/administrador/solicitudes-instlacion/{solicitudes}', [AdminSolicitudesController::class, 'update'])
+Route::post('/administrador/plan/{plan}', [AdminPlanController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.update');
 
@@ -169,11 +162,7 @@ Route::delete('/administrador/metodos-pagos/{payment_method}', [PaymentMethodsCo
     ->middleware(['auth', 'verified'])
     ->name('admin.payment.methods.destroy');
 
-Route::put('/administrador/aceptar-solicitud/{solicitudes}', [AdminSolicitudesController::class, 'accept'])
-    ->middleware(['auth', 'verified'])
-    ->name('admin.requests.accept');
-
-Route::put('/administrador/rechazar-solicitud/{solicitudes}', [AdminSolicitudesController::class, 'reject'])
+Route::put('/administrador/rechazar-plan/{plan}', [AdminPlanController::class, 'reject'])
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.reject');
 
@@ -195,11 +184,11 @@ Route::put('/administrador/rechazar-pago/{payment}', [PaymentController::class, 
 //     ->name('home');
 
 //CLIENTE
-Route::get('/cliente/solicitud', [UserServiceController::class, 'index'])
+Route::get('/cliente/plan', [UserServiceController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('client.plans');
 
-Route::post('/cliente/solicitud/compra', [UserServiceController::class, 'store'])
+Route::post('/cliente/plan/compra', [UserServiceController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('client.plans.shop');
 
@@ -243,7 +232,7 @@ Route::delete('/soporte-tecnico/grupos-instaladores/{technicalSupportGroup}', [T
     ->middleware(['auth', 'verified'])
     ->name('technical.support.group.destroy');
 
-Route::PUT('/soporte-tecnico/update-availability/{technicalSupportGroup}', [TechnicalSupportGroupController::class, 'updateAvailability'])
+Route::PUT('/soporte-tecnico/update-availability/{technical_support_group}', [TechnicalSupportGroupController::class, 'updateAvailability'])
     ->middleware(['auth', 'verified'])
     ->name('technical.support.group.update.availability');
 

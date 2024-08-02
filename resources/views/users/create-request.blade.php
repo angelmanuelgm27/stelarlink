@@ -2,7 +2,7 @@
 
     <swal-html>
 
-        <form method="POST" action="/cliente/solicitud/compra" id="form-create-request">
+        <form method="POST" action="/cliente/plan/compra" id="form-create-request">
 
             @csrf
 

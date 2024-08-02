@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Solicitudes;
+use App\Models\Plan;
 use App\Models\Task;
 use App\Models\TechnicalSupportGroup;
 use App\Models\User;
@@ -123,28 +123,31 @@ class TechnicalSupportGroupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function updateAvailability(TechnicalSupportGroup $technicalSupportGroup)
+    public function updateAvailability(TechnicalSupportGroup $technical_support_group)
     {
 
-        $old_availability = $technicalSupportGroup->availability;
+        $old_availability = $technical_support_group->availability;
         $new_availability = 'No disponible';
 
         if($old_availability == 'No disponible'){
 
-            $solicitud = Solicitudes::where('status', 'Aprobada')
-                ->where('zone_id', $technicalSupportGroup->zone_id)
+            $plan = Plan::where('status', 'Aprobado')
+                ->where('zone_id', $technical_support_group->zone_id)
                 ->oldest()
                 ->first();
 
-            if(!empty($solicitud)){
+            if(!empty($plan)){
 
                 $task = new Task();
 
-                $task->technical_support_group_id = $technicalSupportGroup->id;
+                $task->technical_support_group_id = $technical_support_group->id;
 
-                $solicitud->task()->save($task);
+                $plan->task()->save($task);
 
-                $solicitud->update(['status' => 'Asignada']);
+                $plan->update([
+                    'status' => 'Asignado',
+                    'technical_support_group_id' => $technical_support_group->id,
+                ]);
 
             }else{
 
@@ -154,7 +157,7 @@ class TechnicalSupportGroupController extends Controller
 
         }
 
-        $technicalSupportGroup->update(['availability' => $new_availability]);
+        $technical_support_group->update(['availability' => $new_availability]);
 
         return redirect()->route('technical.support.task.index');
 

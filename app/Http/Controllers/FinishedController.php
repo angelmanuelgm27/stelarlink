@@ -35,7 +35,7 @@ class FinishedController extends Controller
                 $finished->paid = 'Pendiente';
             }
 
-            // if ($finished->finishedable_type == 'App\Models\Solicitudes') {
+            // if ($finished->finishedable_type == 'App\Models\Plan') {
                 // $finished->service_adrress = $finished->finishedable->adrress;
                 // $finished->service_ip = $finished->finishedable->ip;
             // } elseif ($finished->finishedable_type == 'App\Models\Reparations') {
@@ -50,7 +50,7 @@ class FinishedController extends Controller
             'finisheds' => $finisheds,
         ];
 
-        return view('technical.solicitudes', $data);
+        return view('technical.plan', $data);
 
     }
 

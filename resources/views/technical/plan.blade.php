@@ -15,14 +15,6 @@
         <div class="input-group">
 
             <div class="input-group-prepend">
-                 <span class="input-group-text">Tipo</span>
-            </div>
-            <select name="type" class="custom-select" >
-                <option value="">Seleccionar...</option>
-
-            </select>
-
-            <div class="input-group-prepend">
                  <span class="input-group-text">Fecha inicio</span>
             </div>
             <input type="date" class="form-control" name="">
@@ -30,11 +22,8 @@
                  <span class="input-group-text">Fecha final</span>
             </div>
             <input type="date" class="form-control" name="">
-            <div class="input-group-append">
 
-            </div>
         </div>
-
 
         <div class="text-end">
             <button type="submit" class="btn btn-primary">Filtrar</button>

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Solicitudes extends Model
+class Plan extends Model
 {
     use HasFactory;
 
@@ -30,14 +30,15 @@ class Solicitudes extends Model
         'zone_id',
         'invoice_id',
         'instalation_date',
+        'technical_support_group_id'
     ];
 
     public static array $statuses = [
         'Pendiente',
-        'Aprobada',
-        'Asignada',
-        'Completada',
-        'Rechazada',
+        'Aprobado',
+        'Asignado',
+        'Activo',
+        'Rechazado',
     ];
 
     /**

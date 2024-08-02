@@ -314,16 +314,16 @@ return [
             'can' => ['administrador'],
         ],
         [
-            'text' => 'Solicitudes de instalacion',
+            'text' => 'Planes',
             'icon' => 'fas fa-route',
-            'url' => '/administrador/solicitudes-instlacion',
+            'url' => '/administrador/plan',
             'can' => ['administrador', 'soporte-tecnico-administrador'],
         ],
         [
             'text' => 'Grupos de instaladores',
             'icon' => 'fas fa-users-cog',
             'url' => '/soporte-tecnico/grupos-instaladores',
-            'can' => ['soporte-tecnico-administrador'],
+            'can' => ['administrador', 'soporte-tecnico-administrador'],
         ],
         [
             'text' => 'Actividades',
@@ -338,9 +338,9 @@ return [
             'can' => ['soporte-tecnico-instalador'],
         ],
         [
-            'text' => 'Mis Solicitudes',
+            'text' => 'Mis planes',
             'icon' => 'fa fa-cubes',
-            'url' => '/cliente/solicitud',
+            'url' => '/cliente/plan',
             'can' => ['default'],
         ],
         [

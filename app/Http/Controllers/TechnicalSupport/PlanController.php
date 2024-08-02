@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\TechnicalSupport;
 
 use App\Http\Controllers\Controller;
-use App\Models\Solicitudes;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SolicitudesController extends Controller
+class PlanController extends Controller
 {
     //
     public function index()
@@ -23,7 +23,7 @@ class SolicitudesController extends Controller
             )
             ->first();
 
-        $service_requests = Solicitudes::where('status', 'Completada')
+        $service_requests = Plan::where('status', 'Activo')
 
 
             // ->whereRelation('group', 'technical_support_groups.id', $group->id)
@@ -34,7 +34,7 @@ class SolicitudesController extends Controller
             // ->leftJoin('zones', 'zone_id', '=', 'zones.id')
             // // ->leftJoin('technical_support_groups', 'group_id', '=', 'technical_support_groups.id')
             // ->select(
-            //     'solicitudes.*',
+            //     'plans.*',
             //     'services.name as service_name',
             //     'users.name as user_name',
             //     'zones.name as zone_name',
@@ -45,6 +45,6 @@ class SolicitudesController extends Controller
 
 dd($service_requests);
 
-        return view('technical.solicitudes');
+        return view('technical.plan');
     }
 }

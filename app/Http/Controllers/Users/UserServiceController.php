@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\File;
 use App\Models\Invoice;
 use App\Models\Service;
-use App\Models\Solicitudes;
+use App\Models\Plan;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class UserServiceController extends Controller
         $user = Auth::user();
         $user_id = $user->id;
 
-        $user_requests = Solicitudes::where('solicitudes.user_id', $user_id)
+        $user_requests = Plan::where('plans.user_id', $user_id)
             ->with(['service'])
             // ->with(['service' => function ($query) {
             //     $query->select('name');
@@ -59,7 +59,7 @@ class UserServiceController extends Controller
             'address' => $user->address,
         ];
 
-        return view('users.plans', $data);
+        return view('users.plan', $data);
 
     }
 
@@ -120,13 +120,13 @@ class UserServiceController extends Controller
         $file->name = $file_name;
         $invoices->file()->save($file);
 
-        $solicitudes = new Solicitudes;
-        $solicitudes->user_id = $user_id;
-        $solicitudes->service_id = $plan->id;
-        $solicitudes->invoice_id = $invoices->id;
-        $solicitudes->adrress = $validated['address'];
-        $solicitudes->status = "Pendiente";
-        $solicitudes->save();
+        $planes = new Plan;
+        $planes->user_id = $user_id;
+        $planes->service_id = $plan->id;
+        $planes->invoice_id = $invoices->id;
+        $planes->adrress = $validated['address'];
+        $planes->status = "Pendiente";
+        $planes->save();
 
         Session::flash('message', 'Solicitud creada exitosamente! Pronto te contactaremos.');
         Session::flash('alert-class', 'alert-success');
