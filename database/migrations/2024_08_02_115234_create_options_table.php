@@ -13,8 +13,17 @@ return new class extends Migration
     {
         Schema::create('options', function (Blueprint $table) {
             $table->id();
+            $table->string('option');
+            $table->string('value');
             $table->timestamps();
         });
+
+        DB::table('options')->insert([
+            [
+                'option' => 'dollar_price',
+                'value' => '10',
+            ]
+        ]);
     }
 
     /**

@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
-use App\Traits\DollarPriceTrait;
+use Illuminate\Support\Facades\DB;
 
 class FundController extends Controller
 {
-
-    use DollarPriceTrait;
 
     public function index()
     {
@@ -17,7 +15,7 @@ class FundController extends Controller
         $payment_methods = PaymentMethod::where('available', true)
             ->get();
 
-        $dollar_price = $this->getDollarPrice();
+        $dollar_price = floatval(DB::table('options')->where('option', 'dollar_price')->value('value'));
 
         $data = [
             'payment_methods' => $payment_methods,

@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\UsersPasswordsRenews;
 use App\Notifications\Users\AsignNewPasswordDatabaselNotification;
 use App\Notifications\Users\AsignNewPasswordEmailNotification;
-use App\Traits\DollarPriceTrait;
 use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\Query\Builder;
@@ -18,11 +17,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use stdClass;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-
-    use DollarPriceTrait;
 
     public function index(Request $request){
 
@@ -55,7 +53,7 @@ class UsersController extends Controller
             'users' => $users,
             'request' => $request,
             'payment_methods' => $payment_methods,
-            'dollar_price' => $this->getDollarPrice(),
+            'dollar_price' => floatval(DB::table('options')->where('option', 'dollar_price')->value('value')),
         ];
 
         return view('admin.users', $data);
@@ -75,7 +73,7 @@ class UsersController extends Controller
 
         $current_user = Auth::user();
 
-        $dollar_price = $this->getDollarPrice();
+        $dollar_price = floatval(DB::table('options')->where('option', 'dollar_price')->value('value'));
 
         $payment = $user->payments()->create([
             'status' => 'Completado',
@@ -110,7 +108,7 @@ class UsersController extends Controller
 
         $current_user = Auth::user();
 
-        $dollar_price = $this->getDollarPrice();
+        $dollar_price = floatval(DB::table('options')->where('option', 'dollar_price')->value('value'));
 
         $payment = $user->payments()->create([
             'status' => 'Completado',

@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Models\Payment;
-use App\Traits\DollarPriceTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
-
-    use DollarPriceTrait;
 
     /**
      * Display a listing of the resource.
@@ -70,7 +68,7 @@ class PaymentController extends Controller
 
         $user = Auth::user();
 
-        $dollar_price = $this->getDollarPrice();
+        $dollar_price = floatval(DB::table('options')->where('option', 'dollar_price')->value('value'));
 
         $payment = $user->payments()->create([
             'amount_bs' => $validated['amount_bs'],
