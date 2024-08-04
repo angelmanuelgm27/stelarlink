@@ -40,20 +40,6 @@ function planShop(event){
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // $(document).ready(function() {
 
 //     $('.plan-shop-btn').each((index, btn) => {

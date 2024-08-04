@@ -17,7 +17,7 @@ return new class extends Migration {
 
             $table->string('name');
             $table->text('details')->nullable();
-            $table->boolean('enabled')->default(true);
+            $table->boolean('available')->default(true);
             $table->string('image');
 
             $table->timestamps();
@@ -26,8 +26,14 @@ return new class extends Migration {
         DB::table('payment_methods')->insert([
             [
                 'name' => 'Transferencia Banco Mercantil',
-                'details' => 'Detalles',
-                'enabled' => true,
+                'details' => 'Numero de cuenta: 123456789',
+                'available' => true,
+                'image' => 'payment-methods/Uy42xp8gLUqIdGD19oCcWrYGgHk7rQ9UGpHjNS0L.png',
+            ],
+            [
+                'name' => 'Pago en efectivo',
+                'details' => 'Pago en oficina',
+                'available' => false,
                 'image' => 'payment-methods/Uy42xp8gLUqIdGD19oCcWrYGgHk7rQ9UGpHjNS0L.png',
             ],
         ]);

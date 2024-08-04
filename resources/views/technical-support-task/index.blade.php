@@ -68,6 +68,7 @@
 
                 <div class="h5 font-weight-bold">{{ $taskable_name }}</div>
                 <h5>Direccion: {{ $taskable->adrress }}</h5>
+                <h5>Telefono: {{ $phone }}</h5>
 
                 <form
                     method="POST"

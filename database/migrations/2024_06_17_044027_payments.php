@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('reference');
             $table->float('amount_bs');
             $table->float('amount_dollar');
+            $table->float('dollar_price');
             $table->unsignedInteger('user_id_approve')
                 ->references('id')
                 ->on('users')

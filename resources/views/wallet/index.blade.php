@@ -60,6 +60,7 @@
                             <th>Referencia</th>
                             <th>Fecha</th>
                             <th>Monto</th>
+                            <th>Comprobante</th>
                         </tr>
                     </thead>
                     <tbody id="users_plans_table_content">
@@ -72,6 +73,9 @@
                                 <td class="align-middle">{{ $payment->reference }}</td>
                                 <td class="align-middle">{{ $payment->formatted_created_at }}</td>
                                 <td class="align-middle">$ {{ $payment->amount_dollar }}</td>
+                                <td class="align-middle">
+                                    <a href="{{ route('file.show', ['file' => $payment->file->id ]) }}">Descargar</a>
+                                </td>
                             </tr>
 
                         @endforeach

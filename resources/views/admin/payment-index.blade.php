@@ -19,9 +19,12 @@
                             <th>Cliente</th>
                             <th>Metodo</th>
                             <th>Estado</th>
+                            <th>Fecha</th>
                             <th>Referencia</th>
+                            <th>Precio (Bs./$)</th>
                             <th>Monto (bs)</th>
                             <th>Monto ($)</th>
+                            <th>Comprobante</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -33,9 +36,18 @@
                                 <td class="align-middle">{{ $payment->user_name }}</td>
                                 <td class="align-middle">{{ $payment->payment_method_name }}</td>
                                 <td class="align-middle">{{ $payment->status }}</td>
+                                <td class="align-middle">{{ $payment->formatted_created_at }}</td>
                                 <td class="align-middle">{{ $payment->reference }}</td>
+                                <td class="align-middle">Bs./$ {{ $payment->dollar_price }}</td>
                                 <td class="align-middle">Bs. {{ $payment->amount_bs }}</td>
                                 <td class="align-middle">$ {{ $payment->amount_dollar }}</td>
+                                <td class="align-middle">
+                                    @if(isset($payment->file) && !empty($payment->file) && isset($payment->file->id) && !empty($payment->file->id))
+                                        <a href="{{ route('file.show', ['file' => $payment->file->id ]) }}">Descargar</a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
                                 <td class="align-middle">
 
                                     @if($payment->status == 'Pendiente')

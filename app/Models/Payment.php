@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\File;
 use App\Models\PaymentMethod;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,6 +28,7 @@ class Payment extends Model
         'amount_dollar',
         'user_id_approve',
         'payment_method_id',
+        'dollar_price',
     ];
 
     /**
@@ -34,7 +36,7 @@ class Payment extends Model
      */
     public function file(): MorphOne
     {
-        return $this->morphOne(Task::class, 'fileable');
+        return $this->morphOne(File::class, 'fileable');
     }
 
     /**

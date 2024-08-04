@@ -20,10 +20,11 @@ class WalletController extends Controller
         $wallet_balance_to_be_approved = number_format($user->wallet_balance_to_be_approved, 2);
         $payments = $user->payments()
             ->leftJoin('payment_methods', 'payment_method_id', '=', 'payment_methods.id')
+            ->with('file')
             ->select(
                 'payments.*',
                 'payment_methods.name as payment_method_name',
-            )->get();;
+            )->get();
 
         $payments->each(function ($payment) {
 

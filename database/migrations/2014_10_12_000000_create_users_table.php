@@ -21,8 +21,8 @@ return new class extends Migration {
             $table->string('dni')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('rol');
-            $table->float('wallet_balance')->nullable();
-            $table->float('wallet_balance_to_be_approved')->nullable();
+            $table->float('wallet_balance')->default(0);
+            $table->float('wallet_balance_to_be_approved')->default(0);
             $table->string('avatar')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -45,7 +45,7 @@ return new class extends Migration {
                 'email' => 'c@1',
                 'address' => 'default',
                 'phone' => '4122548458',
-                'dni' => '22',
+                'dni' => '963258741',
                 'rol' => 'default',
                 'avatar' => '',
                 'password' => Hash::make('1'),

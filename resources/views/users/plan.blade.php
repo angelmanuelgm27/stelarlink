@@ -16,7 +16,7 @@
 
     <x-paneltitle titleName="Mis planes"></x-paneltitle>
 
-    @if($user_requests->isNotEmpty())
+    @if($plans->isNotEmpty())
 
         <div class="container-fluid table-responsive">
             <table class="table text-center">
@@ -26,26 +26,58 @@
                         <th>Estado</th>
                         <th>Fecha de compra</th>
                         <th>Fecha de instalación</th>
+                        <th>Fecha de renovación</th>
                         <th>Factura</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach ($user_requests as $user_request)
+                    @foreach ($plans as $plan)
 
                         <tr>
-                            <td class="align-middle">{{ $user_request->service->name }}</td>
-                            <td class="align-middle">{{ $user_request->status }}</td>
-                            <td class="align-middle">{{ $user_request->formatted_created_at }}</td>
+                            <td class="align-middle">{{ $plan->service->name }}</td>
+                            <td class="align-middle">{{ $plan->status }}</td>
+                            <td class="align-middle">{{ $plan->formatted_created_at }}</td>
                             <td class="align-middle">
-                                @if($user_request->formatted_instalation_date)
-                                    {{ $user_request->formatted_instalation_date }}
+                                @if($plan->formatted_instalation_date)
+                                    {{ $plan->formatted_instalation_date }}
                                 @else
                                     -
                                 @endif
                             </td>
                             <td class="align-middle">
-                                <a href="{{ route('invoice.show', ['invoice' => $user_request->invoice_id ]) }}">Descargar</a>
+                                @if($plan->formatted_renovation_date)
+                                    {{ $plan->formatted_renovation_date }}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td class="align-middle">
+                                <a href="{{ route('invoice.show', ['invoice' => $plan->invoice_id ]) }}">Descargar</a>
+                            </td>
+                            <td class="align-middle">
+
+                                @if($plan->action == 'Cancelar')
+
+                                    <form method="POST" action="{{route('client.plans.cancel', ['plan' => $plan->id])}}" id="" class="">
+                                        @method('PUT')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Cancelar plan</button>
+                                    </form>
+
+                                @elseif($plan->action == 'Activar')
+
+                                    <form method="POST" action="{{route('client.plans.activate', ['plan' => $plan->id])}}" id="" class="">
+                                        @method('PUT')
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">Activar plan</button>
+                                    </form>
+
+                                @else
+                                    -
+                                @endif
+
                             </td>
 
                         </tr>

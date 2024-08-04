@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->unsignedInteger('zone_id')->references('id')->on('zones')->nullable();
             $table->unsignedInteger('invoice_id')->references('id')->on('invoices');
             $table->timestamp('instalation_date')->nullable();
+            $table->timestamp('renovation_date')->nullable();
             $table->timestamps();
         });
     }

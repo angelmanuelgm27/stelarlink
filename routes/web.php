@@ -16,7 +16,7 @@ use App\Http\Controllers\Profiles;
 use App\Http\Controllers\TechnicalSupportGroupController;
 use App\Http\Controllers\TechnicalSupportTaskController;
 use App\Http\Controllers\TechnicalSupport\PlanController as TechnicalPlanController;
-use App\Http\Controllers\Users\UserServiceController;
+use App\Http\Controllers\Users\UserPlanController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\ZoneController;
 use App\Mail\Contact;
@@ -60,21 +60,20 @@ Route::put('/perfil/actualizar/{id}', [Profiles::class, 'update'])
     ->name('profile.update');
 
 //ADMINISTRADOR - USUARIOS
-Route::get('/administrador/usuarios', [AdminUsersController::class, 'index'])
+Route::get('/administrador/usuario', [AdminUsersController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('admin.users');
 
-Route::get('/administrador/usuarios/all', [AdminUsersController::class, 'list'])
+Route::put('/administrador/usuario/{user}/add-funds', [AdminUsersController::class, 'addFunds'])
     ->middleware(['auth', 'verified'])
-    ->name('admin.users.all');
+    ->name('admin.user.addFunds');
 
-Route::patch('/administrador/usuarios/{id}', [AdminUsersController::class, 'update'])
+Route::put('/administrador/usuario/{user}/withdraw-funds', [AdminUsersController::class, 'withdrawFunds'])
     ->middleware(['auth', 'verified'])
-    ->name('admin.users.update');
+    ->name('admin.user.withdrawFunds');
 
-Route::delete('/administrador/usuarios/{id}', [AdminUsersController::class, 'delete'])
-    ->middleware(['auth', 'verified'])
-    ->name('admin.users.delete');
+
+
 
 //ADMINISTRADOR - EMPLEADOS
 Route::get('/administrador/personal', [AdminStaffController::class, 'index'])
@@ -154,13 +153,13 @@ Route::post('/administrador/metodos-pagos', [PaymentMethodsController::class, 's
     ->middleware(['auth', 'verified'])
     ->name('admin.payment.methods.store');
 
-Route::delete('/administrador/metodos-pagos/{payment_method}', [PaymentMethodsController::class, 'store'])
-    ->middleware(['auth', 'verified'])
-    ->name('admin.payment.methods.store');
-
 Route::delete('/administrador/metodos-pagos/{payment_method}', [PaymentMethodsController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
     ->name('admin.payment.methods.destroy');
+
+Route::put('/administrador/metodos-pagos/{payment_method}', [PaymentMethodsController::class, 'availability'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.payment.methods.availability');
 
 Route::put('/administrador/rechazar-plan/{plan}', [AdminPlanController::class, 'reject'])
     ->middleware(['auth', 'verified'])
@@ -184,13 +183,21 @@ Route::put('/administrador/rechazar-pago/{payment}', [PaymentController::class, 
 //     ->name('home');
 
 //CLIENTE
-Route::get('/cliente/plan', [UserServiceController::class, 'index'])
+Route::get('/cliente/plan', [UserPlanController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('client.plans');
 
-Route::post('/cliente/plan/compra', [UserServiceController::class, 'store'])
+Route::post('/cliente/plan/compra', [UserPlanController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('client.plans.shop');
+
+Route::put('/cliente/plan/cancelar/{plan}', [UserPlanController::class, 'cancel'])
+    ->middleware(['auth', 'verified'])
+    ->name('client.plans.cancel');
+
+Route::put('/cliente/plan/activar/{plan}', [UserPlanController::class, 'activate'])
+    ->middleware(['auth', 'verified'])
+    ->name('client.plans.activate');
 
 //BILETERA
 Route::get('/cliente/billetera', [WalletController::class, 'index'])

@@ -8,6 +8,7 @@ trait DollarPriceTrait
     public function getDollarPrice()
     {
 
+      return 10;
 
       $url = 'https://www.bcv.org.ve/';
 
@@ -18,13 +19,13 @@ trait DollarPriceTrait
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_URL, $url);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 300); //timeout in seconds
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 60); //timeout in seconds
 
       $html = curl_exec($ch);
 
       if ( curl_errno( $ch ) ) {
-        return false ;
+        return 0 ;
       }
 
       curl_close($ch);
@@ -47,7 +48,7 @@ trait DollarPriceTrait
 
       $dollar_price = floatval( $dollarDOM );
 
-      return $dollar_price;
+      return (!empty($dollar_price) && is_numeric($dollar_price)) ? $dollar_price : 0;
 
     }
 

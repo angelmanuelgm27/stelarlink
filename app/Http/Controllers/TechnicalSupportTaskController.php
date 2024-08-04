@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Finished;
-use App\Models\Service;
 use App\Models\Plan;
+use App\Models\Service;
 use App\Models\Task;
+use App\Models\User;
 use App\Traits\FileTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class TechnicalSupportTaskController extends Controller
 {
@@ -43,6 +44,7 @@ class TechnicalSupportTaskController extends Controller
                     $query->where('status', 'Asignado');
                 }
             )
+
             ->first();
 
             $task_id = ($task) ? $task->id : null;
@@ -55,6 +57,8 @@ class TechnicalSupportTaskController extends Controller
 
             $taskable_name = ($task) ? Task::$task_names[$class_name] : null;
 
+            $client = ($task) ? User::find($taskable->user_id) : null;
+
             $group_users = $group->users()
                 ->select('name')
                 ->get();
@@ -66,6 +70,7 @@ class TechnicalSupportTaskController extends Controller
                 'service' => $service,
                 'taskable_name' => $taskable_name,
                 'group_users' => $group_users,
+                'phone' => $client->phone,
             ];
 
         }else{
@@ -89,7 +94,10 @@ class TechnicalSupportTaskController extends Controller
         $taskable->update([
             'status' => 'Activo',
             'instalation_date' => Carbon::now(),
+            'renovation_date' => Carbon::now()->addMonthsNoOverflow(1),
         ]);
+
+        $user = Auth::user();
 
         $this->instalationFiles($request->file('files'), $taskable);
 

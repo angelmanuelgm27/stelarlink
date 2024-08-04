@@ -14,7 +14,7 @@ class FundController extends Controller
     public function index()
     {
 
-        $payment_methods = PaymentMethod::where('enabled', true)
+        $payment_methods = PaymentMethod::where('available', true)
             ->get();
 
         $dollar_price = $this->getDollarPrice();

@@ -48,10 +48,14 @@
                         {{ $payment_method->name }}
                     </div>
                     <div>
+                        Estado: {{ $payment_method->available ? 'Habilitado' : 'No habilitado' }}
+                    </div>
+                    <div>
                         {!! nl2br(e($payment_method->details)) !!}
                     </div>
                 </div>
                 <div class="col-12 col-md-3 p-2">
+
                     <form
                         method="POST"
                         action="{{ route('admin.payment.methods.store', ['payment_method' => $payment_method->id]) }}"
@@ -60,11 +64,26 @@
                         @method('DELETE')
                         @csrf
 
-                        <div class="text-right">
+                        <div class="text-right my-2">
                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                         </div>
 
                     </form>
+
+                    <form
+                        method="POST"
+                        action="{{ route('admin.payment.methods.availability', ['payment_method' => $payment_method->id]) }}"
+                    >
+
+                        @method('PUT')
+                        @csrf
+
+                        <div class="text-right my-2">
+                            <button type="submit" class="btn btn-info"><i class="fas fa-eye"></i></button>
+                        </div>
+
+                    </form>
+
                 </div>
             </div>
         @endforeach

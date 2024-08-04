@@ -50,6 +50,16 @@ class PaymentMethodsController extends Controller
 
     }
 
+    public function availability(PaymentMethod $payment_method){
+
+        $payment_method->update([
+            'available' => !$payment_method->available,
+        ]);
+
+        return redirect()->route('admin.payment.methods.index');
+
+    }
+
 
 
 }

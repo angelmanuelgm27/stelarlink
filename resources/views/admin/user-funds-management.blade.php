@@ -1,28 +1,13 @@
-<template id="payment-method-data-popup">
+<template id="user-funds-management-popup">
 
     <swal-html>
 
-        <div class="row my-3">
+        <form method="POST" action="" id="user-funds-management-form">
 
-            <div class="col-12 col-md-3 p-2">
-                <img src="" class="img-fluid" id="payment-method-img">
-            </div>
-
-            <div class="col-12 col-md-9 p-2 text-left" id="payment-method-details"></div>
-
-        </div>
-
-        <div class="h4 font-weight-bold">Datos del pago</div>
-
-        <form
-            method="POST"
-            action="{{ route('payment.store') }}"
-            enctype="multipart/form-data"
-        >
-
+            @method('PUT')
             @csrf
 
-             <div class="row">
+            <div class="row">
 
                 <div class="col-12 col-md-6">
 
@@ -48,21 +33,22 @@
 
                 <div class="col-12 col-md-6">
 
-                    <label class="form-label">Comprobante del pago</label>
-                    <div class="position-relative">
-                        <input type="file" name="image" id="image" class="custom-file-input" lang="es" required>
-                        <label class="custom-file-label" for="image">Archivo</label>
-                    </div>
+                    <label class="form-label">Metodo de pago</label>
+                    <select class="form-control" name="payment_method_id">
+                        <option value="">Seleccionar...</option>
+                        @foreach ($payment_methods as $payment_method)
+                            <option value="{{$payment_method->id}}">{{$payment_method->name}}</option>
+                        @endforeach
+                    </select>
 
                 </div>
 
             </div>
 
-            <input type="hidden" name="payment_method_id" id="payment-method-id">
-
-            <button type="submit" class="btn btn-primary my-5">Notificar pago</button>
+            <button type="submit" class="btn btn-primary my-3">Agregar fondos</button>
 
         </form>
+
 
     </swal-html>
 

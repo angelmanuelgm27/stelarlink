@@ -4,12 +4,13 @@ namespace App\Models;
 
 use App\Models\File;
 use App\Models\Finished;
+use App\Models\PlanRecord;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Plan extends Model
 {
@@ -30,7 +31,8 @@ class Plan extends Model
         'zone_id',
         'invoice_id',
         'instalation_date',
-        'technical_support_group_id'
+        'technical_support_group_id',
+        'renovation_date',
     ];
 
     public static array $statuses = [
@@ -38,7 +40,9 @@ class Plan extends Model
         'Aprobado',
         'Asignado',
         'Activo',
+        'Suspendido',
         'Rechazado',
+        'Cancelado',
     ];
 
     /**

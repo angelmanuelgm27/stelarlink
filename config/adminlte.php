@@ -304,8 +304,8 @@ return [
         [
             'text' => 'Usuarios',
             'icon' => 'fa fa-users',
-            'url' => '/administrador/usuarios',
-            'can' => ['administrador'],
+            'url' => '/administrador/usuario',
+            'can' => ['administrador', 'cobranzas'],
         ],
         [
             'text' => 'Empelados',
@@ -377,7 +377,7 @@ return [
             'text' => 'Metodos de pago',
             'icon' => 'fa fa-money-check-alt',
             'url' => '/administrador/metodos-pagos',
-            'can' => ['administrador'],
+            'can' => ['administrador', 'cobranzas'],
         ],
         [
             'text' => 'Estado de fibra',
@@ -460,31 +460,31 @@ return [
                 ],
             ],
         ],
-        // 'Select2' => [
-        //     'active' => true,
-        //     'files' => [
-        //         [
-        //             'type' => 'js',
-        //             'asset' => false,
-        //             'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
-        //         ],
-        //         [
-        //             'type' => 'css',
-        //             'asset' => false,
-        //             'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
-        //         ],
-        //     ],
-        // ],
-        // 'Chartjs' => [
-        //     'active' => false,
-        //     'files' => [
-        //         [
-        //             'type' => 'js',
-        //             'asset' => false,
-        //             'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
-        //         ],
-        //     ],
-        // ],
+        'Select2' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+                ],
+            ],
+        ],
+        'Chartjs' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
+                ],
+            ],
+        ],
         'Sweetalert2' => [
             'active' => true,
             'files' => [
@@ -495,36 +495,36 @@ return [
                 ],
             ],
         ],
-        // 'Leaflet' => [
-        //     'active' => true,
-        //     'files' => [
-        //         [
-        //             'type' => 'js',
-        //             'asset' => false,
-        //             'location' => '//unpkg.com/leaflet@1.9.4/dist/leaflet.js',
-        //         ],
-        //         [
-        //             'type' => 'css',
-        //             'asset' => false,
-        //             'location' => '//unpkg.com/leaflet@1.9.4/dist/leaflet.css',
-        //         ]
-        //     ]
-        // ],
-        // 'Pace' => [
-        //     'active' => false,
-        //     'files' => [
-        //         [
-        //             'type' => 'css',
-        //             'asset' => false,
-        //             'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
-        //         ],
-        //         [
-        //             'type' => 'js',
-        //             'asset' => false,
-        //             'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
-        //         ],
-        //     ],
-        // ],
+        'Leaflet' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+                ]
+            ]
+        ],
+        'Pace' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
     ],
 
     /*

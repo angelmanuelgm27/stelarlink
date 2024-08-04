@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 
-class UserServiceController extends Controller
+class UserPlanController extends Controller
 {
 
     public function index()
@@ -24,28 +24,46 @@ class UserServiceController extends Controller
         $user = Auth::user();
         $user_id = $user->id;
 
-        $user_requests = Plan::where('plans.user_id', $user_id)
+        $plans = Plan::where('plans.user_id', $user_id)
             ->with(['service'])
             // ->with(['service' => function ($query) {
             //     $query->select('name');
             // }])
             ->get();
 
-        $user_requests->each(function ($user_request) {
+        $plans->each(function ($plan) {
 
-            $date_created_at = Carbon::createFromFormat('Y-m-d H:i:s', $user_request->created_at);
+            $date_created_at = Carbon::createFromFormat('Y-m-d H:i:s', $plan->created_at);
             Carbon::setLocale('es');
             $formatted_created_at = $date_created_at->isoFormat('D \d\e MMMM, YYYY');
+            $plan->formatted_created_at = $formatted_created_at;
 
-            $user_request->formatted_created_at = $formatted_created_at;
+            if($plan->renovation_date){
 
-            if($user_request->instalation_date){
+                $date_renovation_date = Carbon::createFromFormat('Y-m-d H:i:s', $plan->renovation_date);
+                Carbon::setLocale('es');
+                $formatted_renovation_date = $date_renovation_date->isoFormat('D \d\e MMMM, YYYY');
+                $plan->formatted_renovation_date = $formatted_renovation_date;
 
-                $date_instalation_date = Carbon::createFromFormat('Y-m-d H:i:s', $user_request->instalation_date);
+            }
+
+            if($plan->instalation_date){
+
+                $date_instalation_date = Carbon::createFromFormat('Y-m-d H:i:s', $plan->instalation_date);
                 Carbon::setLocale('es');
                 $formatted_instalation_date = $date_instalation_date->isoFormat('D \d\e MMMM, YYYY');
+                $plan->formatted_instalation_date = $formatted_instalation_date;
 
-                $user_request->formatted_instalation_date = $formatted_instalation_date;
+                if(
+                    $plan->instalation_date < Carbon::now()->subHours(12) &&
+                    ($plan->status == 'Activo' || $plan->status == 'Suspendido')
+                ){
+
+                    $plan->action = 'Cancelar';
+
+                }elseif($plan->status == 'Cancelado'){
+                    $plan->action = 'Activar';
+                }
 
             }
 
@@ -54,7 +72,7 @@ class UserServiceController extends Controller
         $services = Service::all();
 
         $data = [
-            'user_requests' => $user_requests,
+            'plans' => $plans,
             'services' => $services,
             'address' => $user->address,
         ];
@@ -133,6 +151,73 @@ class UserServiceController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function cancel(Plan $plan)
+    {
+
+        $plan->update([
+            'status' => 'Cancelado',
+            'renovation_date' => null,
+        ]);
+
+        Session::flash('message', 'El plan ha sido cancelado.');
+        Session::flash('alert-class', 'alert-success');
+
+        return redirect()->back();
+    }
+
+    public function activate(Plan $plan)
+    {
+
+
+
+
+
+
+
+
+        // cobrar comicion de recativacion ***
+
+        $user = Auth::user();
+        $user_id = $user->id;
+
+        $plan_id = $plan->id;
+
+        $plan = Service::find($plan_id);
+
+        $user_wallet_balance = $user->wallet_balance;
+        $plan_price = $plan->price;
+
+        if($user_wallet_balance >= $plan_price){
+
+            $user_wallet_balance = floatval($user_wallet_balance) - $plan_price;
+            $user->update(['wallet_balance' => $user_wallet_balance,]);
+
+            // reflejar consumo ***
+
+        }else{
+
+            Session::flash('message', 'El saldo de tu billetera es insuficiente!');
+            Session::flash('alert-class', 'alert-warning');
+            return redirect()->back();
+
+        }
+
+
+
+
+
+
+        $plan->update([
+            'status' => 'Activo',
+            'renovation_date' => Carbon::now()->addMonthsNoOverflow(1),
+        ]);
+
+        Session::flash('message', 'El plan ha sido activado.');
+        Session::flash('alert-class', 'alert-success');
+
+        return redirect()->back();
     }
 
 }
