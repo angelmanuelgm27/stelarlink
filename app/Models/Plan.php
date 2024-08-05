@@ -43,6 +43,7 @@ class Plan extends Model
         'Suspendido',
         'Rechazado',
         'Cancelado',
+        'Por suspender',
     ];
 
     /**
@@ -75,6 +76,14 @@ class Plan extends Model
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
+    }
+
+    /**
+     * Get the post's task.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

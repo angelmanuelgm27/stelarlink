@@ -59,6 +59,8 @@ class TechnicalSupportTaskController extends Controller
 
             $client = ($task) ? User::find($taskable->user_id) : null;
 
+            $phone = ($client) ? $client->phone : null;
+
             $group_users = $group->users()
                 ->select('name')
                 ->get();
@@ -70,7 +72,7 @@ class TechnicalSupportTaskController extends Controller
                 'service' => $service,
                 'taskable_name' => $taskable_name,
                 'group_users' => $group_users,
-                'phone' => $client->phone,
+                'phone' => $phone,
             ];
 
         }else{

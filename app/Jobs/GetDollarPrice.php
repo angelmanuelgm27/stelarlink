@@ -13,6 +13,9 @@ class GetDollarPrice implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $tires = 3;
+    public $backoff = 300;
+
     /**
      * Create a new job instance.
      */
