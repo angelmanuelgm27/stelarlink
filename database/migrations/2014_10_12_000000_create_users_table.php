@@ -62,8 +62,8 @@ return new class extends Migration {
             ],
 
             [
-                'name' => 'cobranza',
-                'email' => 'cobranza@1',
+                'name' => 'cobranzas',
+                'email' => 'cobranzas@1',
                 'address' => 'default',
                 'phone' => '4122548458',
                 'dni' => '44',

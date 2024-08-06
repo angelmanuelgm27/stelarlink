@@ -37,7 +37,7 @@
 
                     <div class="mb-1">
                         <span class="font-weight-bold">Zona:</span>
-                        <select class="form-control" name="zone_id" id="zone_id" required>
+                        <select class="form-control" name="zone_id" id="details-zone_id" required>
                             <option value="">Seleccionar</option>
                             @foreach($zones as $zone)
                                 <option value="{{ $zone->id }}">{{ $zone->name }}</option>
@@ -53,6 +53,17 @@
 
         </div>
 
+        <form method="POST" action="" id="form-suspend-plan" class="text-center d-none">
+            @method('PUT')
+            @csrf
+            <button type="submit" class="btn btn-danger">Suspender Plan</button>
+        </form>
+
+        <form method="POST" action="" id="form-activate-plan" class="text-center d-none">
+            @method('PUT')
+            @csrf
+            <button type="submit" class="btn btn-danger">Activar Plan</button>
+        </form>
 
     </swal-html>
 

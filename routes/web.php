@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\Admin\PaymentMethodsController;
-use App\Http\Controllers\Admin\ServiciosController as AdminServiciosController;
 use App\Http\Controllers\Admin\PlanController as AdminPlanController;
+use App\Http\Controllers\Admin\ServiciosController as AdminServiciosController;
 use App\Http\Controllers\Admin\StaffController as AdminStaffController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\FileController;
@@ -11,6 +11,8 @@ use App\Http\Controllers\FinishedController;
 use App\Http\Controllers\FundController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\NotificationSeenController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Profiles;
 use App\Http\Controllers\TechnicalSupportGroupController;
@@ -71,9 +73,6 @@ Route::put('/administrador/usuario/{user}/add-funds', [AdminUsersController::cla
 Route::put('/administrador/usuario/{user}/withdraw-funds', [AdminUsersController::class, 'withdrawFunds'])
     ->middleware(['auth', 'verified'])
     ->name('admin.user.withdrawFunds');
-
-
-
 
 //ADMINISTRADOR - EMPLEADOS
 Route::get('/administrador/personal', [AdminStaffController::class, 'index'])
@@ -164,6 +163,14 @@ Route::put('/administrador/metodos-pagos/{payment_method}', [PaymentMethodsContr
 Route::put('/administrador/rechazar-plan/{plan}', [AdminPlanController::class, 'reject'])
     ->middleware(['auth', 'verified'])
     ->name('admin.requests.reject');
+
+Route::put('/administrador/suspender-plan/{plan}', [AdminPlanController::class, 'suspend'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.requests.suspend');
+
+Route::put('/administrador/activar-plan/{plan}', [AdminPlanController::class, 'activate'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.requests.activate');
 
 // PAGOS
 Route::get('/administrador/pago', [PaymentController::class, 'index'])
@@ -275,3 +282,16 @@ Route::delete('/administrador/zona/{zone}', [ZoneController::class, 'destroy'])
 Route::get('/file/{file}', [FileController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('file.show');
+
+// NOTIFICACIONES
+Route::get('notificaciones/index', [NotificationsController::class, 'index'])
+    ->name('notificaciones.index');
+
+Route::get('notificaciones/get', [NotificationsController::class, 'getNotificationsData'])
+    ->name('notificaciones.get');
+
+Route::put('notificacion/{notification}/visto', NotificationSeenController::class)
+    ->name('notificacion.visto');
+
+Route::delete('notificacion/{notification}/borrar', [NotificationsController::class, 'delete'])
+    ->name('notificacion.borrar');

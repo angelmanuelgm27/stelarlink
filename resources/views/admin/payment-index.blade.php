@@ -10,6 +10,43 @@
 
     <x-paneltitle titleName="Pagos"></x-paneltitle>
 
+    <form action="{{ route('admin.payment.index') }}" method="GET">
+
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <label class="form-label mt-2" for="search">Buscar</label>
+                <input type="text" class="form-control" id="search" name="search" placeholder="Buscar por referencia" value="{{ (isset($request->search) && !empty($request->search)) ? $request->search : '' }}">
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="form-label mt-2" for="status">Status</label>
+                <select name="status" id="status" class="custom-select" >
+                    <option value="">Seleccionar...</option>
+                    @if (isset($statuses))
+                        @foreach ($statuses as $status)
+                            <option value="{{ $status }}" {{ (isset($request->status) && $request->status == $status) ? 'selected' : '' }}>{{ $status }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <label class="form-label mt-2" for="start-date">Fecha inicio</label>
+                <input type="date" class="form-control" id="start-date" name="start_date" value="{{ (isset($request->start_date) && !empty($request->start_date)) ? $request->start_date : '' }}">
+            </div>
+            <div class="col-12 col-md-6">
+                <label class="form-label mt-2" for="end-date">Fecha final</label>
+                <input type="date" class="form-control" id="end-date" name="end_date" value="{{ (isset($request->end_date) && !empty($request->end_date)) ? $request->end_date : '' }}">
+            </div>
+        </div>
+
+        <div class="text-right my-3">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+
+    </form>
+
     @if($payments->isNotEmpty())
 
             <div class="container-fluid table-responsive">

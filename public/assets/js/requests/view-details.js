@@ -55,7 +55,7 @@ function viewDetails(event){
       document.getElementById('invoice').href = '/invoice/' + response.invoice_id;
 
       document.getElementById('ip').value = response.ip;
-      document.getElementById('zone_id').value = response.zone_id;
+      document.getElementById('details-zone_id').value = response.zone_id;
 
       const formRejectRequest = document.getElementById('form-reject-request');
       formRejectRequest.classList.add('d-none');
@@ -70,7 +70,21 @@ function viewDetails(event){
         formRejectRequest.classList.remove('d-none');
 
       }else if(response.status == 'Rechazado'){
+
         document.getElementById('form-update-request').classList.add('d-none');
+
+      }else if(response.status == 'Por suspender'){
+
+        const formsuSpendRequest = document.getElementById('form-suspend-plan');
+        formsuSpendRequest.classList.remove('d-none');
+        formsuSpendRequest.setAttribute('action', '/administrador/suspender-plan/' + requestId);
+
+      }else if(response.status == 'Suspendido' || response.status == 'Por activar'){
+
+        const formsuSpendRequest = document.getElementById('form-activate-plan');
+        formsuSpendRequest.classList.remove('d-none');
+        formsuSpendRequest.setAttribute('action', '/administrador/activar-plan/' + requestId);
+
       }else{
 
         formSubmitBtn.textContent = 'Enviar';

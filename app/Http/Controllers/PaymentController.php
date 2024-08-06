@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Models\Payment;
+use App\Models\User;
+use App\Notifications\NewPaymentToConfirm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentController extends Controller
 {
@@ -16,7 +19,7 @@ class PaymentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $payments = Payment::leftJoin('users', 'user_id', '=', 'users.id')
             ->leftJoin('payment_methods', 'payment_method_id', '=', 'payment_methods.id')
@@ -25,7 +28,26 @@ class PaymentController extends Controller
                 'payments.*',
                 'users.name as user_name',
                 'payment_methods.name as payment_method_name',
-            )->get();
+            );
+
+        if ($request->has('status') && !empty($request->status)) {
+            $payments = $payments->where('payments.status', $request->status);
+        }
+
+        if ($request->has('start_date') && !empty($request->start_date)) {
+            $payments = $payments->whereDate('payments.created_at', '>=', $request->start_date);
+        }
+
+        if ($request->has('end_date') && !empty($request->end_date)) {
+            $payments = $payments->whereDate('payments.created_at', '<=', $request->end_date);
+        }
+
+        if ($request->has('search') && !empty($request->search)) {
+            $payments = $payments
+                ->where('reference', 'like', '%' . $request->search . '%');
+        }
+
+        $payments = $payments->get();
 
         $payments->each(function ($payment) {
 
@@ -39,6 +61,8 @@ class PaymentController extends Controller
 
         $data = [
             'payments' => $payments,
+            'request' => $request,
+            'statuses' => Payment::$statuses,
         ];
 
         return view('admin.payment-index', $data);
@@ -92,6 +116,9 @@ class PaymentController extends Controller
         $user->update([
             'wallet_balance_to_be_approved' => $user_wallet_balance_to_be_approved,
         ]);
+
+        $cobranzas_users = User::where('rol', 'cobranzas')->get();
+        Notification::send($cobranzas_users, new NewPaymentToConfirm($payment));
 
         return redirect()->route('wallet.index');
 
@@ -151,6 +178,47 @@ class PaymentController extends Controller
             'user_id_approve' => $current_user->id,
         ]);
 
+        $plans_to_suspend = $user->plans()->where('status', 'Por suspender')->with(['service'])->get();
+
+        foreach ($plans_to_suspend as $plan) {
+
+            $price = $plan->service->price;
+            $user_wallet_balance = floatval($user->wallet_balance);
+
+            if($user_wallet_balance >= $price){
+
+                $user->update([
+                    'wallet_balance' => $user_wallet_balance - $price,
+                ]);
+
+                $plan->update([
+                    'status' => 'Activo',
+                    'renovation_date' => Carbon::now()->addMonthsNoOverflow(1),
+                ]);
+            }
+        }
+
+        $suspended_plans = $user->plans()->where('status', 'Suspendido')->with(['service'])->get();
+
+        foreach ($suspended_plans as $plan) {
+
+            $price = $plan->service->price;
+            $user_wallet_balance = floatval($user->wallet_balance);
+
+            if($user_wallet_balance >= $price){
+
+                $user->update([
+                    'wallet_balance' => $user_wallet_balance - $price,
+                ]);
+
+                $plan->update([
+                    'status' => 'Por activar',
+                ]);
+
+            }
+
+        }
+
         return redirect()->route('admin.payment.index');
 
     }
@@ -173,4 +241,5 @@ class PaymentController extends Controller
         return redirect()->route('admin.payment.index');
 
     }
+
 }

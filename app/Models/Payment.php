@@ -31,6 +31,11 @@ class Payment extends Model
         'dollar_price',
     ];
 
+    public static $statuses = [
+        'Pendiente',
+        'Completado',
+    ];
+
     /**
      * Get the post's file.
      */

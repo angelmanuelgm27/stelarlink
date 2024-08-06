@@ -159,4 +159,39 @@ class PlanController extends Controller
 
     }
 
+    /**
+     *
+     */
+    public function suspend(Plan $plan): RedirectResponse
+    {
+
+        // if(!(Gate::allows('isEditor') || Gate::allows('isAdmin'))){
+        //     abort(403); // use policies ***
+        // }
+
+        $plan->update(['status' => 'Suspendido']);
+
+        return redirect()->route('admin.requests.index');
+
+    }
+
+    /**
+     *
+     */
+    public function activate(Plan $plan): RedirectResponse
+    {
+
+        // if(!(Gate::allows('isEditor') || Gate::allows('isAdmin'))){
+        //     abort(403); // use policies ***
+        // }
+
+        $plan->update([
+            'status' => 'Activo',
+            'renovation_date' => Carbon::now()->addMonthsNoOverflow(1),
+        ]);
+
+        return redirect()->route('admin.requests.index');
+
+    }
+
 }

@@ -44,6 +44,7 @@ class Plan extends Model
         'Rechazado',
         'Cancelado',
         'Por suspender',
+        'Por activar',
     ];
 
     /**

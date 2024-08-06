@@ -303,12 +303,12 @@ return [
             'icon_color' => 'warning',                // The initial icon color (optional).
             'label' => 0,                             // The initial label for the badge (optional).
             'label_color' => 'danger',                // The initial badge color (optional).
-            'url' => 'notifications/show',            // The url to access all notifications/elements (required).
+            'url' => 'notificaciones/index',            // The url to access all notifications/elements (required).
             'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
-            'dropdown_mode' => true,                  // Enables the dropdown mode (optional).
+            'dropdown_mode' => false,                  // Enables the dropdown mode (optional).
             'dropdown_flabel' => 'Todas las notificaciones', // The label for the dropdown footer link (optional).
             'update_cfg' => [
-                'url' => 'notifications/get',         // The url to periodically fetch new data (optional).
+                'url' => 'notificaciones/get',         // The url to periodically fetch new data (optional).
                 'period' => 300,                       // The update period for get new data (in seconds, optional).
             ],
         ],

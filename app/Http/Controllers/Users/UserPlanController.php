@@ -24,7 +24,7 @@ class UserPlanController extends Controller
         $user = Auth::user();
         $user_id = $user->id;
 
-        $plans = Plan::where('plans.user_id', $user_id)
+        $plans = $user->plans()
             ->with(['service'])
             // ->with(['service' => function ($query) {
             //     $query->select('name');
@@ -170,13 +170,6 @@ class UserPlanController extends Controller
     public function activate(Plan $plan)
     {
 
-
-
-
-
-
-
-
         // cobrar comicion de recativacion ***
 
         $user = Auth::user();
@@ -203,11 +196,6 @@ class UserPlanController extends Controller
             return redirect()->back();
 
         }
-
-
-
-
-
 
         $plan->update([
             'status' => 'Activo',

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Payment;
+use App\Models\Plan;
 use App\Models\TechnicalSupportGroup;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -96,6 +97,14 @@ class User extends AuthenticatableUser implements Authenticatable
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class);
+    }
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function plans(): HasMany
+    {
+        return $this->hasMany(Plan::class);
     }
 
 }
