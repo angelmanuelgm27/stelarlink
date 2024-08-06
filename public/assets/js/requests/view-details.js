@@ -50,6 +50,7 @@ function viewDetails(event){
       document.getElementById('service_name').textContent = response.service_name;
       document.getElementById('formatted_created_at').textContent = response.formatted_created_at;
       document.getElementById('adrress').textContent = response.adrress;
+      document.getElementById('map-link').href = 'https://www.google.com/maps/search/?api=1&query=' + response.latitude + ',' + response.longitude;
       document.getElementById('group_name').textContent = (response.group_name) ? response.group_name : 'No asignado';
       document.getElementById('plan-data-status').textContent = response.status;
       document.getElementById('invoice').href = '/invoice/' + response.invoice_id;

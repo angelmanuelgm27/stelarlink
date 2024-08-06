@@ -128,4 +128,5 @@
 
 @section('js')
     <script type="text/javascript" src="{{ asset('assets/js/requests/user-create.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/requests/map.js') }}"></script>
 @endsection

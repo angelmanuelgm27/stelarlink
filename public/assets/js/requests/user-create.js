@@ -38,6 +38,8 @@ function planShop(event){
   document.getElementById('plan-name').textContent = requestName;
   document.getElementById('plan-price').textContent = requestPrice;
 
+  loadMap();
+
 }
 
 // $(document).ready(function() {

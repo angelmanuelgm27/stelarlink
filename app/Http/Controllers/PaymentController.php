@@ -219,7 +219,7 @@ class PaymentController extends Controller
 
         }
 
-        return redirect()->route('admin.payment.index');
+        return redirect()->back();
 
     }
 
@@ -238,7 +238,7 @@ class PaymentController extends Controller
 
         $payment->update(['status' => 'Rechazado']);
 
-        return redirect()->route('admin.payment.index');
+        return redirect()->back();
 
     }
 

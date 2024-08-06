@@ -10,6 +10,8 @@
                 <div class="mb-1"><span class="font-weight-bold">Plan:</span> <span id="service_name"></span></div>
                 <div class="mb-1"><span class="font-weight-bold">Creacion:</span> <span id="formatted_created_at"></span></div>
                 <div class="mb-1"><span class="font-weight-bold">Direccion:</span> <span id="adrress"></span></div>
+                <div class="mb-1"><span class="font-weight-bold"><a href="" id="map-link" target="_blank">Mapa</a></span></div>
+
                 <div class="mb-1"><span class="font-weight-bold">Grupo:</span> <span id="group_name"></span></div>
                 <div class="mb-1"><span class="font-weight-bold">Estado:</span> <span id="plan-data-status"></span></div>
                 <div class="mb-1"><a class="font-weight-bold" href="" id="invoice">Descargar factura</a></div>

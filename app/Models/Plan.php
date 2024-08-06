@@ -33,6 +33,8 @@ class Plan extends Model
         'instalation_date',
         'technical_support_group_id',
         'renovation_date',
+        'latitude',
+        'longitude',
     ];
 
     public static array $statuses = [

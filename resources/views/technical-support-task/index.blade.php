@@ -68,6 +68,7 @@
 
                 <div class="h5 font-weight-bold">{{ $taskable_name }}</div>
                 <h5>Direccion: {{ $taskable->adrress }}</h5>
+                <h5><a href="https://www.google.com/maps/search/?api=1&query={{$taskable->latitude}},{{$taskable->longitude}}" target="_blank">Mapa</a></h5>
                 <h5>Telefono: {{ $phone }}</h5>
 
                 <form

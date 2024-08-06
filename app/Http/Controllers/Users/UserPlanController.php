@@ -89,6 +89,8 @@ class UserPlanController extends Controller
         $validated = $request->validate([
             'plan_id' => ['required', 'numeric', 'exists:services,id'],
             'address' => ['required', 'string', 'max:512'],
+            'latitude' => ['required', 'string', 'max:512'],
+            'longitude' => ['required', 'string', 'max:512'],
         ]);
 
         $user = Auth::user();
@@ -143,6 +145,8 @@ class UserPlanController extends Controller
         $planes->service_id = $plan->id;
         $planes->invoice_id = $invoices->id;
         $planes->adrress = $validated['address'];
+        $planes->latitude = $validated['latitude'];
+        $planes->longitude = $validated['longitude'];
         $planes->status = "Pendiente";
         $planes->save();
 
