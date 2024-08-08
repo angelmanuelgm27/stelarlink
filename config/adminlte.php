@@ -346,6 +346,12 @@ return [
             'can' => ['administrador', 'soporte-tecnico-administrador'],
         ],
         [
+            'text' => 'Actividades completadas',
+            'icon' => 'fas fa-users-cog',
+            'url' => '/administrador/actividades-completadas',
+            'can' => ['administrador', 'cobranzas'],
+        ],
+        [
             'text' => 'Actividades',
             'icon' => 'fas fa-users-cog',
             'url' => '/soporte-tecnico/actividades',

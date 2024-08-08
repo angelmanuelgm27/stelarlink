@@ -113,10 +113,14 @@ class TechnicalSupportTaskController extends Controller
 
         $users = $group->users;
 
+        $instalation_amount = 100; // ***
+        $users_count = count($users);
+
         foreach ($users as $user) {
 
             $finished = new Finished();
             $finished->user_id = $user->id;
+            $finished->payment_amount = $instalation_amount / $users_count;
             $taskable->finisheds()->save($finished);
 
         };

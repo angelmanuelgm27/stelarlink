@@ -10,6 +10,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\FinishedController;
 use App\Http\Controllers\FundController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InstallerPayment;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\NotificationSeenController;
 use App\Http\Controllers\NotificationsController;
@@ -73,6 +74,16 @@ Route::put('/administrador/usuario/{user}/add-funds', [AdminUsersController::cla
 Route::put('/administrador/usuario/{user}/withdraw-funds', [AdminUsersController::class, 'withdrawFunds'])
     ->middleware(['auth', 'verified'])
     ->name('admin.user.withdrawFunds');
+
+// ACTIVIDADES COMPLETADS
+
+Route::get('/administrador/actividades-completadas', [InstallerPayment::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('installer.payment.index');
+
+Route::put('/administrador/actividades-completadas/{finished}/pagar', [InstallerPayment::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('installer.payment.store');
 
 //ADMINISTRADOR - EMPLEADOS
 Route::get('/administrador/personal', [AdminStaffController::class, 'index'])

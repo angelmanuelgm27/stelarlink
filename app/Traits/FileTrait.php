@@ -8,18 +8,18 @@ use Illuminate\Support\Facades\Storage;
 trait FileTrait
 {
 
-    public function instalationFiles($files, $request)
+    public function instalationFiles($files, $plan)
     {
 
-        foreach ($files as $file_request) {
+        foreach ($files as $file) {
 
-            $path = Storage::disk('local')->put('/instalations', $file_request);
+            $path = Storage::disk('local')->put('/instalations', $file);
 
             $file = new File();
             $file->path = $path;
-            $file->name = $file_request->getClientOriginalName();
+            $file->name = $file->getClientOriginalName();
 
-            $request->files()->save($file);
+            $plan->files()->save($file);
 
         }
 

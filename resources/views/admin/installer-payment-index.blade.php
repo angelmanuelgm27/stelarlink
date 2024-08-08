@@ -37,7 +37,7 @@
             <table id="users_table" class="table text-center">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>Instalador</th>
                         <th>Tipo</th>
                         <th>Fecha</th>
                         <th>Monto</th>
@@ -47,18 +47,22 @@
                 </thead>
                 <tbody id="users_plans_table_content">
 
-                    @php
-                    $index = 1;
-                    @endphp
-
                     @foreach ($finisheds as $finished)
 
                         <tr>
-                            <td class="align-middle">{{ $index }}</td>
+                            <td class="align-middle">{{ $finished->user->name }}</td>
                             <td class="align-middle">{{ $finished->finishedable_name }}</td>
                             <td class="align-middle">{{ $finished->formatted_created_at }}</td>
                             <td class="align-middle">$ {{ $finished->payment_amount }}</td>
-                            <td class="align-middle">{{ $finished->formatted_paid }}</td>
+                            <td class="align-middle">
+                                @if($finished->paid == 'Pagar')
+                                    <button class="btn btn-primary installer-payment-popup-trigger" data-id="{{ $finished->id}}" data-name="{{ $finished->user->name }}" data-amount="{{ $finished->payment_amount }}">
+                                        Pagar
+                                    </button>
+                                @else
+                                    {{ $finished->formatted_paid }}
+                                @endif
+                            </td>
                             <td class="align-middle">
                                 @if(isset($finished->file) && !empty($finished->file) && isset($finished->file->id) && !empty($finished->file->id))
                                     <a href="{{ route('file.show', ['file' => $finished->file->id ]) }}">Descargar</a>
@@ -67,10 +71,6 @@
                                 @endif
                             </td>
                         </tr>
-
-                    @php
-                    $index++;
-                    @endphp
 
                     @endforeach
 
@@ -86,9 +86,10 @@
 
     @endif
 
+    @include('admin.installer-payment-create')
 
 @stop
 
 @section('js')
-    <script></script>
+    <script type="text/javascript" src="{{ asset('assets/js/installer-payment/create-popup.js') }}"></script>
 @endsection

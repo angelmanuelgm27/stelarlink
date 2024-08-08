@@ -74,7 +74,11 @@
                                 <td class="align-middle">{{ $payment->formatted_created_at }}</td>
                                 <td class="align-middle">$ {{ $payment->amount_dollar }}</td>
                                 <td class="align-middle">
-                                    <a href="{{ route('file.show', ['file' => $payment->file->id ]) }}">Descargar</a>
+                                    @if(isset($payment->file) && !empty($payment->file) && isset($payment->file->id) && !empty($payment->file->id))
+                                        <a href="{{ route('file.show', ['file' => $payment->file->id ]) }}">Descargar</a>
+                                    @else
+                                        -
+                                    @endif
                                 </td>
                             </tr>
 

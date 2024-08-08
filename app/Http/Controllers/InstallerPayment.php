@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
+use App\Models\Finished;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Task;
+use App\Models\File;
+use Illuminate\Support\Facades\Storage;
 
-class FinishedController extends Controller
+class InstallerPayment extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
 
-    function index(Request $request){
-
-        $user = Auth::user();
-
-        $finisheds = $user->finisheds()->with('file');
+        $finisheds = Finished::with('user')->with('file');
         // ->with([
         //     'finishedable' => function ($query) {
         //         $query->with(['files', 'task']);
@@ -33,7 +36,7 @@ class FinishedController extends Controller
 
             if(!$finished->paid){
 
-                $finished->paid = 'Pendiente';
+                $finished->paid = 'Pagar';
 
             }else{
 
@@ -51,15 +54,40 @@ class FinishedController extends Controller
             //     $finished->description = $finished->finishedable->description;
             // }
 
-            return $finished;
-
         });
 
         $data = [
             'finisheds' => $finisheds,
         ];
 
-        return view('technical.plan', $data);
+        return view('admin.installer-payment-index', $data);
+
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function store(Request $request, Finished $finished)
+    {
+
+        $validated = $request->validate([
+            'image' => ['required', 'file', 'mimes:bmp,gif,jpeg,jpg,png,zip', 'max:12800'],
+        ]);
+
+        $file_request = $request->file('image');
+        $path = Storage::disk('local')->put('/installer-payments', $file_request);
+
+        $file = new File();
+        $file->path = $path;
+        $file->name = $file_request->getClientOriginalName();
+
+        $finished->file()->save($file);
+
+        $finished->update([
+            'paid' => Carbon::now(),
+        ]);
+
+        return redirect()->back();
 
     }
 
