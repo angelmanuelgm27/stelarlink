@@ -1,6 +1,6 @@
-<header>
+<header class="z-3">
     <div class="container">
-        <nav class="navbar navbar-expand-lg bg-light">
+        <nav class="navbar navbar-expand-lg ">
             <div class="container-fluid align-items-end">
                 <a class="navbar-brand w-25" href="{{ url('/') }}">
                     <img src="{{ asset('images/logo.png') }}" class="w-100" alt="stelarlink">

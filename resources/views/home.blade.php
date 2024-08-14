@@ -3,16 +3,30 @@
 @section('content')
     <section>
         <div class="position-relative">
-            <video class="w-100" autoplay muted loop>
-                <source src="{{ asset('/mp4/stelarlink-home.mp4') }}">
-            </video>
-            <div class="main-content">
+            <div class="main-banner">
+
+                <!-- Slider main container -->
+                <div class="swiper">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide w-100"><img class="w-100" src="{{ asset('images/home/banner1.png')}}" alt="banner1"></div>
+                        <div class="swiper-slide w-100"><img class="w-100" src="{{ asset('images/home/banner2.png')}}" alt="banner2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-banner-responsive">
+                <img src="{{ asset('images/home/responsive/banner-resposive.png') }}" style="width: 100%" alt="main">
+            </div>
+
+            <div class="main-content pt-8 z-2">
                 <h3 class="text-white text-7xl anta-regular">Conectando</h3>
                 <h3 class="text-primary text-5xl anta-regular ">comunidades rurales</h3>
                 <p class="text-white text-2xl work-sans-regular ">Transformando vidas a través de la conectividad digital
                     confiable.</p>
-                <x-button text="Planes y Precios" :url="route('login')"
-                    class="btn btn-primary text-3xl px-4 py-2 fw-semibold work-sans-regular rounded-pill w-100"></x-button>
+                <x-button text="Planes y Precios" :url="('login')"
+                    class="btn btn-primary-light text-3xl px-4 py-2 fw-semibold work-sans-regular rounded-pill w-100"></x-button>
             </div>
         </div>
     </section>
@@ -34,8 +48,8 @@
                 <div class="col-12">
                     <div class="bg-secondary rounded-7 p-7 my-5">
                         <div class="row">
-                            <div class="col-12 col-md-12 col-lg-12 col-xl-6 my-auto">
-                                <p class="text-5xl text-white work-sans-regular">Estas son las razones para activar hoy tu
+                            <div class="col-12 col-md-12 col-lg-12 col-xl-6 my-auto text-xl-start text-center">
+                                <p class="text-5xl text-white  work-sans-regular">Estas son las razones para activar hoy tu
                                     conexión
                                     Stelarlink</p>
                                 <p class="text-white text-2xl work-sans-regular my-4">"StelarLink se compromete a
@@ -92,23 +106,47 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <div class="py-8">
-                                <h3 class="text-center works-sans-regular text-7xl fw-semibold text-secundary-light">
-                                    Nuestros planes</h3>
-                                <p class="text-2xl mt-7 mx-7 text-secundary-light fw-semibold">Ofrecemos precios
+                            <div class="py-5">
+                                <h3 class="text-10xl text-secondary text-center work-sans-regular fw-bold">Planes</h3>
+                                <h3 class="text-center works-sans-regular text-5xl fw-semibold text-secundary-light">
+                                    de instalación</h3>
+                                <p class="text-2xl mt-7 mx-7 text-md-center text-start text-secundary-light fw-semibold">Ofrecemos precios
                                     competitivos y
                                     transparentes sin costos
                                     ocultos
-                                    ni tarifas adicionales". Opciones de pago: "Aceptamos diferentes métodos de pago para
+                                    ni tarifas adicionales". <br> <br> Opciones de pago: "Aceptamos diferentes métodos de pago para
                                     mayor
                                     comodidad, incluidas transferencias bancarias y pagos en línea</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-7">
+                        @foreach ($installation_services as $iservice)
+                            <div class="col-12 col-md-6">
+                                <x-installation-plans class="px-2  py-4 bg-secondary rounded-5 m-2 inst-plan"
+                                    image="{{ $iservice->image ? asset('images/services/' . $iservice->image) : asset('images/noticon.png') }}"
+                                    planName="{{ $iservice->name }}" planPrice="{{ $iservice->price }}$"
+                                    planCategory="{{ $iservice->category }}"
+                                    planDescription="{{ $iservice->description }}">
+                                </x-installation-plans>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="py-8">
+                                <h3 class="text-10xl text-secondary text-center work-sans-regular fw-bold">Planes</h3>
+                                <h3 class="text-center works-sans-regular text-5xl fw-semibold text-secundary-light">
+                                    de suscripción</h3>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-7">
                         @foreach ($services as $service)
                             <div class="col-12 col-md-6">
-                                <x-plans class="px-7 py-5 bg-white rounded-5 m-4"
+                                <x-plans class="px-2 py-5 bg-white rounded-5 m-4"
                                     image="{{ $service->image ? asset('images/services/' . $service->image) : asset('images/noticon.png') }}"
                                     planName="{{ $service->name }}" planPrice="{{ $service->price }}$"
                                     planVelocityLoad="Velocidad de carga {{ $service->velocity_load }} Mbps"
@@ -124,12 +162,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="py-9 image-background-fix"
-                    style="background-image: url({{ asset('images/home/imagen_2.png') }})">
+                    style="background-image: url({{ asset('images/home/banner-contacto.png') }})">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6 col-xl-4 offset-xl-1">
                                 <div>
-                                    <p class="work-sans-regular mb-3 text-base text-white text-lg">¿Tienes alguna pregunta o
+                                    <p class="work-sans-light mb-3 text-base text-white text-lg">¿Tienes alguna pregunta o
                                         consulta? Completa nuestro formulario de contacto y nos pondremos en contacto
                                         contigo lo
                                         antes posible".
@@ -138,7 +176,7 @@
                                 <form name="form_contact" id="form_contact" class="form-contact">
                                     <div class="mb-3">
                                         <label class="form-label text-white text-2xl">Nombre y apellido</label>
-                                        <input required type="text" class="form-control rounded-5 px-3 py-2 text-lg"
+                                        <input required type="text" class="form-control rounded-5 px-5  py-2 text-lg"
                                             id="client_full_name" />
                                     </div>
                                     <div class="mb-3">
@@ -153,13 +191,13 @@
                                     <button type="submit" form="form_contact"
                                         class="btn btn-primary w-100 text-3xl py-3 rounded-5">Enviar</button>
                                 </form>
-                                <p class="text-white mt-5 works-sans-regular text-lg">El siguiente mapa muestra la
+                                <p class="text-white mt-5 work-sans-light text-lg">El siguiente mapa muestra la
                                     cobertura de
-                                    nuestro servicio, revisa si tu ubicación se encuentra en nuestro radio.</p>
+                                    nuestro servicio, <span class="work-sans-semibold"> revisa si tu ubicación se encuentra en nuestro radio. </span> </p>
                             </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-5 my-auto offset-xl-1">
+                            <div class="col-12 col-md-6 col-lg-6 col-xl-6 mt-auto offset-xl-1 mb-3">
                                 <div>
-                                    <p class="anta-regular text-5xl text-white">Conecta con nosotros</p>
+                                    <p class="work-sans-semibold text-5xl text-white">¡Conecta con nosotros!</p>
                                 </div>
                                 <div class="d-flex align-items-center my-4 contact-networks">
                                     <div>
@@ -169,7 +207,7 @@
                                         </a>
                                     </div>
                                     <div>
-                                        <p class="m-0 mx-3 text-white work-sans-regular text-3xl">+584245734146</p>
+                                        <p class="m-0 mx-3 text-white work-sans-semibold text-3xl">+584245734146</p>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-4 contact-networks">
@@ -180,29 +218,52 @@
                                         </a>
                                     </div>
                                     <div>
-                                        <p class="m-0 mx-3 text-white work-sans-regular text-3xl">+584245734146</p>
+                                        <p class="m-0 mx-3 text-white work-sans-semibold text-3xl">+584245734146</p>
+
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center my-4 contact-networks">
-                                    <div>
-                                        <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
-                                            class="d-block">
-                                            <x-icon icon="fab fa-instagram"></x-icon>
-                                        </a>
+
+                                <div class="d-flex flex-row mt-3 justify-content-end me-6">
+
+                                    <div class="d-flex align-items-center mx-1 my-4 contact-networks">
+                                        <div>
+                                            <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
+                                                class="d-block">
+                                                <x-icon icon="fab fa-instagram"></x-icon>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="m-0 mx-3 text-white work-sans-regular text-3xl">stelarlink</p>
+
+                                    <div class="d-flex align-items-center mx-1 my-4 contact-networks">
+                                        <div>
+                                            <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
+                                                class="d-block">
+                                                <x-icon icon="fab fa-facebook-f"></x-icon>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-center my-4 contact-networks">
-                                    <div>
-                                        <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
-                                            class="d-block">
-                                            <x-icon icon="fab fa-facebook-f"></x-icon>
-                                        </a>
+
+                                    <div class="d-flex align-items-center mx-1 my-4 contact-networks">
+                                        <div>
+                                            <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
+                                                class="d-block">
+                                                <x-icon icon="fab fa-tiktok"></x-icon>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="m-0 mx-3 text-white work-sans-regular text-3xl">stelarlink</p>
+
+                                    <div class="d-flex align-items-center mx-1 my-4 contact-networks">
+                                        <div>
+                                            <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
+                                                class="d-block">
+                                               <x-icon icon="fab fa-twitter">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                                                            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                                                        </svg>
+                                               </x-icon>
+
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -211,6 +272,7 @@
                 </div>
             </div>
         </div>
+
     </section>
     <section id="coveragemap">
         <div class="row">
@@ -263,36 +325,31 @@
     <section class="gallery">
         <div class="row">
             <div class="col-12">
-                <div class="py-9">
+                <div class="py-8">
                     <div class="container">
                         <div class="row">
-                            <div class="col-12 col-md-4 offset-md-1 my-4">
+                            <div class="col-12 col-md-6 my-2 mx-auto">
                                 <div>
-                                    <h3 class="text-primary work-sans-regular m-0 text-8xl">¡vive</h3>
-                                    <h3 class="work-sans-regular m-0 text-5xl text-secondary">la experiencia</h3>
-                                    <h3 class="work-sans-regular m-0 text-5xl text-secondary">stelarlink!</h3>
+                                    <h3 class="text-primary work-sans-extrabold m-0 text-12xl text-center">¡Vive!</h3>
+                                    <h3 class="work-sans-semibold text-5xl text-secondary py-4 text-center ">la experiencia</h3>
                                 </div>
                             </div>
                         </div>
                         <!-- Gallery -->
-                        <div class="row">
+                        <div class="row d-none d-lg-flex">
                             <div class="col-12 col-md-12 col-lg-8">
                                 <div class="row">
-                                    <div class="col-12 col-lg-6 col-md-6 mb-4 mt-auto mb-lg-0">
+                                    <div class="col-6 col-lg-6 col-md-6 mb-lg-0">
                                         <img src="{{ asset('images/home/gallery/image_1.jpg') }}"
-                                            class="w-100 shadow-1-strong rounded-5 mb-4" alt="Boat on Calm Water" />
+                                            class="w-100 h-90 shadow-1-strong rounded-5 " alt="Boat on Calm Water" />
                                     </div>
 
-                                    <div class="col-12 col-lg-6 col-md-6 mb-4 mb-lg-0">
+                                    <div class="col-6 col-lg-6 col-md-6 mb-4 mb-lg-0">
                                         <img src="{{ asset('images/home/gallery/image_2.jpg') }}"
                                             class="w-100 shadow-1-strong rounded-5 mb-4" alt="Mountains in the Clouds" />
 
                                         <img src="{{ asset('images/home/gallery/image_3.jpg') }}"
                                             class="w-100 shadow-1-strong rounded-5 mb-4" alt="Mountains in the Clouds" />
-                                    </div>
-                                    <div class="col-lg-12 mb-4 mb-lg-0">
-                                        <img src="{{ asset('images/home/gallery/image_5.jpg') }}"
-                                            class="w-100 shadow-1-strong rounded-5 mb-4" alt="Waves at Sea" />
                                     </div>
                                 </div>
                             </div>
@@ -303,23 +360,121 @@
                                             class="w-100 shadow-1-strong rounded-5 mb-4" alt="Waves at Sea" />
                                     </div>
                                     <div class="col-lg-12 col-12 col-md-6 mb-4 mb-lg-0">
-                                        <div class="position-relative">
-                                            <img src="{{ asset('images/home/gallery/image_6.jpg') }}"
-                                                class="w-100 shadow-1-strong rounded-5 mb-4" alt="Waves at Sea" />
-                                            <p
-                                                class="text-4xl text-white work-sans-regular h-100 fw-semibold px-4 d-flex align-items-center justify-content-center position-absolute top-0 start-0">
-                                                CONSEJOS PARA DISFRUTAR MEJOR</p>
-                                        </div>
+                                        <img src="{{ asset('images/home/gallery/image_5.jpg') }}"
+                                            class="w-100 h-gallery h-lg-gallery  shadow-1-strong rounded-5 mb-4 " alt="Waves at Sea" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Gallery -->
+                        <!-- Gallery RESPONSIVE-->
+                          <div class="row d-lg-none d-flex ">
+                            <div class="col-12  col-lg-8">
+                                <div class="row">
+                                    <div class="col-4 col-lg-6 mb-lg-0">
+                                        <img src="{{ asset('images/home/gallery/image_1.jpg') }}"
+                                            class="w-100 h-80 shadow-1-strong rounded-5 " alt="Boat on Calm Water" />
+                                    </div>
+
+                                    <div class="col-8 col-lg-6 mb-4 mb-lg-0">
+                                        <img src="{{ asset('images/home/gallery/image_2.jpg') }}"
+                                            class="w-100 shadow-1-strong rounded-5 mb-4" alt="Mountains in the Clouds" />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12  col-lg-4 ">
+                                <div class="row">
+
+
+                                    <div class="col-lg-12 col-8 mb-4 mb-lg-0">
+                                        <img src="{{ asset('images/home/gallery/image_5.jpg') }}"
+                                            class="w-100 h-100  shadow-1-strong rounded-5 mb-4 " alt="Waves at Sea" />
+                                    </div>
+                                    <div class="col-lg-12 col-4 mb-4 mb-lg-0">
+                                        <img src="{{ asset('images/home/gallery/image_4.jpg') }}"
+                                            class="w-100 h-100 shadow-1-strong rounded-5 mb-4" alt="Waves at Sea" />
+                                    </div>
+
+                                    <div class="col-12 col-lg-6 mb-lg-0">
+
+                                        <img src="{{ asset('images/home/gallery/image_3.jpg') }}"
+                                            class="w-100 h-60  shadow-1-strong rounded-5 mb-4 col-12" alt="Mountains in the Clouds" />
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    {{-- Team Section --}}
+    <section class="team-section" style="background: #311545 no-repeat padding-box;">
+        <div class="row">
+            <div class="col-12">
+                <div class="py-9">
+                    <div class="container">
+                        <div class="text-center">
+                            <div class="col-12 my-4">
+                                <div class="">
+                                    <h3 class=" text-8xl text-secondary work-sans-regular text-white fw-bolder ">Nuestro equipo</h3>
+                                </div>
+                            </div>
+
+                            <div class="team-members">
+                                <div class="team-member">
+                                    <img src="{{ asset('images/home/team/angel_ceo.jpeg')}}" alt="Ángel Garaban">
+                                    <h3 class="text-2xl">Ángel Garaban</h3>
+                                    <p class="text-xl">Programador</p>
+                                    <p class="role text-2xl">CEO</p>
+                                    <div class="social-media">
+                                        <a href="https://www.instagram.com/angelmanuelgm/" target="_blank">
+                                            <x-icons icon="fab fa-instagram"></x-icons>
+                                        </a>
+                                        <a href="https://www.tiktok.com/@angelgaraban" target="_blank">
+                                            <x-icons icon="fab fa-tiktok"></x-icons>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="team-member">
+                                    <img src="{{ asset('images/home/team/josue_coo.jpg')}}" alt="Josue Avila">
+                                    <h3 class="text-2xl">Josue Avila</h3>
+                                    <p class="text-xl">ING Petroquímico</p>
+                                    <p class="role text-2xl">COO</p>
+                                    <div class="social-media">
+                                        <a href="https://www.instagram.com/AVILA21J/" target="_blank">
+                                            <x-icons icon="fab fa-instagram"></x-icons>
+                                        </a>
+                                        <a href="https://www.tiktok.com/@AVILA21J" target="_blank">
+                                            <x-icons icon="fab fa-tiktok"></x-icons>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="team-member">
+                                    <img src="{{ asset('images/home/team/carlos_cto.png')}}" alt="Carlos Oblander">
+                                    <h3 class="text-2xl">Carlos Oblander</h3>
+                                    <p class="text-xl">Programador</p>
+                                    <p class="role text-2xl">CTO</p>
+                                    <div class="social-media">
+                                        <a href="www.instagram.com/gabrielzinisa/" target="_blank">
+                                            <x-icons icon="fab fa-instagram"></x-icons>
+                                        </a>
+                                        <a href="https://www.tiktok.com/@GABRIELZIN0710" target="_blank">
+                                            <x-icons icon="fab fa-tiktok"></x-icons>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{-- Team Section --}}
 @endsection
 @section('js')
     <script>

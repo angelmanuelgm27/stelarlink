@@ -13,6 +13,11 @@ body{
 }
 
 // Custom
+
+
+.w-60{
+    width: 60% !important;
+}
 .w-30{
     width: 30% !important;
 }
@@ -24,6 +29,26 @@ body{
 }
 .w-8{
     width: 8% !important;
+}
+
+.h-60{
+    height: 60%;
+}
+
+.h-80{
+    height: 80%;
+}
+
+.h-90{
+    height: 90%;
+}
+
+.h-gallery{
+    height: 250px;
+}
+
+.w-2X{
+    width: 100% !important;
 }
 
 .text-xs	{
@@ -90,6 +115,11 @@ body{
     line-height: 1;
 }
 
+.text-12xl	{
+    font-size: 12rem; /* 192px */
+    line-height: 1;
+}
+
 .anta-regular {
     font-family: "Anta", sans-serif;
     font-weight: 400;
@@ -116,6 +146,27 @@ body{
     font-weight: 400;
     font-style: normal;
 }
+
+.inst-plan{
+    display: flex;
+    justify-content: center;
+    min-height: 350px;
+}
+
+.work-sans-semibold {
+    font-family: "Work Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.work-sans-extrabold {
+    font-family: "Work Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+
 .menu .nav-item a:hover{
     position: relative;
 }
@@ -131,6 +182,7 @@ body{
 
 .main-content {
     position: absolute;
+
     top: 0;
     left: 10%;
     height: 100%;
@@ -157,6 +209,12 @@ body{
 .btn-primary {
     color: $white !important;
 }
+
+.btn-white {
+    color: $secondary !important;
+    background-color: $white !important;
+}
+
 
 .btn-secondary:hover {
     color: $white !important;
@@ -203,6 +261,12 @@ a{
     background-size: cover;
 }
 
+.image-background-fix-footer {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 1000px;
+}
+
 .image-background-fix--format-2{
     background-repeat: no-repeat;
     background-size: contain;
@@ -216,6 +280,7 @@ a{
 .p-7{
     padding: 5rem !important;
 }
+
 
 .px-7{
     padding-left: 5rem !important;
@@ -293,10 +358,17 @@ a{
     margin-bottom: 5rem !important;
 }
 
+
 .my-8{
     margin-top: 7rem !important;
     margin-bottom: 7rem !important;
 }
+
+.my-10{
+    padding-top: 15vw !important;
+    padding-bottom: 15vw !important;
+}
+
 
 .py-8{
     padding-top: 7rem !important;
@@ -329,7 +401,18 @@ a{
     color: $light-medium;
 }
 
+.main-banner{
+    display: block;
+}
+.main-banner-responsive{
+    display: none;
+}
+.about-head{
+    height: 40vw;
+}
+
 @media only screen and (max-width: 660px) and (min-width: 300px){
+
     .text-7xl{
         font-size: 2.5rem;
     }
@@ -342,19 +425,33 @@ a{
     .text-3xl{
         font-size: 1.3rem;
     }
-    .text-10xl{
+    .text-8xl{
         font-size: 3rem;
     }
+    .text-10xl{
+        font-size: 4.5rem;
+    }
+    .text-12xl{
+        font-size: 6rem;
+    }
+
+    .image-background-fix-footer {
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 850px;
+    }
     .main-content{
-        width: 98%;
+        text-align: center;
         left: 0;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
         top: 0px;
         padding: 15px;
-        align-items: inherit;
         margin-left: 0;
     }
     .main-content p{
-        display: none;
+
     }
     .main-content-section-1{
         top: 15px;
@@ -368,6 +465,7 @@ a{
     .p-7{
         padding: 3rem !important;
     }
+
 
     .mx-7{
         margin-right: 3rem !important;
@@ -443,6 +541,18 @@ a{
     .mission-vision, .title-content-3{
         display: none;
     }
+    .main-banner{
+        display: none;
+    }
+    .main-banner-responsive{
+        display: block;
+    }
+    .row{
+        --bs-gutter-x: 0;
+    }
+    .about-head{
+        height: 80vw;
+    }
 }
 @media only screen and (max-width: 992px) and (min-width: 661px) {
     .text-7xl{
@@ -468,6 +578,10 @@ a{
     }
     .text-10xl{
         font-size: 7rem;
+    }
+    .text-12xl	{
+        font-size: 7.8rem;
+        line-height: 1;
     }
     .main-content-section-1{
         top: 50px;
@@ -539,7 +653,123 @@ a{
         font-size: 0.65rem;
     }
 }
-@media only screen and (max-width: 1200px) and (min-width: 1025px){}
-@media only screen and (max-width: 1279px) and (min-width: 1201px){}
-@media only screen and (max-width: 1919px) and (min-width: 1280px){}
+@media only screen and (max-width: 1200px) and (min-width: 1025px){
+    .h-gallery{
+        height: 350px;
+    }
+}
+@media only screen and (max-width: 1679px) and (min-width: 1201px){
+    .h-gallery{
+        height: 350px;
+    }
+}
+@media only screen and (max-width: 2560px) and (min-width: 1680px){
+
+    .h-gallery{
+        height: 350px;
+    }
+
+    .image-background-fix-footer {
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 1300px;
+    }
+}
 @media only screen and (min-width: 1920px){}
+
+.team-section {
+    text-align: center;
+    padding: 50px 0;
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+
+    .team-members {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 100px;
+
+        .team-member {
+            background-color: $secondary;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            text-align: center;
+
+            img {
+                border-radius: 50%;
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                margin-bottom: 10px;
+                color: #fff;
+            }
+
+            p {
+                margin: 5px 0;
+                color:#fff;
+            }
+
+            .role {
+                color: $primary;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+            .social-media {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+
+                a {
+                    color: $white;
+                    font-size: 1.5rem;
+
+                    &:hover {
+                        color: $primary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .team-section .team-members {
+        flex-direction: column;
+        align-items: center;
+
+        .team-member {
+            max-width: 90%;
+
+            img {
+
+                width: 300px;
+                height: 300px;
+
+            }
+        }
+    }
+
+
+
+}
+@media (max-width: 480px) {
+    .team-section .team-members .team-member {
+        max-width: 100%;
+        img {
+
+            width: 250px;
+            height: 250px;
+
+        }
+    }
+}
+
+

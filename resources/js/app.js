@@ -1,4 +1,19 @@
 import './bootstrap';
+import {getElement} from "bootstrap/js/src/util/index.js";
+import Swiper from 'swiper/bundle';
+// import Swiper styles
+import 'swiper/css';
+// init Swiper:
+const swiper = new Swiper('.swiper', {
+    // configure Swiper to use modules
+    loop: true,
+    autoplay: {
+        delay: 3000,
+    },
+    disableOnInteraction: false,
+    pauseOnMouseEnter: false,
+
+});
 
 let getAllButtons = document.querySelectorAll('a.smooth')
  getAllButtons.forEach(itemMenu => {

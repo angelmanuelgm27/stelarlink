@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Contact;
 use App\Models\Coordinates;
+use App\Models\InstallationServices;
 use App\Models\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +21,9 @@ class HomeController extends Controller
             'copyright' => 'StelarLink'
         ];
         $services = Services::where('status', true)->get();
+        $installation_services = InstallationServices::where('status', true)->get();
         $coordinates = Coordinates::all();
-        return view('home', compact('data', 'services', 'coordinates'));
+        return view('home', compact('data', 'services', 'installation_services', 'coordinates'));
     }
 
     public function about()
