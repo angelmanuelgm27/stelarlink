@@ -124,7 +124,7 @@
                     <div class="row mb-7">
                         @foreach ($installation_services as $iservice)
                             <div class="col-12 col-md-6">
-                                <x-installation-plans class="px-4 py-4 bg-secondary rounded-5 m-2 inst-plan"
+                                <x-installation-plans class="px-2  py-4 bg-secondary rounded-5 m-2 inst-plan"
                                     image="{{ $iservice->image ? asset('images/services/' . $iservice->image) : asset('images/noticon.png') }}"
                                     planName="{{ $iservice->name }}" planPrice="{{ $iservice->price }}$"
                                     planCategory="{{ $iservice->category }}"
@@ -146,7 +146,7 @@
                     <div class="row mb-7">
                         @foreach ($services as $service)
                             <div class="col-12 col-md-6">
-                                <x-plans class="px-7 py-5 bg-white rounded-5 m-4"
+                                <x-plans class="px-2 py-5 bg-white rounded-5 m-4"
                                     image="{{ $service->image ? asset('images/services/' . $service->image) : asset('images/noticon.png') }}"
                                     planName="{{ $service->name }}" planPrice="{{ $service->price }}$"
                                     planVelocityLoad="Velocidad de carga {{ $service->velocity_load }} Mbps"
@@ -364,7 +364,7 @@
                                             class="w-100 h-gallery h-lg-gallery  shadow-1-strong rounded-5 mb-4 " alt="Waves at Sea" />
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
                         <!-- Gallery RESPONSIVE-->
                           <div class="row d-lg-none d-flex ">
@@ -384,7 +384,7 @@
                             </div>
                             <div class="col-12  col-lg-4 ">
                                 <div class="row">
-                                       
+
 
                                     <div class="col-lg-12 col-8 mb-4 mb-lg-0">
                                         <img src="{{ asset('images/home/gallery/image_5.jpg') }}"
@@ -397,11 +397,11 @@
 
                                     <div class="col-12 col-lg-6 mb-lg-0">
 
-                                        <img src="{{ asset('images/home/gallery/image_3.jpg') }}" 
+                                        <img src="{{ asset('images/home/gallery/image_3.jpg') }}"
                                             class="w-100 h-60  shadow-1-strong rounded-5 mb-4 col-12" alt="Mountains in the Clouds" />
-                                    </div> 
-                                   
-                                    
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>

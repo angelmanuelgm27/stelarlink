@@ -20,7 +20,7 @@
             <div class="col-12 col-sm-8">
                 <div class="text-center mt-2">
                     <x-button text="Conectar" url="{{ route('login') }}"
-                        class="btn btn-white px-4 py-3 w-75 anta-regular rounded-pill text-3xl text-primary"></x-button>
+                        class="text-center btn btn-white  py-3 w-75 anta-regular rounded-pill text-3xl text-primary"></x-button>
                 </div>
             </div>
         </div>
