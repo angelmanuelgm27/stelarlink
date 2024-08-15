@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use App\Models\Task;
 use App\Models\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class InstallerPayment extends Controller
 {
@@ -16,6 +17,10 @@ class InstallerPayment extends Controller
      */
     public function index()
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
 
         $finisheds = Finished::with('user')->with('file');
         // ->with([
@@ -69,6 +74,10 @@ class InstallerPayment extends Controller
      */
     public function store(Request $request, Finished $finished)
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'image' => ['required', 'file', 'mimes:bmp,gif,jpeg,jpg,png,zip', 'max:12800'],

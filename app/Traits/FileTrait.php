@@ -15,11 +15,11 @@ trait FileTrait
 
             $path = Storage::disk('local')->put('/instalations', $file);
 
-            $file = new File();
-            $file->path = $path;
-            $file->name = $file->getClientOriginalName();
+            $instalation_file = new File();
+            $instalation_file->path = $path;
+            $instalation_file->name = $file->getClientOriginalName();
 
-            $plan->files()->save($file);
+            $plan->files()->save($instalation_file);
 
         }
 

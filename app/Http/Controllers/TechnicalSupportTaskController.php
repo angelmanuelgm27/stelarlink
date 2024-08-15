@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class TechnicalSupportTaskController extends Controller
 {
@@ -23,6 +24,10 @@ class TechnicalSupportTaskController extends Controller
      */
     public function index()
     {
+
+        if (! (Gate::allows('soporte-tecnico-instalador'))) {
+            abort(403);
+        }
 
         $user = Auth::user();
 
@@ -85,6 +90,10 @@ class TechnicalSupportTaskController extends Controller
 
     public function markAsCompleted(Request $request, Task $task)
     {
+
+        if (! (Gate::allows('soporte-tecnico-instalador'))) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'files' => ['nullable', 'max:20'],

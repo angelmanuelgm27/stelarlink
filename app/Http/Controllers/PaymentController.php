@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class PaymentController extends Controller
 {
@@ -21,6 +22,11 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
+
         $payments = Payment::leftJoin('users', 'user_id', '=', 'users.id')
             ->leftJoin('payment_methods', 'payment_method_id', '=', 'payment_methods.id')
             ->with('file')
@@ -81,6 +87,10 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'amount_bs' => ['required', 'decimal:0,2', 'min:1'],
@@ -159,6 +169,10 @@ class PaymentController extends Controller
     public function approve(Payment $payment)
     {
 
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
+
         $current_user = Auth::user();
 
         $user = $payment->client;
@@ -225,6 +239,10 @@ class PaymentController extends Controller
 
     public function reject(Payment $payment)
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
 
         $user = $payment->client;
 

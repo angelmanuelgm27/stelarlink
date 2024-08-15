@@ -38,6 +38,8 @@ class FileController extends Controller
     public function show(File $file)
     {
 
+        // gates ***
+
         return Storage::disk('local')->download($file->path, $file->name);
 
     }

@@ -8,11 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Str;
+use Illuminate\Support\Facades\Gate;
+
 class ServiciosController extends Controller
 {
     //
     public function index()
     {
+
+        if (! (Gate::allows('administrador'))) {
+            abort(403);
+        }
+
         return view('admin.services');
     }
 
@@ -27,6 +34,10 @@ class ServiciosController extends Controller
 
     public function store(Request $request)
     {
+
+        if (! (Gate::allows('administrador'))) {
+            abort(403);
+        }
 
         try {
 
@@ -62,6 +73,11 @@ class ServiciosController extends Controller
 
     public function delete($id)
     {
+
+        if (! (Gate::allows('administrador'))) {
+            abort(403);
+        }
+
         $service = Service::findOrFail($id);
         $service->delete();
 
@@ -70,6 +86,11 @@ class ServiciosController extends Controller
 
     public function edit(Request $request, $id)
     {
+
+        if (! (Gate::allows('administrador'))) {
+            abort(403);
+        }
+
         try {
             if ($request->hasFile('image')) {
                 $file = $request->file('image');

@@ -14,12 +14,17 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Gate;
 
 class UserPlanController extends Controller
 {
 
     public function index()
     {
+
+        if (! (Gate::allows('default'))) {
+            abort(403);
+        }
 
         $user = Auth::user();
         $user_id = $user->id;
@@ -83,6 +88,10 @@ class UserPlanController extends Controller
 
     public function store(Request $request)
     {
+
+        if (! (Gate::allows('default'))) {
+            abort(403);
+        }
 
         // ***
 
@@ -160,6 +169,10 @@ class UserPlanController extends Controller
     public function cancel(Plan $plan)
     {
 
+        if (! (Gate::allows('default'))) {
+            abort(403);
+        }
+
         $plan->update([
             'status' => 'Cancelado',
             'renovation_date' => null,
@@ -173,6 +186,10 @@ class UserPlanController extends Controller
 
     public function activate(Plan $plan)
     {
+
+        if (! (Gate::allows('default'))) {
+            abort(403);
+        }
 
         // cobrar comicion de recativacion ***
 
@@ -210,6 +227,7 @@ class UserPlanController extends Controller
         Session::flash('alert-class', 'alert-success');
 
         return redirect()->back();
+
     }
 
 }

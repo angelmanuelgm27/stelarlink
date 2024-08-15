@@ -6,11 +6,16 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class FinishedController extends Controller
 {
 
     function index(Request $request){
+
+        if (! (Gate::allows('soporte-tecnico-instalador'))) {
+            abort(403);
+        }
 
         $user = Auth::user();
 

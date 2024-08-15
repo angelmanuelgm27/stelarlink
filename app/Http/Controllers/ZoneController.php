@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Zone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ZoneController extends Controller
 {
@@ -13,6 +14,10 @@ class ZoneController extends Controller
      */
     public function index()
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
 
         $zones = Zone::all();
 
@@ -27,6 +32,10 @@ class ZoneController extends Controller
 
     public function store(Request $request)
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -44,6 +53,10 @@ class ZoneController extends Controller
 
     public function destroy(Zone $zone)
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
 
         $zone->delete();
 

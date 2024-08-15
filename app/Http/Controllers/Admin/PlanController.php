@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Gate;
 
 class PlanController extends Controller
 {
@@ -20,6 +21,10 @@ class PlanController extends Controller
 
     public function index(Request $request)
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
 
         $plans = Plan::leftJoin('services', 'service_id', '=', 'services.id')
             ->leftJoin('users', 'user_id', '=', 'users.id')
@@ -86,6 +91,10 @@ class PlanController extends Controller
     public function show(string $id)
     {
 
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
+
         $plan_data = Plan::where('plans.id', $id)
             ->leftJoin('services', 'service_id', '=', 'services.id')
             ->leftJoin('users', 'user_id', '=', 'users.id')
@@ -119,9 +128,9 @@ class PlanController extends Controller
     public function update(Request $request, Plan $plan): RedirectResponse
     {
 
-        // if(!(Gate::allows('isEditor') || Gate::allows('isAdmin'))){
-        //     abort(403); // use policies ***
-        // }
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'ip' => ['nullable', 'string', 'max:255'],
@@ -149,9 +158,11 @@ class PlanController extends Controller
     public function reject(Plan $plan): RedirectResponse
     {
 
-        // if(!(Gate::allows('isEditor') || Gate::allows('isAdmin'))){
-        //     abort(403); // use policies ***
-        // }
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
+
+        // check plan status ***
 
         $plan->update(['status' => 'Rechazado']);
 
@@ -165,9 +176,11 @@ class PlanController extends Controller
     public function suspend(Plan $plan): RedirectResponse
     {
 
-        // if(!(Gate::allows('isEditor') || Gate::allows('isAdmin'))){
-        //     abort(403); // use policies ***
-        // }
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
+
+        // check plan status ***
 
         $plan->update(['status' => 'Suspendido']);
 
@@ -181,9 +194,11 @@ class PlanController extends Controller
     public function activate(Plan $plan): RedirectResponse
     {
 
-        // if(!(Gate::allows('isEditor') || Gate::allows('isAdmin'))){
-        //     abort(403); // use policies ***
-        // }
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
+
+        // check plan status ***
 
         $plan->update([
             'status' => 'Activo',

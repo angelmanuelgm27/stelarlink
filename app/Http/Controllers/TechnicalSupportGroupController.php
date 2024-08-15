@@ -8,6 +8,7 @@ use App\Models\TechnicalSupportGroup;
 use App\Models\User;
 use App\Models\Zone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TechnicalSupportGroupController extends Controller
 {
@@ -17,6 +18,10 @@ class TechnicalSupportGroupController extends Controller
      */
     public function index()
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
 
         $groups = TechnicalSupportGroup::leftJoin('zones', 'zone_id', '=', 'zones.id')
             ->select(
@@ -67,6 +72,10 @@ class TechnicalSupportGroupController extends Controller
     public function store(Request $request)
     {
 
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'zone_id' => ['required', 'integer', 'max:255'],
@@ -114,6 +123,10 @@ class TechnicalSupportGroupController extends Controller
     public function destroy(TechnicalSupportGroup $technicalSupportGroup)
     {
 
+        if (! (Gate::allows('administrador') || Gate::allows('soporte-tecnico-administrador'))) {
+            abort(403);
+        }
+
         $technicalSupportGroup->delete();
 
         return redirect()->route('technical.support.group.index');
@@ -125,6 +138,12 @@ class TechnicalSupportGroupController extends Controller
      */
     public function updateAvailability(TechnicalSupportGroup $technical_support_group)
     {
+
+        if (! (Gate::allows('soporte-tecnico-instalador'))) {
+            abort(403);
+        }
+
+        // check the user is in the group ***
 
         $old_availability = $technical_support_group->availability;
         $new_availability = 'No disponible';

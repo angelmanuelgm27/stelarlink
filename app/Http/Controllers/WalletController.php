@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Gate;
 
 class WalletController extends Controller
 {
@@ -13,6 +14,10 @@ class WalletController extends Controller
      */
     public function index()
     {
+
+        if (! (Gate::allows('default'))) {
+            abort(403);
+        }
 
         $user = Auth::user();
 

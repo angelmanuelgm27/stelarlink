@@ -18,7 +18,6 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Profiles;
 use App\Http\Controllers\TechnicalSupportGroupController;
 use App\Http\Controllers\TechnicalSupportTaskController;
-use App\Http\Controllers\TechnicalSupport\PlanController as TechnicalPlanController;
 use App\Http\Controllers\Users\UserPlanController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\ZoneController;

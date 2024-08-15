@@ -6,12 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class PaymentMethodsController extends Controller
 {
 
     public function index()
     {
+
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
 
         $payment_methods = PaymentMethod::all();
 
@@ -23,6 +28,10 @@ class PaymentMethodsController extends Controller
     }
 
     public function store(Request $request){
+
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -44,6 +53,10 @@ class PaymentMethodsController extends Controller
 
     public function destroy(PaymentMethod $payment_method){
 
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
+
         $payment_method->delete();
 
         return redirect()->route('admin.payment.methods.index');
@@ -51,6 +64,10 @@ class PaymentMethodsController extends Controller
     }
 
     public function availability(PaymentMethod $payment_method){
+
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
 
         $payment_method->update([
             'available' => !$payment_method->available,

@@ -18,11 +18,16 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use stdClass;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
 {
 
     public function index(Request $request){
+
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
 
         $users = User::where('rol', 'default');
 
@@ -62,6 +67,10 @@ class UsersController extends Controller
 
     public function addFunds(Request $request, User $user){
 
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
+
         // check if user is client ***
 
         $validated = $request->validate([
@@ -96,6 +105,10 @@ class UsersController extends Controller
     }
 
     public function withdrawFunds(Request $request, User $user){
+
+        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+            abort(403);
+        }
 
         // check if user is client ***
 

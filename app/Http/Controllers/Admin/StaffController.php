@@ -7,23 +7,39 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Gate;
 
 class StaffController extends Controller
 {
     //
     public function index()
     {
+
+        if (! (Gate::allows('administrador'))) {
+            abort(403);
+        }
+
         return view('admin.staff');
     }
 
     public function list()
     {
+
+        if (! (Gate::allows('administrador'))) {
+            abort(403);
+        }
+
         $staffs = User::whereIn('rol', ['soporte-tecnico-administrador', 'soporte-tecnico-instalador', 'cobranzas'])->get();
         return response()->json($staffs, 200);
     }
 
     public function store(Request $request)
     {
+
+        if (! (Gate::allows('administrador'))) {
+            abort(403);
+        }
+
         try {
 
             $existsUser = User::where('dni', $request->input('dni'))->first();
@@ -56,6 +72,11 @@ class StaffController extends Controller
 
     public function delete($id)
     {
+
+        if (! (Gate::allows('administrador'))) {
+            abort(403);
+        }
+
         try {
             $user = User::find($id);
             $user->delete();
