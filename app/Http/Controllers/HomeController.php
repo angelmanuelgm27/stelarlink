@@ -8,6 +8,7 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Models\InstallationServices;
 
 class HomeController extends Controller
 {
@@ -20,8 +21,9 @@ class HomeController extends Controller
             'copyright' => 'StelarLink'
         ];
         $services = Service::where('status', true)->get();
+        $installation_services = InstallationServices::where('status', true)->get();
         $coordinates = Coordinates::all();
-        return view('home', compact('data', 'services', 'coordinates'));
+        return view('home', compact('data', 'services', 'installation_services', 'coordinates'));
 
     }
 
