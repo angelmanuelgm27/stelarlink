@@ -2,11 +2,11 @@
     <div class="container">
         <section>
             <div class="row justify-content-center mt-4">
-           
+
                     <a href="{{ url('/') }}" class="d-block w-50 mx-auto grid">
                         <img src="{{ asset('images/logo-simple.png') }}" class="w-2X" alt="stelarlink">
                     </a>
-              
+
             </div>
         </section>
 
@@ -60,22 +60,22 @@
                         <div class="d-flex gap-3 flex-wrap footer-social-networks">
                             <div>
                                 <a href="https://www.facebook.com/profile.php?id=61558148860539" class="d-block" target="_blank">
-                                    <x-icon icon="fab fa-facebook-f"></x-icon>
+                                    <x-icon-primary icon="fab fa-facebook-f"></x-icon-primary>
                                 </a>
                             </div>
                             <div>
                                 <a href="https://www.instagram.com/stelarlinkcorp/" class="d-block" target="_blank">
-                                    <x-icon icon="fab fa-instagram"></x-icon>
+                                    <x-icon-primary icon="fab fa-instagram"></x-icon-primary>
                                 </a>
                             </div>
                             <div>
                                 <a href="https://api.whatsapp.com/send?phone=584245734146" target="_blank">
-                                    <x-icon icon="fab fa-tiktok"></x-icon>
+                                    <x-icon-primary icon="fab fa-tiktok"></x-icon-primary>
                                 </a>
                             </div>
                             <div>
                                 <a href="https://api.whatsapp.com/send?phone=584245734146" target="_blank">
-                                    <x-icon icon="fab fa-twitter"></x-icon>
+                                    <x-icon-primary icon="fab fa-twitter"></x-icon-primary>
                                 </a>
                             </div>
                         </div>

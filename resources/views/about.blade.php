@@ -58,22 +58,22 @@
                 <div class="d-flex gap-3">
                     <div>
                         <a href="#" class="d-block">
-                            <x-icon icon="fab fa-facebook-f border border-primary"></x-icon>
+                            <x-icon-primary icon="fab fa-facebook-f border border-primary"></x-icon-primary>
                         </a>
                     </div>
                     <div>
                         <a href="#" class="d-block">
-                            <x-icon icon="fab fa-instagram border border-primary"></x-icon>
+                            <x-icon-primary icon="fab fa-instagram border border-primary"></x-icon-primary>
                         </a>
                     </div>
                     <div>
                         <a href="#">
-                            <x-icon icon="fas fa-phone-volume border border-primary"></x-icon>
+                            <x-icon-primary icon="fas fa-phone-volume border border-primary"></x-icon-primary>
                         </a>
                     </div>
                     <div>
                         <a href="#">
-                            <x-icon icon="fab fa-whatsapp border border-primary"></x-icon>
+                            <x-icon-primary icon="fab fa-whatsapp border border-primary"></x-icon-primary>
                         </a>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                                     <div>
                                         <a href="https://api.whatsapp.com/send?phone=584245734146" target="_blank"
                                            class="d-block">
-                                            <x-icon icon="fas fa-phone-volume"></x-icon>
+                                            <x-icon-primary icon="fas fa-phone-volume"></x-icon-primary>
                                         </a>
                                     </div>
                                     <div>
@@ -136,7 +136,7 @@
                                     <div>
                                         <a href="https://api.whatsapp.com/send?phone=584245734146" target="_blank"
                                            class="d-block">
-                                            <x-icon icon="fab fa-whatsapp"></x-icon>
+                                            <x-icon-primary icon="fab fa-whatsapp"></x-icon-primary>
                                         </a>
                                     </div>
                                     <div>
@@ -151,7 +151,7 @@
                                         <div>
                                             <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
                                                class="d-block">
-                                                <x-icon icon="fab fa-instagram"></x-icon>
+                                                <x-icon-primary icon="fab fa-instagram"></x-icon-primary>
                                             </a>
                                         </div>
                                     </div>
@@ -160,7 +160,7 @@
                                         <div>
                                             <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
                                                class="d-block">
-                                                <x-icon icon="fab fa-facebook-f"></x-icon>
+                                                <x-icon-primary icon="fab fa-facebook-f"></x-icon-primary>
                                             </a>
                                         </div>
                                     </div>
@@ -169,7 +169,7 @@
                                         <div>
                                             <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
                                                class="d-block">
-                                                <x-icon icon="fab fa-tiktok"></x-icon>
+                                                <x-icon-primary icon="fab fa-tiktok"></x-icon-primary>
                                             </a>
                                         </div>
                                     </div>
@@ -178,11 +178,11 @@
                                         <div>
                                             <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
                                                class="d-block">
-                                                <x-icon icon="fab fa-twitter">
+                                                <x-icon-primary icon="fab fa-twitter">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
                                                         <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
                                                     </svg>
-                                                </x-icon>
+                                                </x-icon-primary>
 
                                             </a>
                                         </div>
