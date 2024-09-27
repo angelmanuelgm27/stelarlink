@@ -48,10 +48,10 @@
 
 <body>
     <div id="app">
-        {{-- HEADER COMPONENT --}}
-        <x-header></x-header>
 
-        <main>
+        <main class="position-relative">
+            {{-- HEADER COMPONENT --}}
+            <x-header></x-header>
             @yield('content')
         </main>
 

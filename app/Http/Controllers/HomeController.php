@@ -20,6 +20,7 @@ class HomeController extends Controller
             'description' => 'Home',
             'copyright' => 'StelarLink'
         ];
+
         $services = Service::where('status', true)->get();
         $installation_services = InstallationServices::where('status', true)->get();
         $coordinates = Coordinates::all();
