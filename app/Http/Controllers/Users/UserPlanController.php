@@ -139,7 +139,7 @@ class UserPlanController extends Controller
             'date' => Carbon::now()->isoFormat('D \d\e MMMM, YYYY'),
         ];
 
-        $file_name = '/invoices/Adquisición_de_plan.pdf';
+        $file_name = '/invoices/Adquisición_de_plan-' . time() . '.pdf';
         $file_path = storage_path('app') . $file_name;
         $invoice_file = Pdf::loadView('pdf.contrato-de-instalacion-y-venta-de-equipo', $pdf_data)->save($file_path);
 

@@ -124,7 +124,7 @@
                     <div class="row mb-7">
                         @foreach ($installation_services as $iservice)
                             <div class="col-12 col-md-6">
-                                <x-installation-plans class="px-2  py-4 bg-secondary rounded-5 m-2 inst-plan"
+                                <x-installation-plans class="px-4 px-lg-5 py-4 bg-secondary rounded-5 m-2 inst-plan"
                                     image="{{ $iservice->image ? asset('images/services/' . $iservice->image) : asset('images/noticon.png') }}"
                                     planName="{{ $iservice->name }}" planPrice="{{ $iservice->price }}$"
                                     planCategory="{{ $iservice->category }}"
@@ -146,7 +146,7 @@
                     <div class="row mb-7">
                         @foreach ($services as $service)
                             <div class="col-12 col-md-6">
-                                <x-plans class="px-2 py-5 bg-white rounded-5 m-4"
+                                <x-plans class="px-4 px-lg-6 py-5 bg-white rounded-5 m-4"
                                     image="{{ $service->image ? asset('images/services/' . $service->image) : asset('images/noticon.png') }}"
                                     planName="{{ $service->name }}" planPrice="{{ $service->price }}$"
                                     planVelocityLoad="Velocidad de carga {{ $service->velocity_load }} Mbps"
@@ -203,7 +203,7 @@
                                     <div>
                                         <a href="https://api.whatsapp.com/send?phone=584245734146" target="_blank"
                                             class="d-block">
-                                            <x-icon icon="fas fa-phone-volume"></x-icon>
+                                            <x-icon-primary icon="fas fa-phone-volume"></x-icon-primary>
                                         </a>
                                     </div>
                                     <div>
@@ -214,7 +214,7 @@
                                     <div>
                                         <a href="https://api.whatsapp.com/send?phone=584245734146" target="_blank"
                                             class="d-block">
-                                            <x-icon icon="fab fa-whatsapp"></x-icon>
+                                            <x-icon-primary icon="fab fa-whatsapp"></x-icon-primary>
                                         </a>
                                     </div>
                                     <div>
@@ -229,7 +229,7 @@
                                         <div>
                                             <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
                                                 class="d-block">
-                                                <x-icon icon="fab fa-instagram"></x-icon>
+                                                <x-icon-primary icon="fab fa-instagram"></x-icon-primary>
                                             </a>
                                         </div>
                                     </div>
@@ -238,7 +238,7 @@
                                         <div>
                                             <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
                                                 class="d-block">
-                                                <x-icon icon="fab fa-facebook-f"></x-icon>
+                                                <x-icon-primary icon="fab fa-facebook-f"></x-icon-primary>
                                             </a>
                                         </div>
                                     </div>
@@ -247,7 +247,7 @@
                                         <div>
                                             <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
                                                 class="d-block">
-                                                <x-icon icon="fab fa-tiktok"></x-icon>
+                                                <x-icon-primary icon="fab fa-tiktok"></x-icon-primary>
                                             </a>
                                         </div>
                                     </div>
@@ -256,11 +256,11 @@
                                         <div>
                                             <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
                                                 class="d-block">
-                                               <x-icon icon="fab fa-twitter">
+                                               <x-icon-primary icon="fab fa-twitter">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
                                                             <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
                                                         </svg>
-                                               </x-icon>
+                                               </x-icon-primary>
 
                                             </a>
                                         </div>
@@ -432,10 +432,10 @@
                                     <p class="role text-2xl">CEO</p>
                                     <div class="social-media">
                                         <a href="https://www.instagram.com/angelmanuelgm/" target="_blank">
-                                            <x-icons icon="fab fa-instagram"></x-icons>
+                                            <x-icon-secondary icon="fab fa-instagram"></x-icon-secondary>
                                         </a>
                                         <a href="https://www.tiktok.com/@angelgaraban" target="_blank">
-                                            <x-icons icon="fab fa-tiktok"></x-icons>
+                                            <x-icon-secondary icon="fab fa-tiktok"></x-icon-secondary>
                                         </a>
                                     </div>
                                 </div>
@@ -446,10 +446,10 @@
                                     <p class="role text-2xl">COO</p>
                                     <div class="social-media">
                                         <a href="https://www.instagram.com/AVILA21J/" target="_blank">
-                                            <x-icons icon="fab fa-instagram"></x-icons>
+                                            <x-icon-secondary icon="fab fa-instagram"></x-icon-secondary>
                                         </a>
                                         <a href="https://www.tiktok.com/@AVILA21J" target="_blank">
-                                            <x-icons icon="fab fa-tiktok"></x-icons>
+                                            <x-icon-secondary icon="fab fa-tiktok"></x-icon-secondary>
                                         </a>
                                     </div>
                                 </div>
@@ -460,10 +460,10 @@
                                     <p class="role text-2xl">CTO</p>
                                     <div class="social-media">
                                         <a href="www.instagram.com/gabrielzinisa/" target="_blank">
-                                            <x-icons icon="fab fa-instagram"></x-icons>
+                                            <x-icon-secondary icon="fab fa-instagram"></x-icon-secondary>
                                         </a>
                                         <a href="https://www.tiktok.com/@GABRIELZIN0710" target="_blank">
-                                            <x-icons icon="fab fa-tiktok"></x-icons>
+                                            <x-icon-secondary icon="fab fa-tiktok"></x-icon-secondary>
                                         </a>
                                     </div>
                                 </div>
