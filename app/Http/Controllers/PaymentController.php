@@ -88,7 +88,7 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
 
-        if (! (Gate::allows('administrador') || Gate::allows('cobranzas'))) {
+        if (! (Gate::allows('default') || Gate::allows('administrador') || Gate::allows('cobranzas'))) {
             abort(403);
         }
 

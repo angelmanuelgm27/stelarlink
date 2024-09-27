@@ -127,15 +127,21 @@ class UserPlanController extends Controller
 
         }
 
+        Carbon::setLocale('es');
+
         $pdf_data = [
             'plan_price' => $plan_price,
             'plan_name' => $plan->name,
             'user_name' => $user->name,
+            'user_address' => $user->address,
+            'user_dni' => $user->dni,
+            'user_phone' => $user->phone,
+            'date' => Carbon::now()->isoFormat('D \d\e MMMM, YYYY'),
         ];
 
-        $file_name = '/invoices/Factura.pdf';
+        $file_name = '/invoices/Adquisición_de_plan.pdf';
         $file_path = storage_path('app') . $file_name;
-        $invoice_file = Pdf::loadView('pdf.service-invoice', $pdf_data)->save($file_path);
+        $invoice_file = Pdf::loadView('pdf.contrato-de-instalacion-y-venta-de-equipo', $pdf_data)->save($file_path);
 
         $invoices = new Invoice;
         $invoices->user_id = $user_id;

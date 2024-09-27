@@ -38,41 +38,5 @@ class AuthServiceProvider extends ServiceProvider
             });
         }
 
-        // Gate::define('administrador', function ($user) {
-        //     if (strtolower($user->rol) == 'administrador') {
-        //         return true;
-        //     }
-        //     return false;
-        // });
-
-        // Gate::define('default', function ($user) {
-        //     if (strtolower($user->rol) == 'default') {
-        //         return true;
-        //     }
-        //     return false;
-        // });
-
-        // Gate::define('soporte-tecnico-administrador', function ($user) {
-        //     if (strtolower($user->rol) == 'soporte-tecnico-administrador') {
-        //         return true;
-        //     }
-        //     return false;
-        // });
-
-        // Gate::define('soporte-tecnico-instalador', function ($user) {
-        //     if (strtolower($user->rol) == 'soporte-tecnico-instalador') {
-        //         return true;
-        //     }
-        //     return false;
-        // });
-
-        // Gate::define('cobranzas', function ($user) {
-        //     if (strtolower($user->rol) == 'cobranzas') {
-        //         return true;
-        //     }
-        //     return false;
-        // });
-
-
     }
 }

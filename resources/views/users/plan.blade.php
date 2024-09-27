@@ -18,7 +18,7 @@
 
     @if($plans->isNotEmpty())
 
-        <div class="container-fluid table-responsive">
+        <div class="container-fluid table-responsive overflow-auto" style="max-height: 50vh;">
             <table class="table text-center">
                 <thead>
                     <tr>
