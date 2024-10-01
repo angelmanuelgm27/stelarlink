@@ -57,22 +57,22 @@
                 <!-- Links -->
                 <div class="d-flex gap-3">
                     <div>
-                        <a href="#" class="d-block">
+                        <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank" class="d-block">
                             <x-icon-primary icon="fab fa-facebook-f border border-primary"></x-icon-primary>
                         </a>
                     </div>
                     <div>
-                        <a href="#" class="d-block">
+                        <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank" class="d-block">
                             <x-icon-primary icon="fab fa-instagram border border-primary"></x-icon-primary>
                         </a>
                     </div>
                     <div>
-                        <a href="#">
+                        <a href="tel:+584245734146" target="_blank">
                             <x-icon-primary icon="fas fa-phone-volume border border-primary"></x-icon-primary>
                         </a>
                     </div>
                     <div>
-                        <a href="#">
+                        <a href="https://api.whatsapp.com/send?phone=584245734146" target="_blank">
                             <x-icon-primary icon="fab fa-whatsapp border border-primary"></x-icon-primary>
                         </a>
                     </div>
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="d-flex align-items-center my-4 contact-networks">
                                     <div>
-                                        <a href="https://api.whatsapp.com/send?phone=584245734146" target="_blank"
+                                        <a href="tel:+584245734146" target="_blank"
                                            class="d-block">
                                             <x-icon-primary icon="fas fa-phone-volume"></x-icon-primary>
                                         </a>
@@ -167,7 +167,7 @@
 
                                     <div class="d-flex align-items-center mx-1 my-4 contact-networks">
                                         <div>
-                                            <a href="https://www.instagram.com/stelarlinkcorp/" target="_blank"
+                                            <a href="https://tiktok.com/@stelarlinkcorp" target="_blank"
                                                class="d-block">
                                                 <x-icon-primary icon="fab fa-tiktok"></x-icon-primary>
                                             </a>
@@ -176,7 +176,7 @@
 
                                     <div class="d-flex align-items-center mx-1 my-4 contact-networks">
                                         <div>
-                                            <a href="https://www.facebook.com/profile.php?id=61558148860539" target="_blank"
+                                            <a href="https://x.com/stelarlinkcorp" target="_blank"
                                                class="d-block">
                                                 <x-icon-primary icon="fab fa-twitter">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">

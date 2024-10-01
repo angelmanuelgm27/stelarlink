@@ -69,12 +69,12 @@
                                 </a>
                             </div>
                             <div>
-                                <a href="https://api.whatsapp.com/send?phone=584245734146" target="_blank">
+                                <a href="https://tiktok.com/@stelarlinkcorp" target="_blank">
                                     <x-icon-primary icon="fab fa-tiktok"></x-icon-primary>
                                 </a>
                             </div>
                             <div>
-                                <a href="https://api.whatsapp.com/send?phone=584245734146" target="_blank">
+                                <a href="https://x.com/stelarlinkcorp" target="_blank">
                                     <x-icon-primary icon="fab fa-twitter"></x-icon-primary>
                                 </a>
                             </div>
