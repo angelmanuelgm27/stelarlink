@@ -23,6 +23,12 @@ class ServiciosController extends Controller
         return view('admin.services');
     }
 
+    public function list()
+    {
+        $services = Service::all();
+        return response()->json($services, 200);
+    }
+
     public function updateStatus(Request $request, $id)
     {
         $service = Service::find($id);

@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
 
         // $schedule->command('inspire')->hourly();
 
-        // $schedule->job(new GetDollarPrice)->everyMinute(); //hourly ***
+        $schedule->job(new GetDollarPrice)->everyMinute(); //hourly ***
 
         $schedule->job(new SearchSuspendedPlan)->everyThirtySeconds(); //hourly ***
 

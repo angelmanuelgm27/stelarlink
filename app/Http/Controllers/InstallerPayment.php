@@ -9,6 +9,7 @@ use App\Models\Task;
 use App\Models\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
 class InstallerPayment extends Controller
 {
@@ -95,6 +96,9 @@ class InstallerPayment extends Controller
         $finished->update([
             'paid' => Carbon::now(),
         ]);
+
+        Session::flash('message', 'Pago actualizado exitosamente');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->back();
 

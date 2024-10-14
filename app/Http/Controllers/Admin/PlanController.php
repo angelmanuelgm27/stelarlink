@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
 class PlanController extends Controller
 {
@@ -148,6 +149,9 @@ class PlanController extends Controller
             $plan->update(['status' => 'Aprobado']);
         }
 
+        Session::flash('message', 'Plan actualizado correctamente');
+        Session::flash('alert-class', 'alert-success');
+
         return redirect()->route('admin.requests.index');
 
     }
@@ -166,6 +170,9 @@ class PlanController extends Controller
 
         $plan->update(['status' => 'Rechazado']);
 
+        Session::flash('message', 'Solicitud rechazada');
+        Session::flash('alert-class', 'alert-success');
+
         return redirect()->route('admin.requests.index');
 
     }
@@ -183,6 +190,9 @@ class PlanController extends Controller
         // check plan status ***
 
         $plan->update(['status' => 'Suspendido']);
+
+        Session::flash('message', 'Plan suspendido.');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->route('admin.requests.index');
 
@@ -204,6 +214,9 @@ class PlanController extends Controller
             'status' => 'Activo',
             'renovation_date' => Carbon::now()->addMonthsNoOverflow(1),
         ]);
+
+        Session::flash('message', 'Plan activo');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->route('admin.requests.index');
 

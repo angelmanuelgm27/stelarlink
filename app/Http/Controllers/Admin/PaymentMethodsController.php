@@ -7,6 +7,7 @@ use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
 class PaymentMethodsController extends Controller
 {
@@ -47,6 +48,9 @@ class PaymentMethodsController extends Controller
         $payment_method->image = Storage::disk('public')->put('payment-methods', $file);;
         $payment_method->save();
 
+        Session::flash('message', 'Método de pago agregado exitosamente.');
+        Session::flash('alert-class', 'alert-success');
+
         return redirect()->route('admin.payment.methods.index');
 
     }
@@ -58,6 +62,9 @@ class PaymentMethodsController extends Controller
         }
 
         $payment_method->delete();
+
+        Session::flash('message', 'Método de pago eliminado exitosamente.');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->route('admin.payment.methods.index');
 
@@ -72,6 +79,9 @@ class PaymentMethodsController extends Controller
         $payment_method->update([
             'available' => !$payment_method->available,
         ]);
+
+        Session::flash('message', 'Método de pago actualizado exitosamente.');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->route('admin.payment.methods.index');
 

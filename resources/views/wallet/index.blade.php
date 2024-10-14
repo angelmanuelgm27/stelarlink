@@ -8,6 +8,12 @@
 
 @section('content')
 
+    @if(Session::has('message'))
+        <div class="alert {{ Session::get('alert-class', 'alert-primary') }}" role="alert">
+            {{ Session::get('message') }}
+        </div>
+    @endif
+
     <x-paneltitle titleName="Billetera"></x-paneltitle>
 
     <div class="row">

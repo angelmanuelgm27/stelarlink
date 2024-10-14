@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
 class TechnicalSupportTaskController extends Controller
 {
@@ -133,6 +134,9 @@ class TechnicalSupportTaskController extends Controller
             $taskable->finisheds()->save($finished);
 
         };
+
+        Session::flash('message', 'Actividad marcada como completada exitosamente');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->route('technical.support.task.index');
 

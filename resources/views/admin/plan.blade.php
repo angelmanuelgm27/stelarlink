@@ -7,6 +7,13 @@
 @stop
 
 @section('content')
+
+    @if(Session::has('message'))
+        <div class="alert {{ Session::get('alert-class', 'alert-primary') }}" role="alert">
+            {{ Session::get('message') }}
+        </div>
+    @endif
+
     <x-paneltitle titleName="Plan de Instalacion"></x-paneltitle>
 
     <form action="{{ route('admin.requests.index') }}" method="GET">

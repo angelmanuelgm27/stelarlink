@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
@@ -130,6 +131,9 @@ class PaymentController extends Controller
         $cobranzas_users = User::where('rol', 'cobranzas')->get();
         Notification::send($cobranzas_users, new NewPaymentToConfirm($payment));
 
+        Session::flash('message', 'Pago procesado exitosamente');
+        Session::flash('alert-class', 'alert-success');
+
         return redirect()->route('wallet.index');
 
     }
@@ -233,6 +237,9 @@ class PaymentController extends Controller
 
         }
 
+        Session::flash('message', 'Pago aprobado');
+        Session::flash('alert-class', 'alert-success');
+
         return redirect()->back();
 
     }
@@ -255,6 +262,9 @@ class PaymentController extends Controller
         ]);
 
         $payment->update(['status' => 'Rechazado']);
+
+        Session::flash('message', 'Pago rechazado');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->back();
 

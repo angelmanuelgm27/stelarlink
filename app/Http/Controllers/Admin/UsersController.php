@@ -10,7 +10,7 @@ use App\Models\UsersPasswordsRenews;
 use App\Notifications\Users\AsignNewPasswordDatabaselNotification;
 use App\Notifications\Users\AsignNewPasswordEmailNotification;
 use Carbon\Carbon;
-use Illuminate\Contracts\Session\Session;
+// use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 use stdClass;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller
 {
@@ -100,6 +101,9 @@ class UsersController extends Controller
             'wallet_balance' => $user_wallet_balance,
         ]);
 
+        Session::flash('message', 'Fondos agregados exitosamente');
+        Session::flash('alert-class', 'alert-success');
+
         return redirect()->back();
 
     }
@@ -138,6 +142,9 @@ class UsersController extends Controller
         $user->update([
             'wallet_balance' => $user_wallet_balance,
         ]);
+
+        Session::flash('message', 'Fondos retirados exitosamente');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->back();
 

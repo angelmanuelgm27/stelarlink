@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
 class TechnicalSupportGroupController extends Controller
 {
@@ -90,6 +91,9 @@ class TechnicalSupportGroupController extends Controller
 
         $technical_support_group->users()->attach($request->technical_support_user); // validate ***
 
+        Session::flash('message', 'Grupo de instalacion creado exitosamente');
+        Session::flash('alert-class', 'alert-success');
+
         return redirect()->route('technical.support.group.index');
     }
 
@@ -128,6 +132,9 @@ class TechnicalSupportGroupController extends Controller
         }
 
         $technicalSupportGroup->delete();
+
+        Session::flash('message', 'Grupo de instalacion eliminado exitosamente');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->route('technical.support.group.index');
 
@@ -177,6 +184,9 @@ class TechnicalSupportGroupController extends Controller
         }
 
         $technical_support_group->update(['availability' => $new_availability]);
+
+        Session::flash('message', 'Disponibilidad actualizada exitosamente');
+        Session::flash('alert-class', 'alert-success');
 
         return redirect()->route('technical.support.task.index');
 

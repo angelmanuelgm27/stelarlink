@@ -8,6 +8,12 @@
 
 @section('content')
 
+    @if(Session::has('message'))
+        <div class="alert {{ Session::get('alert-class', 'alert-primary') }}" role="alert">
+            {{ Session::get('message') }}
+        </div>
+    @endif
+
     <x-paneltitle titleName="Agregar metodo de pago"></x-paneltitle>
 
     <form method="POST" action="{{ route('admin.payment.methods.store') }}" enctype="multipart/form-data">
@@ -58,7 +64,7 @@
 
                     <form
                         method="POST"
-                        action="{{ route('admin.payment.methods.store', ['payment_method' => $payment_method->id]) }}"
+                        action="{{ route('admin.payment.methods.destroy', ['payment_method' => $payment_method->id]) }}"
                     >
 
                         @method('DELETE')

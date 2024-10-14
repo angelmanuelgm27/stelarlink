@@ -19,14 +19,17 @@ class MapController extends Controller
     }
 
     public function store(Request $request){
-        $url = explode(' ', $request->input('map_iframe'))[1];
+
+        // $url = explode(' ', $request->input('map_iframe'))[1];
+        $url = explode(' ', $request->input('map_iframe'));
         $reemplace = array('src=', 'https://','"', 'www.');
         $iframe_url = str_replace($reemplace, '', $url);
 
         $coordinates = new Coordinates();
         $coordinates->latitude = str_replace(',', '',$request->input('map_latitude'));
         $coordinates->longitude = str_replace(',', '', $request->input('map_longitude'));
-        $coordinates->iframe = $iframe_url;
+        // $coordinates->iframe = $iframe_url;
+        $coordinates->iframe = $iframe_url[0];
         $coordinates->name = $request->input('map_name');
         $coordinates->save();
         Alert::success('Nueva coordenada agregada', '');
